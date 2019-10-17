@@ -39,6 +39,12 @@ class CategoryMapper
                 $limit--;
             }
         }
+        else{
+            foreach ($array as $item) {
+                $result[] = $this->convert($item);
+            }
+        }
+
 
 
         return $result;
