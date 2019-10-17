@@ -32,6 +32,12 @@ class ProjectTranslation
      */
     private $locale;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="projectTranslations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $project;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class ProjectTranslation
     public function setLocale(?Locale $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

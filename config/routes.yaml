@@ -1,0 +1,6 @@
+get_categories:
+  path: /api/get_categories
+  controller: App\Controller\Api\CategoryApiController::get_categories
+get_languages:
+  path: /api/get_languages
+  controller: App\Controller\Api\MainApiController::getLanguages

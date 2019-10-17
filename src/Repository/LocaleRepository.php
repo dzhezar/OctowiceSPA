@@ -19,32 +19,17 @@ class LocaleRepository extends ServiceEntityRepository
         parent::__construct($registry, Locale::class);
     }
 
-    // /**
-    //  * @return Locale[] Returns an array of Locale objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getAllLanguages()
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->select('l.name', 'l.short_name')
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Locale
+    public function getAllShortNames()
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->select('l.short_name')
+            ->getQuery()->getResult();
     }
-    */
 }
