@@ -33,4 +33,15 @@ class CategoryRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function getCategoriesInRussian()
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.categoryTranslations','cc')
+            ->leftJoin('cc.locale', 'cl')
+            ->where('cl.short_name =:name')
+            ->select('c.price', 'c.id', 'cc.name')
+            ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
+    }
 }

@@ -30,4 +30,9 @@ class CategoryService implements CategoryServiceInterface
         return $this->categoryMapper->entityToArray($this->categoryRepository->getCategories(), $limit);
     }
 
+    public function getCategoriesInRussian(): array
+    {
+        return $this->categoryRepository->getCategoriesInRussian();
+
+    }
 }

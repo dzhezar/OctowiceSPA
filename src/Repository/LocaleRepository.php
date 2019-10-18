@@ -22,7 +22,7 @@ class LocaleRepository extends ServiceEntityRepository
     public function getAllLanguages()
     {
         return $this->createQueryBuilder('l')
-            ->select('l.name', 'l.short_name')
+            ->select('l.name', 'l.short_name', 'l.id')
             ->getQuery()->getResult();
     }
 

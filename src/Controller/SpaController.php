@@ -12,7 +12,7 @@ final class SpaController extends AbstractController
 {
 
     /**
-     * @Route(path="/{spa_route}", name="spa", requirements={ "spa_route" = "^(?!.*(api.*|admin.*)$).*" })
+     * @Route(path="/{spa_route}", name="spa", requirements={ "spa_route" = "^(?!.*(api.*|octo_admin.*)$).*" })
      *
      * @return Response
      */
