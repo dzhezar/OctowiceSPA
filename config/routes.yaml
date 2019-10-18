@@ -1,6 +1,10 @@
 get_categories:
   path: /api/get_categories
   controller: App\Controller\Api\CategoryApiController::get_categories
+send_mail:
+  path: /api/send_mail
+  methods: post
+  controller: App\Controller\Api\MainApiController::sendMail
 get_languages:
   path: /api/get_languages
   controller: App\Controller\Api\MainApiController::getLanguages
