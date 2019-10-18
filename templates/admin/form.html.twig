@@ -1,0 +1,17 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

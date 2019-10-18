@@ -13,5 +13,7 @@ interface CategoryServiceInterface
 
     public function getCategories(int $limit);
 
+    public function getCategoriesInRussian();
+
 
 }

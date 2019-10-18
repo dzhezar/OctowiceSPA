@@ -19,12 +19,12 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CategoryTranslation", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\CategoryTranslation", mappedBy="category" , cascade={"remove"})
      */
     private $categoryTranslations;
 
@@ -44,9 +44,14 @@ class Category
     private $SeoDescription;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="category" , cascade={"remove"})
      */
     private $projects;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -165,6 +170,18 @@ class Category
                 $project->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

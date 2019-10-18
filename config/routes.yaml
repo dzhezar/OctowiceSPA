@@ -1,6 +1,31 @@
 get_categories:
   path: /api/get_categories
   controller: App\Controller\Api\CategoryApiController::get_categories
+send_mail:
+  path: /api/send_mail
+  methods: post
+  controller: App\Controller\Api\MainApiController::sendMail
 get_languages:
   path: /api/get_languages
   controller: App\Controller\Api\MainApiController::getLanguages
+admin:
+  path: /octo_admin
+  controller: App\Controller\Admin\MainController::index
+locale_main:
+  path: /octo_admin/locale_main
+  controller: App\Controller\Admin\LocaleController::index
+category_main:
+  path: /octo_admin/category_main
+  controller: App\Controller\Admin\CategoryController::index
+edit_category:
+  path: /octo_admin/edit_category/{id}
+  controller: App\Controller\Admin\CategoryController::edit_category
+edit_category_translation:
+  path: /octo_admin/edit_category_translation/{category}/{locale}
+  controller: App\Controller\Admin\CategoryController::edit_category_translation
+create_category:
+  path: /octo_admin/create_category
+  controller: App\Controller\Admin\CategoryController::create_category
+remove_category:
+  path: /octo_admin/remove_category/{category}
+  controller: App\Controller\Admin\CategoryController::remove_category

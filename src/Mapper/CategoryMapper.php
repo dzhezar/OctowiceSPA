@@ -4,6 +4,7 @@
 namespace App\Mapper;
 
 
+use App\DTO\EditCategoryDTO;
 use App\Entity\Category;
 use App\Repository\LocaleRepository;
 
@@ -27,6 +28,24 @@ class CategoryMapper
         foreach ($localeRepository->getAllShortNames() as $item) {
             $this->locale_arr[] = $item['short_name'];
         }
+    }
+
+    public function EntityToEditCategoryDTO(Category $category): EditCategoryDTO
+    {
+        return new EditCategoryDTO(
+            $category->getPrice(),
+            $category->getSeoTitle(),
+            $category->getSeoDescription()
+        );
+    }
+
+    public function EditCategoryDTOtoEntity(EditCategoryDTO $categoryDTO): Category
+    {
+        $category = new Category();
+        $category->setPrice($categoryDTO->getPrice())
+            ->setSeoTitle($categoryDTO->getSeoTitle())
+            ->setSeoDescription($categoryDTO->getSeoDescription())
+            ->setPrice($categoryDTO->getPrice());
     }
 
     public function entityToArray(array $array, $limit = 0): array
@@ -82,8 +101,6 @@ class CategoryMapper
             'projects' => $projects,
         ];
     }
-
-
 
 
 
