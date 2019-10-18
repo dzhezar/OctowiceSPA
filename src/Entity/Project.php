@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,22 @@ class Project
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $SeoDescription;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectTranslation", mappedBy="project")
+     */
+    private $projectTranslations;
+
+    public function __construct()
+    {
+        $this->projectTranslations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +69,49 @@ class Project
     public function setSeoDescription(?string $SeoDescription): self
     {
         $this->SeoDescription = $SeoDescription;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectTranslation[]
+     */
+    public function getProjectTranslations(): Collection
+    {
+        return $this->projectTranslations;
+    }
+
+    public function addProjectTranslation(ProjectTranslation $projectTranslation): self
+    {
+        if (!$this->projectTranslations->contains($projectTranslation)) {
+            $this->projectTranslations[] = $projectTranslation;
+            $projectTranslation->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectTranslation(ProjectTranslation $projectTranslation): self
+    {
+        if ($this->projectTranslations->contains($projectTranslation)) {
+            $this->projectTranslations->removeElement($projectTranslation);
+            // set the owning side to null (unless already changed)
+            if ($projectTranslation->getProject() === $this) {
+                $projectTranslation->setProject(null);
+            }
+        }
 
         return $this;
     }
