@@ -11,7 +11,7 @@ interface CategoryServiceInterface
 {
     public function __construct(CategoryRepository $categoryRepository, CategoryMapper $categoryMapper);
 
-    public function getCategories(int $limit);
+    public function getCategories(int $limit, int $project_limit);
 
     public function getCategoriesInRussian();
 

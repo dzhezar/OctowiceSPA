@@ -30,7 +30,6 @@ class CategoryRepository extends ServiceEntityRepository
                 ->leftJoin('ct.locale', 'cl')
                 ->select('c', 'ct', 'cl', 'cp', 'cpp');
 
-
         return $query->getQuery()->getResult();
     }
 
@@ -42,6 +41,30 @@ class CategoryRepository extends ServiceEntityRepository
             ->where('cl.short_name =:name')
             ->select('c.price', 'c.id', 'cc.name')
             ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
+    }
+
+    public function getCategoriesNameInRussian()
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.categoryTranslations','cc')
+            ->leftJoin('cc.locale', 'cl')
+            ->where('cl.short_name =:name')
+            ->select('c.id', 'cc.name')
+            ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
+    }
+
+    public function getCategoryInRussian($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.categoryTranslations','cc')
+            ->leftJoin('cc.locale', 'cl')
+            ->where('cl.short_name =:name')
+            ->andWhere('c.id =:id')
+            ->select('c.price', 'c.id', 'cc.name')
+            ->setParameter('name', 'ru')
+            ->setParameter('id', $id)
             ->getQuery()->getResult();
     }
 }

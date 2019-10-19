@@ -19,32 +19,32 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
-    // /**
-    //  * @return Project[] Returns an array of Project objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getProjectsInRussian()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('project')
+            ->leftJoin('project.category', 'category')
+            ->leftJoin('category.categoryTranslations', 'category_translations')
+            ->leftJoin('category_translations.locale', 'category_locale')
+            ->leftJoin('project.projectTranslations','project_translations')
+            ->leftJoin('project_translations.locale', 'locale')
+            ->where('locale.short_name =:name')
+            ->andWhere('category_locale.short_name =:name')
+            ->select('category_translations.name AS category_name', 'project_translations.name', 'project.id')
+            ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Project
+    public function getProjectById(int $id)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('project')
+            ->leftJoin('project.projectTranslations','project_translations')
+            ->leftJoin('project_translations.locale', 'locale')
+            ->leftJoin('project.projectImages', 'project_images')
+            ->where('project.id =:id')
+            ->setParameter('id', $id)
+            ->select('project', 'project_translations', 'locale',  'project_images')
+            ->getQuery()->getResult();
     }
-    */
+
+
 }

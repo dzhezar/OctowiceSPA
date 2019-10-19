@@ -90,8 +90,9 @@ class CategoryController extends AbstractController
 
 
 
-    public function remove_category(Category $category)
+    public function remove_category(Category $category, UploadFileService $uploadFileService)
     {
+        $uploadFileService->remove($category->getIcon());
         $this->em->remove($category);
         $this->em->flush();
         return $this->redirectToRoute('category_main');
@@ -156,7 +157,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_main');
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName(). 'Перевод']);
+        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
     }
 
 
