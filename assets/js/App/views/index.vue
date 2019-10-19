@@ -56,7 +56,7 @@
                     Мы делаем сайты комплексно
                 </div>
                 <div class="col">
-                    <img src="../../../велосипед.svg" style="height: 100%;" alt="">
+                    <img src="../../../images/bike.png" style="height: 100%;" alt="">
                 </div>
                 <div class="col" style="color: black; font-size: 25px; display: flex; flex-wrap: wrap; place-content: center;">
                     <p style="width: 85%; line-height: normal;">

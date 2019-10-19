@@ -4,6 +4,7 @@
 namespace App\Mapper;
 
 
+use App\DTO\CategoryNameDTO;
 use App\DTO\EditCategoryDTO;
 use App\Entity\Category;
 use App\Repository\LocaleRepository;
@@ -100,6 +101,24 @@ class CategoryMapper
             'translations' => $translations,
             'projects' => $projects,
         ];
+    }
+
+    public function arrayToCategoryNameDTO($array): array
+    {
+        $result = [];
+        foreach ($array as $item) {
+            $result[] = $this->convertToCategoryNameDTO($item);
+        }
+
+        return $result;
+    }
+
+    public function convertToCategoryNameDTO($array): CategoryNameDTO
+    {
+        return new CategoryNameDTO(
+            $array['id'],
+            $array['name']
+        );
     }
 
 
