@@ -14,7 +14,7 @@ class EditProjectTranslationDTO
      * @param $name
      * @param $description
      */
-    public function __construct($name, $description)
+    public function __construct($name = null, $description = null)
     {
         $this->name = $name;
         $this->description = $description;

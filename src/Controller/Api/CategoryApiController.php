@@ -26,6 +26,7 @@ class CategoryApiController extends AbstractController
     public function get_categories(Request $request)
     {
         $limit = $request->query->getInt('limit');
-        return new JsonResponse($this->categoryService->getCategories($limit), 200);
+        $project_limit = $request->query->getInt('project_limit');
+        return new JsonResponse($this->categoryService->getCategories($limit, $project_limit), 200);
     }
 }

@@ -166,6 +166,7 @@ class ProjectController extends AbstractController
             $translation = $translation[0];
 
 
+
         $form = $this->createForm(EditProjectTranslationForm::class, $projectMapper->entityToEditProjectTranslationDTO($translation));
         $form->handleRequest($request);
 

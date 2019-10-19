@@ -45,8 +45,10 @@ class ProjectMapper
         );
     }
 
-    public function entityToEditProjectTranslationDTO(ProjectTranslation $project): EditProjectTranslationDTO
+    public function entityToEditProjectTranslationDTO(?ProjectTranslation $project): EditProjectTranslationDTO
     {
+        if(!$project)
+            return new EditProjectTranslationDTO();
         return new EditProjectTranslationDTO(
             $project->getName(),
             $project->getDescription()
