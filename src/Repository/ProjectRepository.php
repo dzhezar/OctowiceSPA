@@ -34,5 +34,17 @@ class ProjectRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
+    public function getProjectById(int $id)
+    {
+        return $this->createQueryBuilder('project')
+            ->leftJoin('project.projectTranslations','project_translations')
+            ->leftJoin('project_translations.locale', 'locale')
+            ->leftJoin('project.projectImages', 'project_images')
+            ->where('project.id =:id')
+            ->setParameter('id', $id)
+            ->select('project', 'project_translations', 'locale',  'project_images')
+            ->getQuery()->getResult();
+    }
+
 
 }

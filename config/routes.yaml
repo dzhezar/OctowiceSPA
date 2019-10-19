@@ -8,6 +8,9 @@ send_mail:
 get_languages:
   path: /api/get_languages
   controller: App\Controller\Api\MainApiController::getLanguages
+get_project:
+  path: /api/get_project/{project}
+  controller: App\Controller\Api\ProjectApiController::get_project
 admin:
   path: /octo_admin
   controller: App\Controller\Admin\MainController::index
