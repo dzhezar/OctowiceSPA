@@ -18,6 +18,7 @@ use App\Mapper\CategoryTranslationMapper;
 use App\Repository\CategoryRepository;
 use App\Repository\CategoryTranslationRepository;
 use App\Repository\LocaleRepository;
+use App\Repository\ServiceRepository;
 use App\Service\UploadFile\UploadFileService;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,7 +45,7 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository)
+    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository, ServiceRepository $serviceRepository)
     {
         $form = $this->createForm(CreateCategoryForm::class);
         $form->handleRequest($request);
@@ -58,6 +59,14 @@ class CategoryController extends AbstractController
             /** @var CreateCategoryDTO $data */
             $data = $form->getData();
             $category = new Category();
+
+            $data->setServices(json_decode($data->getServices()));
+            foreach ($data->getServices() as $item) {
+                $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                if($service_search)
+                    $category->addService($service_search);
+            }
+
             $category->setSeoTitle($data->getSeoTitle())
                 ->setSeoDescription($data->getSeoDescription())
                 ->setSlug($slugify->slugify($data->getName()))
@@ -80,7 +89,7 @@ class CategoryController extends AbstractController
 
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin/category/create.category.html.twig', ['form' => $form->createView(), 'services' => json_encode($serviceRepository->getServicesNameInRussian())]);
     }
 
     public function index(CategoryRepository $categoryRepository, LocaleRepository $localeRepository)
@@ -98,7 +107,7 @@ class CategoryController extends AbstractController
         return $this->redirectToRoute('category_main');
     }
 
-    public function edit_category(Category $id, Request $request, UploadFileService $uploadedFile)
+    public function edit_category(Category $id, Request $request, UploadFileService $uploadedFile, ServiceRepository $serviceRepository)
     {
         $form = $this->createForm(EditCategoryForm::class, $this->categoryMapper->EntityToEditCategoryDTO($id));
         $form->handleRequest($request);
@@ -106,6 +115,15 @@ class CategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             /** @var EditCategoryDTO $data */
             $data = $form->getData();
+            $data->setServices(json_decode($data->getServices()));
+            foreach ($id->getServices() as $service) {
+                $id->removeService($service);
+            }
+            foreach ($data->getServices() as $item) {
+                $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                if($service_search)
+                    $id->addService($service_search);
+            }
             if($data->getImage()){
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setIcon($newFileName);
@@ -119,7 +137,11 @@ class CategoryController extends AbstractController
         }
 
 
-        return $this->render('admin/category/edit_category.html.twig', ['form' => $form->createView(), 'image' => $id->getIcon()]);
+        return $this->render('admin/category/edit_category.html.twig', [
+            'form' => $form->createView(),
+            'image' => $id->getIcon(),
+            'services' => json_encode($serviceRepository->getServicesNameInRussian()),
+            'current_services' => json_encode($serviceRepository->getServicesNameInRussianByCategoryId($id->getId()))]);
     }
 
     public function edit_category_translation(Category $category, Locale $locale, Request $request, CategoryTranslationMapper $categoryTranslationMapper)

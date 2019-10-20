@@ -1,5 +1,8 @@
 {% extends 'admin/base.html.twig' %}
 
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
 
 {% block body %}
     <div class="container" style="padding-top: 20px">
@@ -11,31 +14,20 @@
             </div>
         </div>
     </div>
+
     <div id="edit_services"></div>
 {% endblock %}
+
 
 {% block javascripts %}
     <link href="/admin/css/magicsuggest-min.css" rel="stylesheet">
     <script src="/admin/js/magicsuggest-min.js"></script>
+
     <script>
-        {% if image is not empty %}
-            $('#edit_category_form_image').parent().after('<div>Старое фото: <a target="_blank" href="/images/{{ image }}"><img class="admin-show-image" src="/images/{{ image }}"></a> </div>');
-        {% else %}
-            $('#edit_category_form_image').after('<div>Старого фото нет</div>');
-        {% endif %}
-
-
         $(document).ready(function () {
-            $('#edit_category_form_seoDescription').parent().after('<div id="service_editor" class="form-group"><label for="edit_services">Что входит в тариф</label></div>');
+            $('#create_category_form_description').parent().after('<div id="service_editor" class="form-group"><label for="edit_services">Что входит в тариф</label></div>');
             $('#edit_services').appendTo('#service_editor');
             let all_services = JSON.parse('{{ services|raw }}');
-            let newq = [];
-            current = JSON.parse('{{ current_services|raw }}');
-            current.forEach(function (elem){
-                newq.push(elem['id']);
-            });
-
-            $('#edit_category_form_services').val(JSON.stringify(newq));
 
             let recommend = $('#edit_services').magicSuggest({
                 allowFreeEntries: false,
@@ -43,13 +35,11 @@
                 data: all_services,
                 placeholder: 'Начните вводить текст'
             });
-            recommend.addToSelection(JSON.parse('{{ current_services|raw }}'));
 
             $(recommend).on('blur', function () {
-                $('#edit_category_form_services').val(JSON.stringify(this.getValue()));
+                $('#create_category_form_services').val(JSON.stringify(this.getValue()));
             });
         });
-
-
     </script>
+
 {% endblock %}

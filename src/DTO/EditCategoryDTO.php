@@ -11,6 +11,7 @@ class EditCategoryDTO
     private $seo_title;
     private $seo_description;
     private $image;
+    private $services;
 
     /**
      * EditCategoryDTO constructor.
@@ -89,6 +90,24 @@ class EditCategoryDTO
     {
         $this->image = $image;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param mixed $services
+     */
+    public function setServices($services): void
+    {
+        $this->services = $services;
+    }
+
+
 
 
 

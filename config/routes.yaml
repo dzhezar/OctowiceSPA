@@ -41,9 +41,21 @@ create_project:
 edit_project:
   path: /octo_admin/edit_project/{id}
   controller: App\Controller\Admin\ProjectController::edit_project
+remove_project_image:
+  path: /octo_admin/remove_project_image/{id}
+  controller: App\Controller\Admin\ProjectController::remove_image
 edit_project_translation:
   path: /octo_admin/edit_project_translation/{project}/{locale}
   controller: App\Controller\Admin\ProjectController::edit_project_translation
 remove_project:
   path: /octo_admin/remove_project/{project}
   controller: App\Controller\Admin\ProjectController::remove_project
+service_main:
+  path: /octo_admin/service_main
+  controller: App\Controller\Admin\ServiceController::index
+create_service:
+  path: /octo_admin/create_service
+  controller: App\Controller\Admin\ServiceController::create_service
+edit_service:
+  path: /octo_admin/edit_service/{id}
+  controller: App\Controller\Admin\ServiceController::edit_service
