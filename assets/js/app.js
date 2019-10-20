@@ -3,8 +3,10 @@ import CountryFlag from 'vue-country-flag'
 import VueRouter from "vue-router";
 import router from "./App/router";
 import App from "./App/App";
+let VueScrollTo = require('vue-scrollto');
 import 'axios';
 Vue.use(VueRouter);
+Vue.use(VueScrollTo);
 Vue.component('country-flag', CountryFlag);
 import { i18n } from './i18n'
 
