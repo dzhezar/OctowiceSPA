@@ -1,6 +1,19 @@
 <template>
-    <div>
-        <nav id='footer-nav' class="navbar navbar-expand-lg header">
+    <div style="padding-bottom: 20px;">
+        <div style="width: 75%; margin:0 auto; line-height: 100%;font-family: 'M PLUS 1p', sans-serif; color: black;  padding: 20px 0 0;">
+            <ul class="list-group list-group-horizontal justify-content-center">
+                <li style="padding: .75rem 1.25rem; list-style: none">
+                    <i class="fab  fa-2x fa-facebook-square"></i>
+                </li>
+                <li style="padding: .75rem 1.25rem; list-style: none">
+                    <i class="fab fa-2x fa-instagram"></i>
+                </li>
+                <li style="padding: .75rem 1.25rem; list-style: none">
+                    <i class="fab fa-2x fa-telegram"></i>
+                </li>
+            </ul>
+        </div>
+        <nav id='footer-nav' class="navbar navbar-expand-lg header" style="background: transparent">
             <div class="row w-100 m-auto">
                 <div class="collapse navbar-collapse justify-content-around" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -20,9 +33,9 @@
                             <li class="nav-item">
                                 <a href="#">Блог</a>
                             </li>
-                            <li class="nav-item" style="margin-left: 150px">
-                                +38(050)868-38-47<br>
-                                octowice@gmail.com
+                            <li class="nav-item contacts" style="margin-left: 150px; padding-top: 30px">
+                                <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a><br>
+                                <a href="mailto:octowice@gmail.com">octowice@gmail.com</a>
                             </li>
                         </ul>
 

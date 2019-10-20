@@ -1,5 +1,5 @@
 <template>
-    <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <transition name="router-anim" enter-active-class="animated fadeIn faster" leave-active-class="animated fadeOut faster">
         <router-view></router-view>
     </transition>
 </template>
@@ -23,6 +23,7 @@
 </script>
 
 <style src="../../css/app.css"></style>
+<style src="../../css/media-queries/app_responsive.css"></style>
 <style>
     @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
     @import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";

@@ -4,17 +4,16 @@
             <div class="row w-75 m-auto">
                 <div class="collapse navbar-collapse justify-content-around" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <p class="logo">
-                            +38(050)868-38-47<br>
-                            octowice@gmail.com
-                        </p>
+                        <div class="contacts header-cnct">
+                            <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a><br>
+                            <a href="mailto:octowice@gmail.com">octowice@gmail.com</a>
+                        </div>
                         <ul class="navbar-nav">
-
                             <li class="nav-item">
-                                <a href="#">Главная</a>
+                                <router-link to="/">Главная</router-link>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Услуги</a>
+                                <router-link to="/servises">Услуги</router-link>
                             </li>
                             <li class="nav-item pt-0">
                                 <img src="../../../images/octo.png" alt="">
@@ -23,14 +22,14 @@
                                 <a href="#">Портфолио</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Блог</a>
+                                <router-link to="/blog">Блог</router-link>
                             </li>
-                            <li class="nav-item">
-                                <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
-                            </li>
-                            <li class="nav-item">
-                                <p @click="setLocale('ru')"><country-flag country='rus'/></p>
-                            </li>
+<!--                            <li class="nav-item">-->
+<!--                                <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <p @click="setLocale('ru')"><country-flag country='rus'/></p>-->
+<!--                            </li>-->
                         </ul>
                         <a class="header-btn" href="#">Остались вопросы?</a>
                     </div>
@@ -86,7 +85,20 @@
             }
         }
     }
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            let nav = document.getElementById("main-nav");
+            nav.style.background = "white";
+            nav.style.boxShadow = "0 4px 10px 0 lightgray";
+        } else {
+            let nav = document.getElementById("main-nav");
+            nav.style.background = "transparent";
+            nav.style.boxShadow = "unset";
+        }
+    }
 </script>
+
 <style>
 
 </style>
