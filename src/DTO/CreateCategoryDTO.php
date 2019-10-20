@@ -15,6 +15,7 @@ class CreateCategoryDTO
     private $image;
     private $name;
     private $description;
+    private $services;
 
     /**
      * @return mixed
@@ -111,6 +112,24 @@ class CreateCategoryDTO
     {
         $this->description = $description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param mixed $services
+     */
+    public function setServices($services): void
+    {
+        $this->services = $services;
+    }
+
+
 
 
 }

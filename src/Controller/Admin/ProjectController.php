@@ -23,11 +23,13 @@ use App\Repository\CategoryRepository;
 use App\Repository\LocaleRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\ProjectTranslationRepository;
+use App\Repository\ServiceRepository;
 use App\Service\UploadFile\UploadFileService;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProjectController extends AbstractController
@@ -153,7 +155,7 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('project_main');
         }
 
-        return $this->render('admin/category/edit_project.html.twig', ['form' => $form->createView(), 'image' => $id->getImage(), 'photos' => $id->getProjectImages()]);
+        return $this->render('admin/project/edit_project.html.twig', ['form' => $form->createView(), 'image' => $id->getImage(), 'photos' => $id->getProjectImages()]);
     }
 
     public function edit_project_translation(Project $project, Locale $locale, ProjectTranslationRepository $projectTranslationRepository, Request $request, ProjectMapper $projectMapper)
@@ -194,5 +196,13 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
+    }
+
+    public function remove_image(ProjectImage $image, UploadFileService $uploadFileService)
+    {
+        $uploadFileService->remove($image->getImage());
+        $this->entityManager->remove($image);
+        $this->entityManager->flush();
+        return new JsonResponse('', 200);
     }
 }
