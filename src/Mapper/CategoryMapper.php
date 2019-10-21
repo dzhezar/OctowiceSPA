@@ -61,7 +61,7 @@ class CategoryMapper
         }
         else{
             foreach ($array as $item) {
-                $result[] = $this->convert($item);
+                $result[] = $this->convert($item, $project_limit);
             }
         }
 

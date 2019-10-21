@@ -59,3 +59,9 @@ create_service:
 edit_service:
   path: /octo_admin/edit_service/{id}
   controller: App\Controller\Admin\ServiceController::edit_service
+edit_service_traslation:
+  path: /octo_admin/edit_service_traslation/{service}/{locale}
+  controller: App\Controller\Admin\ServiceController::edit_service_translation
+remove_service:
+  path: /octo_admin/remove_service/{service}
+  controller: App\Controller\Admin\ServiceController::remove_service

@@ -34,9 +34,14 @@ class Service
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ServiceTranslation", mappedBy="service")
+     * @ORM\OneToMany(targetEntity="App\Entity\ServiceTranslation", mappedBy="service", cascade={"remove"})
      */
     private $serviceTranslations;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_on_service_page;
 
     public function __construct()
     {
@@ -126,6 +131,18 @@ class Service
                 $serviceTranslation->setService(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsOnServicePage(): ?bool
+    {
+        return $this->is_on_service_page;
+    }
+
+    public function setIsOnServicePage(bool $is_on_service_page): self
+    {
+        $this->is_on_service_page = $is_on_service_page;
 
         return $this;
     }

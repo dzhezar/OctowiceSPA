@@ -42,7 +42,7 @@
                                                     <button data-toggle="dropdown" type="button" class="btn btn-outline-secondary dropdown-toggle">Редактировать перевод<span class="caret"></span></button>
                                                     <div class="dropdown-menu">
                                                         {% for locale in locales %}
-                                                            <a class="dropdown-item" href="{{ path('edit_project_translation', {'project': service.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
+                                                            <a class="dropdown-item" href="{{ path('edit_service_traslation', {'service': service.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
                                                         {% endfor %}
                                                     </div>
                                                 </div>
@@ -67,7 +67,7 @@
         $(document).on('click', '.remove-project', function () {
             let id = $(this).attr('data-id');
             if(confirm('Вы уверены?')){
-                location.href = '/octo_admin/remove_project/'+id;
+                location.href = '/octo_admin/remove_service/'+id;
             }
         })
     </script>
