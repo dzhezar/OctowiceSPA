@@ -10,6 +10,7 @@ class CreateServiceDTO
     private $description;
     private $image;
     private $price;
+    private $is_on_service_page;
 
     /**
      * @return mixed
@@ -74,6 +75,24 @@ class CreateServiceDTO
     {
         $this->price = $price;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIsOnServicePage()
+    {
+        return $this->is_on_service_page;
+    }
+
+    /**
+     * @param mixed $is_on_service_page
+     */
+    public function setIsOnServicePage($is_on_service_page): void
+    {
+        $this->is_on_service_page = $is_on_service_page;
+    }
+
+
 
 
 

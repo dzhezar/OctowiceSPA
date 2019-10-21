@@ -12,7 +12,8 @@ class ServiceMapper
     public function entityToEditServiceDTO(Service $service): EditServiceDTO
     {
         return new EditServiceDTO(
-            $service->getPrice()
+            $service->getPrice(),
+            $service->getIsOnServicePage()
         );
     }
 

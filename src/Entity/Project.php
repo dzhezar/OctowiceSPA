@@ -59,6 +59,7 @@ class Project
      */
     private $slug;
 
+
     public function __construct()
     {
         $this->projectTranslations = new ArrayCollection();

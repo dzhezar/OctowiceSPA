@@ -15,16 +15,23 @@ class EditCategoryTranslationDTO
      * @Assert\NotBlank
      */
     private $description;
+    /**
+     * @var null
+     */
+    private $short_description;
+
 
     /**
      * EditCategoryTranslationDTO constructor.
      * @param $name
      * @param $description
+     * @param null $short_description
      */
-    public function __construct($name = null, $description = null)
+    public function __construct($name = null, $description = null, $short_description = null)
     {
         $this->name = $name;
         $this->description = $description;
+        $this->short_description = $short_description;
     }
 
     /**
@@ -58,6 +65,23 @@ class EditCategoryTranslationDTO
     {
         $this->description = $description;
     }
+
+    /**
+     * @return null
+     */
+    public function getShortDescription()
+    {
+        return $this->short_description;
+    }
+
+    /**
+     * @param null $short_description
+     */
+    public function setShortDescription($short_description): void
+    {
+        $this->short_description = $short_description;
+    }
+
 
 
 
