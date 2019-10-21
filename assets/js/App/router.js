@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 import Index from "./views/index";
 import Servises from './views/servises';
 import Blog from './views/blog';
+import Single_Service from './views/single_service';
 import {i18n} from "../i18n";
 
 const router = new VueRouter({
@@ -16,6 +17,11 @@ const router = new VueRouter({
             path: '/servises',
             name: 'servises',
             component: Servises
+        },
+        {
+            path: '/servises/landing',
+            name: 'servises',
+            component: Single_Service
         },
         {
             path: '/blog',

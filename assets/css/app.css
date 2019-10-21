@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC|Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+1p&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Vampiro+One&display=swap');
 body {
     background: #ffffff;
     color: white;
@@ -88,14 +89,20 @@ nav {
 }
 @keyframes gradientBG {
     0% {
-        background-position: 40% 50%;
+        background-position: 100% 100%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 0% 100%;
+    }
+    75% {
+        background-position: 50% 100%;
     }
     100% {
-        background-position: 0 100%;
+        background-position: 100% 100%;
     }
-    /*100% {*/
-    /*    background-position: 0 50%;*/
-    /*}*/
 }
 @-webkit-keyframes text-flicker-in-glow {
     0% {
