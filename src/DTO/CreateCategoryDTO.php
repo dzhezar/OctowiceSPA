@@ -16,7 +16,9 @@ class CreateCategoryDTO
     private $name;
     private $description;
     private $services;
+    private $short_description;
 
+    
     /**
      * @return mixed
      */
@@ -128,6 +130,24 @@ class CreateCategoryDTO
     {
         $this->services = $services;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return $this->short_description;
+    }
+
+    /**
+     * @param mixed $short_description
+     */
+    public function setShortDescription($short_description): void
+    {
+        $this->short_description = $short_description;
+    }
+
+
 
 
 

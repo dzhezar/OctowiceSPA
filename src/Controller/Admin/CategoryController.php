@@ -81,6 +81,7 @@ class CategoryController extends AbstractController
             $translation->setCategory($category)
                 ->setLocale($ru_locale)
                 ->setName($data->getName())
+                ->setShortDescription($data->getShortDescription())
                 ->setDescription($data->getDescription());
             $this->em->persist($translation);
             $this->em->flush();
@@ -163,11 +164,13 @@ class CategoryController extends AbstractController
                 $translation = new CategoryTranslation();
                 $translation->setName($data->getName())
                     ->setDescription($data->getDescription())
+                    ->setShortDescription($data->getShortDescription())
                     ->setCategory($category)
                     ->setLocale($locale);
             }
             else{
                 $translation->setName($data->getName())
+                    ->setShortDescription($data->getShortDescription())
                     ->setDescription($data->getDescription());
             }
             if($locale->getShortName() === 'ru'){

@@ -19,4 +19,15 @@ class ServiceTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, ServiceTranslation::class);
     }
 
+    public function findByProjectAndLocale(int $service, int $locale)
+    {
+        return $this->createQueryBuilder('service_translation')
+            ->leftJoin('service_translation.service', 'service')
+            ->leftJoin('service_translation.locale', 'locale')
+            ->setParameter('service', $service)
+            ->setParameter('locale', $locale)
+            ->where('service.id =:service')
+            ->andWhere('locale.id =:locale')
+            ->getQuery()->getResult();
+    }
 }

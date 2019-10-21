@@ -8,15 +8,20 @@ class EditServiceDTO
 {
     private $price;
     private $image;
+    /**
+     * @var null
+     */
+    private $is_on_service_page;
 
     /**
      * EditServiceDTO constructor.
      * @param $price
-     * @param $image
+     * @param null $is_on_service_page
      */
-    public function __construct($price = null)
+    public function __construct($price = null, $is_on_service_page = null)
     {
         $this->price = $price;
+        $this->is_on_service_page = $is_on_service_page;
     }
 
 
@@ -51,6 +56,24 @@ class EditServiceDTO
     {
         $this->image = $image;
     }
+
+    /**
+     * @return null
+     */
+    public function getIsOnServicePage()
+    {
+        return $this->is_on_service_page;
+    }
+
+    /**
+     * @param null $is_on_service_page
+     */
+    public function setIsOnServicePage($is_on_service_page): void
+    {
+        $this->is_on_service_page = $is_on_service_page;
+    }
+
+
 
 
 

@@ -54,7 +54,7 @@ class CreateProjectForm extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('save', SubmitType::class, ['label' => 'Сохранить'])
+            ->add('save', SubmitType::class, ['label' => 'Добавить портфолио'])
             ->getForm();
     }
     public function configureOptions(OptionsResolver $resolver)
