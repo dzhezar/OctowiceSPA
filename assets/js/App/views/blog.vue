@@ -8,15 +8,15 @@
         </div>
         <div style="height: 125vh; background: linear-gradient(180deg, #131313 0%, #333333 100%); display:flex;">
 
-            <div class="row m-auto" style="width: 85%; color: black; justify-content: center; height: 80%">
+            <div class="row m-auto" style="width: 85%; color: black; justify-content: center; align-content: center; height: 80vh;">
                 <div style="background-color: rgb(196, 196, 196); padding: 5% 0;">
-                    <div style="width: 85%; margin: auto; font-size: 40px; font-weight: 800; padding: 30px 0;">
+                    <div style="width: 85%; margin: auto; font-size: 40px; font-weight: 800; padding: 3% 0;">
                         Заголовок
                     </div>
-                    <div style="width: 85%; margin: auto; font-size: 24px; line-height: normal; padding-bottom: 50px;">
+                    <div style="width: 85%; margin: auto; font-size: 24px; line-height: normal; padding-bottom: 3%;">
                         Смысл жизни, следовательно, творит данный закон внешнего мира. Надстройка нетривиальна. Дискретность амбивалентно транспонирует гравитационный парадок
                     </div>
-                    <div style="width: 85%; margin: auto; font-size: 20px; padding-bottom: 30px;">
+                    <div style="width: 85%; margin: auto; font-size: 20px; padding-bottom: 3%;">
                         24/05/2019
                     </div>
                     <div style="height: 500px; background-color: rgb(0, 0, 0);width: 85%; margin: auto;">
