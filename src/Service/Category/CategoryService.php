@@ -6,6 +6,7 @@ namespace App\Service\Category;
 
 use App\Mapper\CategoryMapper;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class CategoryService implements CategoryServiceInterface
@@ -33,6 +34,16 @@ class CategoryService implements CategoryServiceInterface
     public function getCategoriesInRussian(): array
     {
         return $this->categoryRepository->getCategoriesInRussian();
+
+    }
+
+    public function getCategory(int $id)
+    {
+        $category = $this->categoryRepository->getCategory($id);
+        if(!$category)
+            return ['status' => 404];
+
+        return $this->categoryMapper->EntityToApiArray($category[0]);
 
     }
 }

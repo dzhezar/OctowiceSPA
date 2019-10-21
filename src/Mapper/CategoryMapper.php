@@ -141,6 +141,39 @@ class CategoryMapper
         );
     }
 
+    public function EntityToApiArray(Category $category): array
+    {
+        $result = ['id' => $category->getId(), 'price' => $category->getPrice(), 'seo_title' => $category->getSeoTitle(), 'seo_description' => $category->getSeoDescription(), 'image' => $category->getIcon()];
+
+
+        $result['translations'] = [];
+        foreach ($category->getCategoryTranslations() as $categoryTranslation) {
+            $result['translations'][$categoryTranslation->getLocale()->getShortName()] = ['name' => $categoryTranslation->getName(), 'description' => $categoryTranslation->getDescription()];
+        }
+
+
+        foreach ($this->locale_arr as $item) {
+            if(!isset($result['translations'][$item]) && isset($result['translations']['ru']))
+                $result['translations'][$item] = $result['translations']['ru'];
+        }
+        
+        $result['services'] = [];
+        foreach ($category->getServices() as $key => $service) {
+            $result['services'][$key] = ['id' => $service->getId(), 'image' => $service->getImage()];
+            foreach ($service->getServiceTranslations() as $serviceTranslation) {
+                $result['services'][$key]['translations'][$serviceTranslation->getLocale()->getShortName()] = ['name' => $serviceTranslation->getName(), 'description' => $serviceTranslation->getDescription()];
+            }
+
+            foreach ($this->locale_arr as $item) {
+                if(!isset($result['services'][$key]['translations'][$item]) && isset($result['services'][$key]['translations']['ru']))
+                    $result['services'][$key]['translations'][$item] = $result['services'][$key]['translations']['ru'];
+            }
+        }
+
+
+        return $result;
+    }
+
 
 
 }
