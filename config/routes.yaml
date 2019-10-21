@@ -1,6 +1,9 @@
 get_categories:
   path: /api/get_categories
   controller: App\Controller\Api\CategoryApiController::get_categories
+get_category:
+  path: /api/get_category
+  controller: App\Controller\Api\CategoryApiController::get_category
 send_mail:
   path: /api/send_mail
   methods: post
