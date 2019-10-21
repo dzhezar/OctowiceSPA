@@ -61,10 +61,12 @@ class CategoryController extends AbstractController
             $category = new Category();
 
             $data->setServices(json_decode($data->getServices()));
-            foreach ($data->getServices() as $item) {
-                $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                if($service_search)
-                    $category->addService($service_search);
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $category->addService($service_search);
+                }
             }
 
             $category->setSeoTitle($data->getSeoTitle())
@@ -120,10 +122,12 @@ class CategoryController extends AbstractController
             foreach ($id->getServices() as $service) {
                 $id->removeService($service);
             }
-            foreach ($data->getServices() as $item) {
-                $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                if($service_search)
-                    $id->addService($service_search);
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $id->addService($service_search);
+                }
             }
             if($data->getImage()){
                 $newFileName = $uploadedFile->upload($data->getImage());
