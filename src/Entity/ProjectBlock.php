@@ -30,7 +30,7 @@ class ProjectBlock
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlockTranslation", mappedBy="projectBlock")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlockTranslation", mappedBy="projectBlock" , cascade={"remove"})
      */
     private $projectBlockTranslations;
 
@@ -38,6 +38,11 @@ class ProjectBlock
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $queue;
 
     public function __construct()
     {
@@ -112,6 +117,18 @@ class ProjectBlock
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getQueue(): ?int
+    {
+        return $this->queue;
+    }
+
+    public function setQueue(int $queue): self
+    {
+        $this->queue = $queue;
 
         return $this;
     }

@@ -1,10 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block name %}
-    Типы проектов
+    Блоки Портфолио "{{ project_name }}"
 {% endblock %}
+
 {% block title %}
-    Типы проектов
+    Блоки Портфолио "{{ project_name }}"
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,14 +17,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <a class="btn btn-primary" href="{{ path('project_main') }}" role="button">Назад</a>
                     <div class="card" style="margin-top: 10px">
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Порядок проектов</h3>
+                            <h3 class="h4">Порядок блоков</h3>
                         </div>
                         <div class="card-body">
                             <ul id="sortable" class="list-group">
-                                {% for category in categories %}
-                                    <li data-id="{{ category.id }}" class="ui-state-default list-group-item"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{ category.name }}</li>
+                                {% for block in blocks %}
+                                    <li data-id="{{ block.id }}" class="ui-state-default list-group-item"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{ block.name }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -36,10 +38,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="btn btn-primary" href="{{ path('create_category') }}" role="button">Добавить новый тип проекта</a>
+                    <a class="btn btn-primary" href="{{ path('project_block_create', {project: project_id}) }}" role="button">Добавить блок</a>
                     <div class="card" style="margin-top: 10px">
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Список проектов</h3>
+                            <h3 class="h4">Список портфолио</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -48,30 +50,28 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Название (ru)</th>
-                                        <th>Цена</th>
-                                        <th>Редактировать цену/SEO</th>
+                                        <th>Редактировать Фото/Цвет</th>
                                         <th>Редактировать перевод</th>
                                         <th>Удалить</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for category in categories %}
+                                    {% for block in blocks %}
                                         <tr>
-                                            <th scope="row">{{ category.id }}</th>
-                                            <td>{{ category.name }}</td>
-                                            <td>{{ category.price }}</td>
-                                            <td><a href="{{ path('edit_category', {id: category.id}) }}" class="btn btn-primary active" role="button" aria-pressed="true">Редактировать</a></td>
+                                            <th scope="row">{{ block.id }}</th>
+                                            <td>{{ block.name }}</td>
+                                            <td><a href="{{ path('project_block_edit', {block: block.id}) }}" class="btn btn-primary active" role="button" aria-pressed="true">Редактировать</a></td>
                                             <td>
                                                 <div class="input-group-prepend">
                                                     <button data-toggle="dropdown" type="button" class="btn btn-outline-secondary dropdown-toggle">Редактировать перевод<span class="caret"></span></button>
                                                     <div class="dropdown-menu">
                                                         {% for locale in locales %}
-                                                            <a class="dropdown-item" href="{{ path('edit_category_translation', {'category': category.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
+                                                            <a class="dropdown-item" href="{{ path('project_block_edit_translation', {'block': block.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
                                                         {% endfor %}
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><button data-id="{{ category.id }}" type="button" class="btn btn-danger remove-category">Удалить</button></td>
+                                            <td><button data-id="{{ block.id }}" type="button" class="btn btn-danger remove-block">Удалить</button></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -89,10 +89,10 @@
 {% block javascripts %}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(document).on('click', '.remove-category', function () {
+        $(document).on('click', '.remove-block', function () {
             let id = $(this).attr('data-id');
-            if(confirm('Внимание, удаление этого типа проекта приведёт к удалению его дочерних портфолио, Уверены?')){
-                location.href = '/octo_admin/remove_category/'+id;
+            if(confirm('Вы уверены?')){
+                location.href = '/octo_admin/project_block_remove/'+id;
             }
         });
 
@@ -109,7 +109,7 @@
 
             $.ajax({
                 method: "POST",
-                url: '/octo_admin/change_order/category',
+                url: '/octo_admin/change_order/block',
                 data:{
                     'order': arr
                 }
@@ -117,9 +117,6 @@
             })
                 .done(function() { });
 
-
         } );
     </script>
-
-
 {% endblock %}

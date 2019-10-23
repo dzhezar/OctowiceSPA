@@ -82,4 +82,13 @@ class CategoryRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()->getResult();
     }
+
+    public function getLastQueue()
+    {
+        return $this->createQueryBuilder('category')
+            ->orderBy('category.queue', 'DESC')
+            ->select('category.queue')
+            ->setMaxResults('1')
+            ->getQuery()->getResult();
+    }
 }

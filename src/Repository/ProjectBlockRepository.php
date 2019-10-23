@@ -19,32 +19,27 @@ class ProjectBlockRepository extends ServiceEntityRepository
         parent::__construct($registry, ProjectBlock::class);
     }
 
-    // /**
-    //  * @return ProjectBlock[] Returns an array of ProjectBlock objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getBlocksByProjectId(int $id)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('project_block')
+            ->leftJoin('project_block.project', 'project')
+            ->leftJoin('project_block.projectBlockTranslations', 'project_block_translations')
+            ->leftJoin('project_block_translations.locale', 'locale')
+            ->select('project_block.id', 'project_block_translations.name')
+            ->where('locale.short_name =:loc')
+            ->andWhere('project.id =:id')
+            ->orderBy('project_block.queue')
+            ->setParameter('loc', 'ru')
+            ->setParameter('id', $id)
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ProjectBlock
+    public function getLastQueue()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('project_block')
+            ->select('project_block.queue')
+            ->orderBy('project_block.queue', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()->getResult();
     }
-    */
 }

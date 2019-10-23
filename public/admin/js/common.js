@@ -8,7 +8,12 @@ $(document).ready(function () {
 
     $('input').each(function () {
         if($(this).prop('required')){
-            $(this).labels().append('<span>*Обязательно</span>')
+            $(this).labels().append('<span> *Обязательно</span>')
+        }
+    });
+    $('textarea').each(function () {
+        if($(this).prop('required')){
+            $(this).labels().append('<span> *Обязательно</span>')
         }
     })
 });

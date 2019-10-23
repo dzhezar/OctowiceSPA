@@ -19,32 +19,16 @@ class ProjectBlockTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, ProjectBlockTranslation::class);
     }
 
-    // /**
-    //  * @return ProjectBlockTranslation[] Returns an array of ProjectBlockTranslation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getTranslationByProjectAndLocaleID(int $block, int $locale)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('project_block_translation')
+            ->leftJoin('project_block_translation.projectBlock', 'project_block')
+            ->leftJoin('project_block_translation.locale', 'locale')
+            ->where('project_block.id =:block_id')
+            ->andWhere('locale.id =:locale')
+            ->setParameter('block_id', $block)
+            ->setParameter('locale', $locale)
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ProjectBlockTranslation
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
