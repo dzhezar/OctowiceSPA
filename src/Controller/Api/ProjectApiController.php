@@ -32,11 +32,6 @@ class ProjectApiController extends AbstractController
                 $result['translations'][$item] = $result['translations']['ru'];
         }
 
-        $result['images'] = [];
-        foreach ($project->getProjectImages() as $projectImage) {
-            $result['images'][] = $projectImage->getImage();
-        }
-
 
         return new JsonResponse($result, 200);
 

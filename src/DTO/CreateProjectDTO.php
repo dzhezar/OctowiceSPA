@@ -11,7 +11,6 @@ class CreateProjectDTO
     private $seo_title;
     private $seo_description;
     private $image;
-    private $photos;
     private $link;
     private $category;
 
@@ -95,22 +94,6 @@ class CreateProjectDTO
     public function setImage($image): void
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
-    }
-
-    /**
-     * @param mixed $photos
-     */
-    public function setPhotos($photos): void
-    {
-        $this->photos = $photos;
     }
 
     /**

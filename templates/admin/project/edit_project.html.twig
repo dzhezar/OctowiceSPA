@@ -29,10 +29,6 @@
                 $('#edit_project_form_image').after('<div>Старого фото нет</div>');
             {% endif %}
             $('#edit_project_form_photos').parent().css('margin-bottom', '20px');
-            $('#edit_project_form_photos').parent().parent().append('<div class="row" id="photos_list"></div>');
-            {% for photo in photos %}
-                $('#photos_list').append(create_image_block('{{ photo.image }}', '{{ photo.id }}'));
-            {% endfor %}
         });
 
         function create_image_block(src, id) {

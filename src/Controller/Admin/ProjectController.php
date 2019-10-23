@@ -74,14 +74,6 @@ class ProjectController extends AbstractController
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setImage($newFileName);
             }
-            foreach ($data->getPhotos() as $photo) {
-                $newFileName = $uploadedFile->upload($photo);
-                $image = new ProjectImage();
-                $image->setImage($newFileName)
-                    ->setProject($id);
-                $this->entityManager->persist($image);
-                $id->addProjectImage($image);
-            }
             $id->setSeoDescription($data->getSeoDescription())
                 ->setLink($data->getLink())
                 ->setSeoTitle($data->getSeoTitle());
@@ -113,9 +105,6 @@ class ProjectController extends AbstractController
     public function remove_project(Project $project, UploadFileService $uploadFileService)
     {
         $uploadFileService->remove($project->getImage());
-        foreach ($project->getProjectImages() as $projectImage) {
-            $uploadFileService->remove($projectImage->getImage());
-        }
         $this->entityManager->remove($project);
         $this->entityManager->flush();
         return $this->redirectToRoute('project_main');
@@ -139,14 +128,6 @@ class ProjectController extends AbstractController
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setImage($newFileName);
             }
-            foreach ($data->getPhotos() as $photo) {
-                $newFileName = $uploadedFile->upload($photo);
-                $image = new ProjectImage();
-                $image->setImage($newFileName)
-                    ->setProject($id);
-                $this->entityManager->persist($image);
-                $id->addProjectImage($image);
-            }
             $id->setSeoDescription($data->getSeoDescription())
                 ->setLink($data->getLink())
                 ->setSeoTitle($data->getSeoTitle());
@@ -155,7 +136,7 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('project_main');
         }
 
-        return $this->render('admin/project/edit_project.html.twig', ['form' => $form->createView(), 'image' => $id->getImage(), 'photos' => $id->getProjectImages()]);
+        return $this->render('admin/project/edit_project.html.twig', ['form' => $form->createView(), 'image' => $id->getImage()]);
     }
 
     public function edit_project_translation(Project $project, Locale $locale, ProjectTranslationRepository $projectTranslationRepository, Request $request, ProjectMapper $projectMapper)
@@ -196,13 +177,5 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
-    }
-
-    public function remove_image(ProjectImage $image, UploadFileService $uploadFileService)
-    {
-        $uploadFileService->remove($image->getImage());
-        $this->entityManager->remove($image);
-        $this->entityManager->flush();
-        return new JsonResponse('', 200);
     }
 }

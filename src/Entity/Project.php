@@ -45,11 +45,6 @@ class Project
     private $link;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectImage", mappedBy="project" , cascade={"remove"})
-     */
-    private $projectImages;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
@@ -68,7 +63,6 @@ class Project
     public function __construct()
     {
         $this->projectTranslations = new ArrayCollection();
-        $this->projectImages = new ArrayCollection();
         $this->projectBlocks = new ArrayCollection();
     }
 
@@ -152,37 +146,6 @@ class Project
     public function setLink(?string $link): self
     {
         $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ProjectImage[]
-     */
-    public function getProjectImages(): Collection
-    {
-        return $this->projectImages;
-    }
-
-    public function addProjectImage(ProjectImage $projectImage): self
-    {
-        if (!$this->projectImages->contains($projectImage)) {
-            $this->projectImages[] = $projectImage;
-            $projectImage->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectImage(ProjectImage $projectImage): self
-    {
-        if ($this->projectImages->contains($projectImage)) {
-            $this->projectImages->removeElement($projectImage);
-            // set the owning side to null (unless already changed)
-            if ($projectImage->getProject() === $this) {
-                $projectImage->setProject(null);
-            }
-        }
 
         return $this;
     }

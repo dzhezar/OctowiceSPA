@@ -13,7 +13,6 @@ class EditProjectDTO
     private $seo_description;
     private $link;
     private $image;
-    private $photos;
     private $category;
 
     /**
@@ -94,22 +93,6 @@ class EditProjectDTO
     public function setImage($image): void
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return null|UploadedFile[]
-     */
-    public function getPhotos()
-    {
-        return $this->photos;
-    }
-
-    /**
-     * @param mixed $photos
-     */
-    public function setPhotos($photos): void
-    {
-        $this->photos = $photos;
     }
 
     /**
