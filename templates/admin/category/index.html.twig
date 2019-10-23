@@ -7,7 +7,32 @@
     Типы проектов
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+{% endblock %}
+
 {% block body %}
+    <section id="sort" style=" padding-bottom: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" style="margin-top: 10px">
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">Порядок проектов</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="sortable" class="list-group">
+                                {% for category in categories %}
+                                    <li data-id="{{ category.id }}" class="ui-state-default list-group-item"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{ category.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="locales">
         <div class="container">
             <div class="row">
@@ -63,12 +88,39 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).on('click', '.remove-category', function () {
             let id = $(this).attr('data-id');
             if(confirm('Внимание, удаление этого типа проекта приведёт к удалению его дочерних портфолио, Уверены?')){
                 location.href = '/octo_admin/remove_category/'+id;
             }
-        })
+        });
+
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        } );
+
+        $( "#sortable" ).on( "sortupdate", function() {
+            let arr = [];
+            $("#sortable").find($('li')).each(function () {
+                arr.push($(this).attr('data-id'));
+            });
+
+            $.ajax({
+                method: "POST",
+                url: '/octo_admin/change_order/category',
+                data:{
+                    'order': arr
+                }
+
+            })
+                .done(function() { });
+
+
+        } );
     </script>
+
+
 {% endblock %}

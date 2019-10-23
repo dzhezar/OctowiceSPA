@@ -59,11 +59,17 @@ class Project
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlock", mappedBy="project")
+     */
+    private $projectBlocks;
+
 
     public function __construct()
     {
         $this->projectTranslations = new ArrayCollection();
         $this->projectImages = new ArrayCollection();
+        $this->projectBlocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,6 +207,37 @@ class Project
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectBlock[]
+     */
+    public function getProjectBlocks(): Collection
+    {
+        return $this->projectBlocks;
+    }
+
+    public function addProjectBlock(ProjectBlock $projectBlock): self
+    {
+        if (!$this->projectBlocks->contains($projectBlock)) {
+            $this->projectBlocks[] = $projectBlock;
+            $projectBlock->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectBlock(ProjectBlock $projectBlock): self
+    {
+        if ($this->projectBlocks->contains($projectBlock)) {
+            $this->projectBlocks->removeElement($projectBlock);
+            // set the owning side to null (unless already changed)
+            if ($projectBlock->getProject() === $this) {
+                $projectBlock->setProject(null);
+            }
+        }
 
         return $this;
     }

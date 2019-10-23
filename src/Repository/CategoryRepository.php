@@ -41,6 +41,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->where('cl.short_name =:name')
             ->select('c.price', 'c.id', 'cc.name')
             ->setParameter('name', 'ru')
+            ->orderBy('c.queue')
             ->getQuery()->getResult();
     }
 
