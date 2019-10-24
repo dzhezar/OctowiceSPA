@@ -3,6 +3,8 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class CreateProjectDTO
 {
@@ -10,6 +12,9 @@ class CreateProjectDTO
     private $description;
     private $seo_title;
     private $seo_description;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $link;
     private $category;

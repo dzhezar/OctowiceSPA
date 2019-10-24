@@ -5,13 +5,16 @@ namespace App\DTO;
 
 
 use App\Entity\Category;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class EditProjectDTO
 {
     private $seo_title;
     private $seo_description;
     private $link;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $category;
 

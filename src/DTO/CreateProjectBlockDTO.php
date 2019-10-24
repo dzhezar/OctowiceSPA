@@ -3,12 +3,17 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class CreateProjectBlockDTO
 {
     private $name;
     private $description;
     private $color;
+    /**
+     * @Assert\Image()
+     */
     private $image;
 
     /**

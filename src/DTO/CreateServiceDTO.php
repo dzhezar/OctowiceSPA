@@ -4,10 +4,15 @@
 namespace App\DTO;
 
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class CreateServiceDTO
 {
     private $name;
     private $description;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $price;
     private $is_on_service_page;
