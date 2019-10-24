@@ -2,10 +2,10 @@
     <div class="wrapper">
         <progress-bar></progress-bar>
         <navigation></navigation>
-        <div id="top" style="height: 100vh; animation: gradientBG 2s ease alternate; background-size: 50% 100%; background-image: linear-gradient(90deg, rgba(165, 165, 165, 0.03) 0%, rgba(165, 165, 165, 0.03) 8%, rgba(235, 235, 235, 0.03) 8%, rgba(235, 235, 235, 0.03) 9%, rgba(7, 7, 7, 0.03) 9%, rgba(7, 7, 7, 0.03) 14%, rgba(212, 212, 212, 0.03) 14%, rgba(212, 212, 212, 0.03) 17%, rgba(219, 219, 219, 0.03) 17%, rgba(219, 219, 219, 0.03) 95%, rgba(86, 86, 86, 0.03) 95%, rgba(86, 86, 86, 0.03) 100%), linear-gradient(67.5deg, rgba(80, 80, 80, 0.03) 0%, rgba(235, 87, 87, 0.16) 11%, rgba(138, 138, 138, 0.03) 11%, rgba(138, 138, 138, 0.03) 17%, rgba(122, 122, 122, 0.03) 17%, rgba(122, 122, 122, 0.03) 24%, rgba(166, 166, 166, 0.03) 24%, rgba(166, 166, 166, 0.03) 27%, rgba(245, 245, 245, 0.03) 27%, rgba(245, 245, 245, 0.03) 89%, rgba(88, 88, 88, 0.03) 89%, rgba(88, 88, 88, 0.03) 100%), linear-gradient(67.5deg, rgba(244, 244, 244, 0.03) 0%, rgba(244, 244, 244, 0.03) 4%, rgba(16, 16, 16, 0.03) 4%, rgba(16, 16, 16, 0.03) 10%, rgba(157, 157, 157, 0.03) 10%, rgba(157, 157, 157, 0.03) 20%, rgba(212, 212, 212, 0.03) 20%, rgba(212, 212, 212, 0.03) 83%, rgba(235, 87, 87, 0.25) 83%, rgba(5, 5, 5, 0.03) 84%, rgba(237, 237, 237, 0.03) 84%, rgba(237, 237, 237, 0.03) 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))">
-<!--        <div style="height: calc(100vh - 90px);background: linear-gradient(22.5deg, rgba(67, 67, 67, 0) 0%, rgba(255, 0, 0, 0) 29%, rgba(225, 32, 32, 0.09) 29%, rgba(173, 7, 7, 0.13) 37%, rgba(84, 61, 61, 0.07) 37%, rgba(23, 23, 23, 0) 55%, rgba(182, 182, 182, 0.05) 55%, rgba(255, 150, 150, 0.06) 69%, rgba(27, 27, 27, 0.02) 69%, rgba(27, 27, 27, 0.02) 71%, rgba(250, 250, 250, 0.02) 71%, rgba(250, 250, 250, 0.02) 100%), linear-gradient(67.5deg, rgba(117, 117, 117, 0.02) 0%, rgba(117, 117, 117, 0.02) 14%, rgba(199, 199, 199, 0.14) 14%, rgba(199, 199, 199, 0.02) 40%, rgba(33, 33, 33, 0.02) 40%, rgba(33, 33, 33, 0.02) 48%, rgba(135, 135, 135, 0.02) 48%, rgba(135, 135, 135, 0) 60%, rgba(148, 148, 148, 0) 60%, rgba(255, 202, 202, 0.28) 95%, rgba(53, 53, 53, 0) 95%, rgba(53, 53, 53, 0) 100%), linear-gradient(135deg, rgba(190, 190, 190, 0) 0%, rgba(190, 190, 190, 0) 6%, rgba(251, 251, 251, 0.02) 6%, rgba(251, 251, 251, 0.02) 18%, rgba(2, 2, 2, 0.02) 18%, rgba(2, 2, 2, 0.02) 27%, rgba(253, 253, 253, 0.02) 27%, rgba(253, 253, 253, 0.02) 49%, rgba(128, 128, 128, 0.02) 49%, rgba(128, 128, 128, 0.02) 76%, rgba(150, 150, 150, 0) 76%, rgba(128, 65, 65, 0) 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));">-->
+<!--        <div id="top" style="height: 100vh; animation: gradientBG 2s ease alternate; background-size: 50% 100%; background-image: linear-gradient(90deg, rgba(165, 165, 165, 0.03) 0%, rgba(165, 165, 165, 0.03) 8%, rgba(235, 235, 235, 0.03) 8%, rgba(235, 235, 235, 0.03) 9%, rgba(7, 7, 7, 0.03) 9%, rgba(7, 7, 7, 0.03) 14%, rgba(212, 212, 212, 0.03) 14%, rgba(212, 212, 212, 0.03) 17%, rgba(219, 219, 219, 0.03) 17%, rgba(219, 219, 219, 0.03) 95%, rgba(86, 86, 86, 0.03) 95%, rgba(86, 86, 86, 0.03) 100%), linear-gradient(67.5deg, rgba(80, 80, 80, 0.03) 0%, rgba(235, 87, 87, 0.16) 11%, rgba(138, 138, 138, 0.03) 11%, rgba(138, 138, 138, 0.03) 17%, rgba(122, 122, 122, 0.03) 17%, rgba(122, 122, 122, 0.03) 24%, rgba(166, 166, 166, 0.03) 24%, rgba(166, 166, 166, 0.03) 27%, rgba(245, 245, 245, 0.03) 27%, rgba(245, 245, 245, 0.03) 89%, rgba(88, 88, 88, 0.03) 89%, rgba(88, 88, 88, 0.03) 100%), linear-gradient(67.5deg, rgba(244, 244, 244, 0.03) 0%, rgba(244, 244, 244, 0.03) 4%, rgba(16, 16, 16, 0.03) 4%, rgba(16, 16, 16, 0.03) 10%, rgba(157, 157, 157, 0.03) 10%, rgba(157, 157, 157, 0.03) 20%, rgba(212, 212, 212, 0.03) 20%, rgba(212, 212, 212, 0.03) 83%, rgba(235, 87, 87, 0.25) 83%, rgba(5, 5, 5, 0.03) 84%, rgba(237, 237, 237, 0.03) 84%, rgba(237, 237, 237, 0.03) 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255))">-->
+        <div id="top" style="height: 100vh;background: linear-gradient(22.5deg, rgba(67, 67, 67, 0) 0%, rgba(255, 0, 0, 0) 29%, rgba(225, 32, 32, 0.09) 29%, rgba(173, 7, 7, 0.13) 37%, rgba(84, 61, 61, 0.07) 37%, rgba(23, 23, 23, 0) 55%, rgba(182, 182, 182, 0.05) 55%, rgba(255, 150, 150, 0.06) 69%, rgba(27, 27, 27, 0.02) 69%, rgba(27, 27, 27, 0.02) 71%, rgba(250, 250, 250, 0.02) 71%, rgba(250, 250, 250, 0.02) 100%), linear-gradient(67.5deg, rgba(117, 117, 117, 0.02) 0%, rgba(117, 117, 117, 0.02) 14%, rgba(199, 199, 199, 0.14) 14%, rgba(199, 199, 199, 0.02) 40%, rgba(33, 33, 33, 0.02) 40%, rgba(33, 33, 33, 0.02) 48%, rgba(135, 135, 135, 0.02) 48%, rgba(135, 135, 135, 0) 60%, rgba(148, 148, 148, 0) 60%, rgba(255, 202, 202, 0.28) 95%, rgba(53, 53, 53, 0) 95%, rgba(53, 53, 53, 0) 100%), linear-gradient(135deg, rgba(190, 190, 190, 0) 0%, rgba(190, 190, 190, 0) 6%, rgba(251, 251, 251, 0.02) 6%, rgba(251, 251, 251, 0.02) 18%, rgba(2, 2, 2, 0.02) 18%, rgba(2, 2, 2, 0.02) 27%, rgba(253, 253, 253, 0.02) 27%, rgba(253, 253, 253, 0.02) 49%, rgba(128, 128, 128, 0.02) 49%, rgba(128, 128, 128, 0.02) 76%, rgba(150, 150, 150, 0) 76%, rgba(128, 65, 65, 0) 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));">
             <div style="height: 90vh; display:flex; flex-wrap: wrap; align-items: center; width: 80%; margin: 0 auto; color: black; font-size: 50px;padding: 90px 20% 0 0; line-height: normal;">
-                <span style="-webkit-animation: text-flicker-in-glow 2s linear both; animation: text-flicker-in-glow 2s linear both;">
+                <span style="-webkit-animation: text-flicker-in-glow 2s linear both; animation: text-flicker-in-glow 2s linear both; z-index: 1;">
                 <span style="font-family: 'Saira Stencil One', cursive; font-size: 55px;">OctoWice</span> – закажи сайт у культурных профессионалов!
                 </span>
             </div>
@@ -13,7 +13,7 @@
                 <img src="../../../images/осьминог.svg" style="height: 95vh;" alt="">
            </div>
             <div style="height: 10vh; display: flex;flex-wrap: wrap; align-content: flex-end; justify-content: center; color: grey; padding-bottom: 20px;">
-                <a href="#" v-scroll-to="'#id'" style="color: gray;">
+                <a href="#" v-scroll-to="'#id'" style="color: gray; z-index: 1;">
                     <i class="fas fa-3x fa-chevron-down"></i>
                 </a>
             </div>
@@ -27,12 +27,12 @@
                     <div class="col-3 mx-lg-5 mx-md-3 caption" style="background: #BDBDBD;box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
                         <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
                             <img class="col-3" src="../../../images/landing.svg" alt="">
-                            <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
+                            <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center; text-align: end;">
                                 Landing Page
                             </div>
                         </div>
-                        <div style="font-size: 22px; line-height: normal; text-align: justify; margin: 20% 2rem;" class="caption_text">
-                            - одностраничный сайт отличается повышенной конверсией, меньшей информативностью по сравнению с другими сайтами
+                        <div style="font-size: 22px; line-height: normal; margin: 20% 2rem; text-align: end;">
+                            одностраничный сайт отличается повышенной конверсией, меньшей информативностью по сравнению с другими сайтами
                         </div>
                         <div class="caption_img">
                             <img style="width: 100%;" src="../../../велосипед.svg" alt="">
@@ -41,12 +41,12 @@
                     <div class="col-3 mx-lg-5 mx-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
                         <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
                             <img class="col-3" src="../../../images/shop.svg" alt="">
-                            <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
+                            <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center; text-align: end;">
                                 Интернет магазин
                             </div>
                         </div>
-                        <div  style="font-size: 22px; line-height: normal; margin: 20% 2rem">
-                            - любимые всеми магазины, похожи на сайты каталоги, однако есть функция покупки
+                        <div  style="font-size: 22px; line-height: normal; margin: 20% 2rem; text-align: end;">
+                            любимые всеми магазины, похожи на сайты каталоги, однако есть функция покупки
                         </div>
                     </div>
                     <div class="col-3 mx-lg-5 mx-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
@@ -56,8 +56,8 @@
                                 Сайт-визитка
                             </div>
                         </div>
-                        <div style="font-size: 22px; line-height: normal; margin: 20% 2rem">
-                            - идеальный тип сайта для отображения товаров или услуг методом каталога
+                        <div style="font-size: 22px; line-height: normal; margin: 20% 2rem; text-align: end;">
+                            идеальный тип сайта для отображения товаров или услуг методом каталога
                         </div>
                     </div>
                 </div>

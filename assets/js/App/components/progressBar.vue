@@ -1,3 +1,2 @@
 <template>
-    <VueScrollProgress></VueScrollProgress>
 </template>
