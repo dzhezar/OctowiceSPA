@@ -3,19 +3,18 @@
 
 namespace App\DTO;
 
-
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateServiceDTO
+
+class CreateProjectBlockDTO
 {
     private $name;
     private $description;
+    private $color;
     /**
      * @Assert\Image()
      */
     private $image;
-    private $price;
-    private $is_on_service_page;
 
     /**
      * @return mixed
@@ -52,6 +51,22 @@ class CreateServiceDTO
     /**
      * @return mixed
      */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $color
+     */
+    public function setColor($color): void
+    {
+        $this->color = $color;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getImage()
     {
         return $this->image;
@@ -64,41 +79,6 @@ class CreateServiceDTO
     {
         $this->image = $image;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price): void
-    {
-        $this->price = $price;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIsOnServicePage()
-    {
-        return $this->is_on_service_page;
-    }
-
-    /**
-     * @param mixed $is_on_service_page
-     */
-    public function setIsOnServicePage($is_on_service_page): void
-    {
-        $this->is_on_service_page = $is_on_service_page;
-    }
-
-
-
 
 
 

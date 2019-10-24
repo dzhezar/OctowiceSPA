@@ -1,6 +1,9 @@
 get_categories:
   path: /api/get_categories
   controller: App\Controller\Api\CategoryApiController::get_categories
+get_category:
+  path: /api/get_category
+  controller: App\Controller\Api\CategoryApiController::get_category
 send_mail:
   path: /api/send_mail
   methods: post
@@ -14,6 +17,10 @@ get_project:
 admin:
   path: /octo_admin
   controller: App\Controller\Admin\MainController::index
+change_order_category:
+  methods: post
+  path: /octo_admin/change_order/category
+  controller: App\Controller\Admin\MainController::change_order_category
 locale_main:
   path: /octo_admin/locale_main
   controller: App\Controller\Admin\LocaleController::index
@@ -41,9 +48,6 @@ create_project:
 edit_project:
   path: /octo_admin/edit_project/{id}
   controller: App\Controller\Admin\ProjectController::edit_project
-remove_project_image:
-  path: /octo_admin/remove_project_image/{id}
-  controller: App\Controller\Admin\ProjectController::remove_image
 edit_project_translation:
   path: /octo_admin/edit_project_translation/{project}/{locale}
   controller: App\Controller\Admin\ProjectController::edit_project_translation
@@ -65,3 +69,22 @@ edit_service_traslation:
 remove_service:
   path: /octo_admin/remove_service/{service}
   controller: App\Controller\Admin\ServiceController::remove_service
+project_block_main:
+  path: /octo_admin/project_block_main/{project}
+  controller: App\Controller\Admin\ProjectBlockController::index
+project_block_create:
+  path: /octo_admin/project_block_create/{project}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_create
+project_block_edit:
+  path: /octo_admin/project_block_edit/{block}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_edit
+project_block_edit_translation:
+  path: /octo_admin/project_block_edit_translation/{block}/{locale}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_edit_translation
+project_block_remove:
+  path: /octo_admin/project_block_remove/{block}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_remove
+change_order_block:
+  methods: post
+  path: /octo_admin/change_order/block
+  controller: App\Controller\Admin\ProjectBlockController::change_order_block

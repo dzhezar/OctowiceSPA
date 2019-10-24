@@ -45,7 +45,7 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository, ServiceRepository $serviceRepository)
+    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository)
     {
         $form = $this->createForm(CreateCategoryForm::class);
         $form->handleRequest($request);
@@ -61,16 +61,25 @@ class CategoryController extends AbstractController
             $category = new Category();
 
             $data->setServices(json_decode($data->getServices()));
-            foreach ($data->getServices() as $item) {
-                $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                if($service_search)
-                    $category->addService($service_search);
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $category->addService($service_search);
+                }
             }
+
+            $queue = $categoryRepository->getLastQueue();
+            if($queue)
+                $queue = $queue[0]['queue']+1;
+            elseif(!$queue)
+                $queue = 1;
 
             $category->setSeoTitle($data->getSeoTitle())
                 ->setSeoDescription($data->getSeoDescription())
                 ->setSlug($slugify->slugify($data->getName()))
-                ->setPrice($data->getPrice());
+                ->setPrice($data->getPrice())
+                ->setQueue($queue);
             if($data->getImage()){
                 $file_name = $uploadFileService->upload($data->getImage());
                 $category->setIcon($file_name);
@@ -120,10 +129,12 @@ class CategoryController extends AbstractController
             foreach ($id->getServices() as $service) {
                 $id->removeService($service);
             }
-            foreach ($data->getServices() as $item) {
-                $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                if($service_search)
-                    $id->addService($service_search);
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $id->addService($service_search);
+                }
             }
             if($data->getImage()){
                 $newFileName = $uploadedFile->upload($data->getImage());

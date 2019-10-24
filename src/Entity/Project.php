@@ -45,11 +45,6 @@ class Project
     private $link;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectImage", mappedBy="project" , cascade={"remove"})
-     */
-    private $projectImages;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
@@ -59,11 +54,16 @@ class Project
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlock", mappedBy="project")
+     */
+    private $projectBlocks;
+
 
     public function __construct()
     {
         $this->projectTranslations = new ArrayCollection();
-        $this->projectImages = new ArrayCollection();
+        $this->projectBlocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,37 +150,6 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection|ProjectImage[]
-     */
-    public function getProjectImages(): Collection
-    {
-        return $this->projectImages;
-    }
-
-    public function addProjectImage(ProjectImage $projectImage): self
-    {
-        if (!$this->projectImages->contains($projectImage)) {
-            $this->projectImages[] = $projectImage;
-            $projectImage->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjectImage(ProjectImage $projectImage): self
-    {
-        if ($this->projectImages->contains($projectImage)) {
-            $this->projectImages->removeElement($projectImage);
-            // set the owning side to null (unless already changed)
-            if ($projectImage->getProject() === $this) {
-                $projectImage->setProject(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -201,6 +170,37 @@ class Project
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectBlock[]
+     */
+    public function getProjectBlocks(): Collection
+    {
+        return $this->projectBlocks;
+    }
+
+    public function addProjectBlock(ProjectBlock $projectBlock): self
+    {
+        if (!$this->projectBlocks->contains($projectBlock)) {
+            $this->projectBlocks[] = $projectBlock;
+            $projectBlock->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectBlock(ProjectBlock $projectBlock): self
+    {
+        if ($this->projectBlocks->contains($projectBlock)) {
+            $this->projectBlocks->removeElement($projectBlock);
+            // set the owning side to null (unless already changed)
+            if ($projectBlock->getProject() === $this) {
+                $projectBlock->setProject(null);
+            }
+        }
 
         return $this;
     }

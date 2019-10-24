@@ -4,12 +4,17 @@
 namespace App\DTO;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class EditCategoryDTO
 {
     private $price;
     private $seo_title;
     private $seo_description;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $services;
 

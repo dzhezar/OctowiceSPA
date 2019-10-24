@@ -41,6 +41,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->where('cl.short_name =:name')
             ->select('c.price', 'c.id', 'cc.name')
             ->setParameter('name', 'ru')
+            ->orderBy('c.queue')
             ->getQuery()->getResult();
     }
 
@@ -65,6 +66,29 @@ class CategoryRepository extends ServiceEntityRepository
             ->select('c.price', 'c.id', 'cc.name')
             ->setParameter('name', 'ru')
             ->setParameter('id', $id)
+            ->getQuery()->getResult();
+    }
+
+    public function getCategory(int $id)
+    {
+        return $this->createQueryBuilder('category')
+            ->leftJoin('category.categoryTranslations', 'category_translations')
+            ->leftJoin('category.services', 'services')
+            ->leftJoin('services.serviceTranslations', 'service_translations')
+            ->leftJoin('service_translations.locale', 'service_locale')
+            ->leftJoin('category_translations.locale', 'category_locale')
+            ->select('category', 'category_translations', 'services', 'service_translations', 'service_locale', 'category_locale')
+            ->where('category.id =:id')
+            ->setParameter('id', $id)
+            ->getQuery()->getResult();
+    }
+
+    public function getLastQueue()
+    {
+        return $this->createQueryBuilder('category')
+            ->orderBy('category.queue', 'DESC')
+            ->select('category.queue')
+            ->setMaxResults('1')
             ->getQuery()->getResult();
     }
 }
