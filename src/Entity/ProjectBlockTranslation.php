@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ServiceTranslationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectBlockTranslationRepository")
  */
-class ServiceTranslation
+class ProjectBlockTranslation
 {
     /**
      * @ORM\Id()
@@ -15,6 +15,12 @@ class ServiceTranslation
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProjectBlock", inversedBy="projectBlockTranslations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $projectBlock;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -27,20 +33,26 @@ class ServiceTranslation
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Locale", inversedBy="serviceTranslations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Locale", inversedBy="projectBlockTranslations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $locale;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="serviceTranslations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $service;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getProjectBlock(): ?ProjectBlock
+    {
+        return $this->projectBlock;
+    }
+
+    public function setProjectBlock(?ProjectBlock $projectBlock): self
+    {
+        $this->projectBlock = $projectBlock;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -75,18 +87,6 @@ class ServiceTranslation
     public function setLocale(?Locale $locale): self
     {
         $this->locale = $locale;
-
-        return $this;
-    }
-
-    public function getService(): ?Service
-    {
-        return $this->service;
-    }
-
-    public function setService(?Service $service): self
-    {
-        $this->service = $service;
 
         return $this;
     }

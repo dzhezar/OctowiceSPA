@@ -41,6 +41,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->where('cl.short_name =:name')
             ->select('c.price', 'c.id', 'cc.name')
             ->setParameter('name', 'ru')
+            ->orderBy('c.queue')
             ->getQuery()->getResult();
     }
 
@@ -79,6 +80,15 @@ class CategoryRepository extends ServiceEntityRepository
             ->select('category', 'category_translations', 'services', 'service_translations', 'service_locale', 'category_locale')
             ->where('category.id =:id')
             ->setParameter('id', $id)
+            ->getQuery()->getResult();
+    }
+
+    public function getLastQueue()
+    {
+        return $this->createQueryBuilder('category')
+            ->orderBy('category.queue', 'DESC')
+            ->select('category.queue')
+            ->setMaxResults('1')
             ->getQuery()->getResult();
     }
 }

@@ -58,6 +58,11 @@ class Category
      */
     private $services;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $queue;
+
     public function __construct()
     {
         $this->categoryTranslations = new ArrayCollection();
@@ -216,6 +221,18 @@ class Category
             $this->services->removeElement($service);
             $service->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getQueue(): ?int
+    {
+        return $this->queue;
+    }
+
+    public function setQueue(int $queue): self
+    {
+        $this->queue = $queue;
 
         return $this;
     }

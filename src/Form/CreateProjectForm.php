@@ -49,11 +49,6 @@ class CreateProjectForm extends AbstractType
                 },
                 'label' => 'Тип проекта'
             ])
-            ->add('photos', FileType::class,[
-                'label' => 'Изображения',
-                'required' => false,
-                'multiple' => true,
-            ])
             ->add('save', SubmitType::class, ['label' => 'Добавить портфолио'])
             ->getForm();
     }

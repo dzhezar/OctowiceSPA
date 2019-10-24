@@ -3,10 +3,15 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class EditServiceDTO
 {
     private $price;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     /**
      * @var null

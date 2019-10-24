@@ -28,6 +28,7 @@
                                         <th>Категория (ru)</th>
                                         <th>Редактировать SEO/Фото</th>
                                         <th>Редактировать перевод</th>
+                                        <th>Редактировать блоки</th>
                                         <th>Удалить</th>
                                     </tr>
                                     </thead>
@@ -48,6 +49,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td><a href="{{ path('project_block_main', {project: project.id}) }}" class="btn btn-outline-warning active" role="button" aria-pressed="true">Редактировать</a></td>
                                             <td><button data-id="{{ project.id }}" type="button" class="btn btn-danger remove-project">Удалить</button></td>
                                         </tr>
                                     {% endfor %}
