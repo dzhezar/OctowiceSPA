@@ -7,6 +7,8 @@
 /var/
 /vendor/
 /.idea/
+/yarn.lock
+/public/images
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
