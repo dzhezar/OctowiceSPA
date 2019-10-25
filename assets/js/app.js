@@ -4,9 +4,12 @@ import VueRouter from "vue-router";
 import router from "./App/router";
 import App from "./App/App";
 let VueScrollTo = require('vue-scrollto');
+import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
 import 'axios';
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
+Vue.use(VueScrollProgressBar);
+
 Vue.component('country-flag', CountryFlag);
 import { i18n } from './i18n'
 

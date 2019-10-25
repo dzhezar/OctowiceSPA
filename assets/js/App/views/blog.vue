@@ -16,8 +16,13 @@
                     <div style="width: 85%; margin: auto; font-size: 24px; line-height: normal; padding-bottom: 3%;">
                         Смысл жизни, следовательно, творит данный закон внешнего мира. Надстройка нетривиальна. Дискретность амбивалентно транспонирует гравитационный парадок
                     </div>
-                    <div style="width: 85%; margin: auto; font-size: 20px; padding-bottom: 3%;">
-                        24/05/2019
+                    <div style="width: 85%; margin: auto; font-size: 20px; padding-bottom: 3%; display: flex;">
+                        <div style="font-size: 16px;">
+                            24/05/2019
+                        </div>
+                        <div style="width: 100%; text-align: end;">
+                            <router-link to="/blog/paragraph" style="color: #EB5757; text-decoration: none;">Подробнее ></router-link>
+                        </div>
                     </div>
                     <div style="height: 500px; background-color: rgb(0, 0, 0);width: 85%; margin: auto;">
 
