@@ -88,3 +88,15 @@ change_order_block:
   methods: post
   path: /octo_admin/change_order/block
   controller: App\Controller\Admin\ProjectBlockController::change_order_block
+blog_main:
+  path: /octo_admin/blog_main
+  controller: App\Controller\Admin\BlogController::index
+create_blog:
+  path: /octo_admin/create_blog
+  controller: App\Controller\Admin\BlogController::create_service
+edit_blog:
+  path: /octo_admin/edit_blog/{id}
+  controller: App\Controller\Admin\BlogController::edit_service
+edit_blog_traslation:
+  path: /octo_admin/edit_blog_traslation/{blog}/{locale}
+  controller: App\Controller\Admin\BlogController::edit_service_translation

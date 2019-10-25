@@ -1,10 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block name %}
-    Услуги
+    Портфолио
 {% endblock %}
+
 {% block title %}
-    Услуги
+    Портфолио
 {% endblock %}
 
 {% block body %}
@@ -12,10 +13,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="btn btn-primary" href="{{ path('create_service') }}" role="button">Добавить услугу</a>
+                    <a class="btn btn-primary" href="{{ path('create_blog') }}" role="button">Добавить блог</a>
                     <div class="card" style="margin-top: 10px">
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Список портфолио</h3>
+                            <h3 class="h4">Список блогов</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -24,30 +25,28 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Название (ru)</th>
-                                        <th>Цена</th>
-                                        <th>Редактировать цену/SEO/Фото</th>
+                                        <th>Редактировать SEO/Фото</th>
                                         <th>Редактировать перевод</th>
                                         <th>Удалить</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for service in services %}
+                                    {% for blog in blogs %}
                                         <tr>
-                                            <th scope="row">{{ service.id }}</th>
-                                            <td>{{ service.name }}</td>
-                                            <td>{{ service.price }}</td>
-                                            <td><a href="{{ path('edit_service', {id: service.id}) }}" class="btn btn-primary active" role="button" aria-pressed="true">Редактировать</a></td>
+                                            <th scope="row">blog project.id }}</th>
+                                            <td>{{ blog.name }}</td>
+                                            <td><a href="{{ path('edit_blog', {id: project.id}) }}" class="btn btn-primary active" role="button" aria-pressed="true">Редактировать</a></td>
                                             <td>
                                                 <div class="input-group-prepend">
                                                     <button data-toggle="dropdown" type="button" class="btn btn-outline-secondary dropdown-toggle">Редактировать перевод<span class="caret"></span></button>
                                                     <div class="dropdown-menu">
                                                         {% for locale in locales %}
-                                                            <a class="dropdown-item" href="{{ path('edit_service_traslation', {'service': service.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
+                                                            <a class="dropdown-item" href="{{ path('edit_blog_traslation', {'blog': blog.id, 'locale': locale.id}) }}">{{ locale.short_name }}</a>
                                                         {% endfor %}
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><button data-id="{{ service.id }}" type="button" class="btn btn-danger remove-project">Удалить</button></td>
+                                            <td><button data-id="{{ project.id }}" type="button" class="btn btn-danger remove-project">Удалить</button></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -67,7 +66,7 @@
         $(document).on('click', '.remove-project', function () {
             let id = $(this).attr('data-id');
             if(confirm('Вы уверены?')){
-                location.href = '/octo_admin/remove_service/'+id;
+                location.href = '/octo_admin/remove_blog/'+id;
             }
         })
     </script>

@@ -4,6 +4,10 @@
     {% if text is defined %}{{ text }}{% endif %}
 {% endblock %}
 
+{% block stylesheets %}
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
     <div class="container" style="padding-top: 20px">
         <div class="row">
@@ -14,4 +18,24 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Montserrat'],
+                height: 300,
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                },
+                codemirror: {
+                    theme: 'paper'
+                }
+            });
+        });
+    </script>
 {% endblock %}

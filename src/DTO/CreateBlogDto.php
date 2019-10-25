@@ -3,23 +3,14 @@
 
 namespace App\DTO;
 
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-class CreateProjectDTO
+class CreateBlogDto
 {
     private $name;
     private $description;
     private $seo_title;
     private $seo_description;
-    /**
-     * @Assert\Image()
-     */
     private $image;
-    private $link;
-    private $category;
-
-
 
     /**
      * @return mixed
@@ -100,40 +91,6 @@ class CreateProjectDTO
     {
         $this->image = $image;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * @param mixed $link
-     */
-    public function setLink($link): void
-    {
-        $this->link = $link;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category): void
-    {
-        $this->category = $category;
-    }
-
-
 
 
 }
