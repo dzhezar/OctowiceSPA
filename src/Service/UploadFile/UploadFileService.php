@@ -28,7 +28,7 @@ class UploadFileService
     public function remove(?string $filename)
     {
         try {
-            if(file_exists('your_file_name'))
+            if(file_exists($this->uploadDir.$filename))
                 unlink($this->uploadDir.$filename);
             return true;
         } catch (FileException $e) {

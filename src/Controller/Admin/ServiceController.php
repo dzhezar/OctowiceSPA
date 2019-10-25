@@ -104,6 +104,8 @@ class ServiceController extends AbstractController
             $id->setPrice($data->getPrice())
                 ->setIsOnServicePage($data->getIsOnServicePage());
             if($data->getImage()){
+                if($id->getImage())
+                    $uploadFileService->remove($id->getImage());
                 $image = $uploadFileService->upload($data->getImage());
                 $id->setImage($image);
             }

@@ -117,6 +117,8 @@ class ProjectBlockController extends AbstractController
             /** @var EditProjectBlockDTO $data */
             $data = $form->getData();
             if($data->getImage()){
+                if($block->getImage())
+                    $uploadFileService->remove($block->getImage());
                 $fileName = $uploadFileService->upload($data->getImage());
                 $block->setImage($fileName);
             }
