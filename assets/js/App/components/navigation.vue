@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <header data-aos="fade-down">
         <nav id='main-nav' class="navbar navbar-expand-lg header">
             <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
             <div class="row w-75 m-auto">
@@ -56,7 +56,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </header>
 </template>
 <script>
     import $ from 'jquery';
