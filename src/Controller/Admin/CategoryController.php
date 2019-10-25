@@ -137,6 +137,8 @@ class CategoryController extends AbstractController
                 }
             }
             if($data->getImage()){
+                if($id->getIcon())
+                    $uploadedFile->remove($id->getIcon());
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setIcon($newFileName);
             }
