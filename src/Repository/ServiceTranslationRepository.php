@@ -19,32 +19,15 @@ class ServiceTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, ServiceTranslation::class);
     }
 
-    // /**
-    //  * @return ServiceTranslation[] Returns an array of ServiceTranslation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByProjectAndLocale(int $service, int $locale)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('service_translation')
+            ->leftJoin('service_translation.service', 'service')
+            ->leftJoin('service_translation.locale', 'locale')
+            ->setParameter('service', $service)
+            ->setParameter('locale', $locale)
+            ->where('service.id =:service')
+            ->andWhere('locale.id =:locale')
+            ->getQuery()->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ServiceTranslation
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -22,7 +22,7 @@ class ServiceTranslation
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -31,6 +31,12 @@ class ServiceTranslation
      * @ORM\JoinColumn(nullable=false)
      */
     private $locale;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="serviceTranslations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $service;
 
     public function getId(): ?int
     {
@@ -69,6 +75,18 @@ class ServiceTranslation
     public function setLocale(?Locale $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    public function setService(?Service $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }

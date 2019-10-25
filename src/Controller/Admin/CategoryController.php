@@ -18,6 +18,7 @@ use App\Mapper\CategoryTranslationMapper;
 use App\Repository\CategoryRepository;
 use App\Repository\CategoryTranslationRepository;
 use App\Repository\LocaleRepository;
+use App\Repository\ServiceRepository;
 use App\Service\UploadFile\UploadFileService;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,7 +45,7 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository)
+    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository)
     {
         $form = $this->createForm(CreateCategoryForm::class);
         $form->handleRequest($request);
@@ -58,10 +59,27 @@ class CategoryController extends AbstractController
             /** @var CreateCategoryDTO $data */
             $data = $form->getData();
             $category = new Category();
+
+            $data->setServices(json_decode($data->getServices()));
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $category->addService($service_search);
+                }
+            }
+
+            $queue = $categoryRepository->getLastQueue();
+            if($queue)
+                $queue = $queue[0]['queue']+1;
+            elseif(!$queue)
+                $queue = 1;
+
             $category->setSeoTitle($data->getSeoTitle())
                 ->setSeoDescription($data->getSeoDescription())
                 ->setSlug($slugify->slugify($data->getName()))
-                ->setPrice($data->getPrice());
+                ->setPrice($data->getPrice())
+                ->setQueue($queue);
             if($data->getImage()){
                 $file_name = $uploadFileService->upload($data->getImage());
                 $category->setIcon($file_name);
@@ -72,6 +90,7 @@ class CategoryController extends AbstractController
             $translation->setCategory($category)
                 ->setLocale($ru_locale)
                 ->setName($data->getName())
+                ->setShortDescription($data->getShortDescription())
                 ->setDescription($data->getDescription());
             $this->em->persist($translation);
             $this->em->flush();
@@ -80,7 +99,7 @@ class CategoryController extends AbstractController
 
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin/category/create.category.html.twig', ['form' => $form->createView(), 'services' => json_encode($serviceRepository->getServicesNameInRussian())]);
     }
 
     public function index(CategoryRepository $categoryRepository, LocaleRepository $localeRepository)
@@ -90,14 +109,15 @@ class CategoryController extends AbstractController
 
 
 
-    public function remove_category(Category $category)
+    public function remove_category(Category $category, UploadFileService $uploadFileService)
     {
+        $uploadFileService->remove($category->getIcon());
         $this->em->remove($category);
         $this->em->flush();
         return $this->redirectToRoute('category_main');
     }
 
-    public function edit_category(Category $id, Request $request, UploadFileService $uploadedFile)
+    public function edit_category(Category $id, Request $request, UploadFileService $uploadedFile, ServiceRepository $serviceRepository)
     {
         $form = $this->createForm(EditCategoryForm::class, $this->categoryMapper->EntityToEditCategoryDTO($id));
         $form->handleRequest($request);
@@ -105,6 +125,17 @@ class CategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             /** @var EditCategoryDTO $data */
             $data = $form->getData();
+            $data->setServices(json_decode($data->getServices()));
+            foreach ($id->getServices() as $service) {
+                $id->removeService($service);
+            }
+            if($data->getServices()) {
+                foreach ($data->getServices() as $item) {
+                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
+                    if ($service_search)
+                        $id->addService($service_search);
+                }
+            }
             if($data->getImage()){
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setIcon($newFileName);
@@ -118,7 +149,11 @@ class CategoryController extends AbstractController
         }
 
 
-        return $this->render('admin/category/edit_category.html.twig', ['form' => $form->createView(), 'image' => $id->getIcon()]);
+        return $this->render('admin/category/edit_category.html.twig', [
+            'form' => $form->createView(),
+            'image' => $id->getIcon(),
+            'services' => json_encode($serviceRepository->getServicesNameInRussian()),
+            'current_services' => json_encode($serviceRepository->getServicesNameInRussianByCategoryId($id->getId()))]);
     }
 
     public function edit_category_translation(Category $category, Locale $locale, Request $request, CategoryTranslationMapper $categoryTranslationMapper)
@@ -140,11 +175,13 @@ class CategoryController extends AbstractController
                 $translation = new CategoryTranslation();
                 $translation->setName($data->getName())
                     ->setDescription($data->getDescription())
+                    ->setShortDescription($data->getShortDescription())
                     ->setCategory($category)
                     ->setLocale($locale);
             }
             else{
                 $translation->setName($data->getName())
+                    ->setShortDescription($data->getShortDescription())
                     ->setDescription($data->getDescription());
             }
             if($locale->getShortName() === 'ru'){
@@ -156,7 +193,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_main');
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName(). 'Перевод']);
+        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
     }
 
 

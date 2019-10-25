@@ -7,6 +7,7 @@ namespace App\Form;
 use App\DTO\CreateCategoryDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,6 +26,10 @@ class CreateCategoryForm extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Название (на русском)',
             ])
+            ->add('shortDescription', TextType::class, [
+                'label' => 'Короткое описание',
+                'required' => false,
+            ])
             ->add('description', TextType::class, [
                 'label' => 'Описание (на русском)',
             ])
@@ -39,6 +44,7 @@ class CreateCategoryForm extends AbstractType
                 'label' => 'Сео описание',
                 'required' => false,
             ])
+            ->add('services', HiddenType::class)
 
             ->add('save', SubmitType::class, ['label' => 'Добавить тип проекта'])
             ->getForm();

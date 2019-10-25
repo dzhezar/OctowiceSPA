@@ -48,12 +48,18 @@ class Locale
      */
     private $serviceTranslations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlockTranslation", mappedBy="locale")
+     */
+    private $projectBlockTranslations;
+
     public function __construct()
     {
         $this->categoryTranslations = new ArrayCollection();
         $this->blogTranslations = new ArrayCollection();
         $this->projectTranslations = new ArrayCollection();
         $this->serviceTranslations = new ArrayCollection();
+        $this->projectBlockTranslations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +209,37 @@ class Locale
             // set the owning side to null (unless already changed)
             if ($serviceTranslation->getLocale() === $this) {
                 $serviceTranslation->setLocale(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProjectBlockTranslation[]
+     */
+    public function getProjectBlockTranslations(): Collection
+    {
+        return $this->projectBlockTranslations;
+    }
+
+    public function addProjectBlockTranslation(ProjectBlockTranslation $projectBlockTranslation): self
+    {
+        if (!$this->projectBlockTranslations->contains($projectBlockTranslation)) {
+            $this->projectBlockTranslations[] = $projectBlockTranslation;
+            $projectBlockTranslation->setLocale($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectBlockTranslation(ProjectBlockTranslation $projectBlockTranslation): self
+    {
+        if ($this->projectBlockTranslations->contains($projectBlockTranslation)) {
+            $this->projectBlockTranslations->removeElement($projectBlockTranslation);
+            // set the owning side to null (unless already changed)
+            if ($projectBlockTranslation->getLocale() === $this) {
+                $projectBlockTranslation->setLocale(null);
             }
         }
 

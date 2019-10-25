@@ -1,0 +1,63 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            {% if image is not empty %}
+                $('#edit_project_block_form_image').parent().after('<div>Старое фото: <a target="_blank" href="/images/{{ image }}"><img class="admin-show-image" src="/images/{{ image }}"></a> </div>');
+            {% else %}
+                $('#edit_project_block_form_image').after('<div>Старого фото нет</div>');
+            {% endif %}
+
+            $('#edit_project_block_form_color').after('<div class="form-group"><label for="color_picker" class="required">Название (на русском)<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+
+            console.log($('#edit_project_block_form_color').val());
+
+            const pickr = Pickr.create({
+                default: $('#edit_project_block_form_color').val(),
+                el: '#color_picker',
+                theme: 'classic',
+                components: {
+                    preview: true,
+                    opacity: true,
+
+                    hue: true,
+                    interaction: {
+                        input: true,
+                    }
+                }
+            });
+
+            pickr.on('change', (color) => {
+                let colorq = color.toHEXA().toString();
+                pickr.setColor(colorq);
+                $('#edit_project_block_form_color').val(colorq);
+            });
+        })
+    </script>
+{% endblock %}
