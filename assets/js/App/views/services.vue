@@ -6,9 +6,9 @@
                 Что мы делаем?
             </div>
         </div>
-        <div style="height: 75vh; background: linear-gradient(180deg, #131313 0%, #333333 100%); display: flex;">
-            <div class="row m-auto" style="color: black;display: flex; justify-content: center;">
-                <div class="col-3 mx-lg-5 mx-md-3 caption" style="background: #BDBDBD;box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
+        <div style="background: linear-gradient(180deg, #131313 0%, #333333 100%); display: flex;">
+            <div class="row m-auto" style="color: black;display: flex; justify-content: space-between; width: 85%;">
+                <div class="col-3 my-lg-5 m-md-3 caption" style="background: #BDBDBD;box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
                     <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
                         <img class="col-3" src="../../../images/landing.svg" alt="">
                         <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
@@ -21,10 +21,10 @@
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">
-                        <router-link to="/servises/landing" style="color: black; text-decoration: none;">Подробнее ></router-link>
+                        <router-link to="/service/landing" style="color: black; text-decoration: none;">Подробнее ></router-link>
                     </div>
                 </div>
-                <div class="col-3 mx-lg-5 mx-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
+                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
                     <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
                         <img class="col-3" src="../../../images/shop.svg" alt="">
                         <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
@@ -38,7 +38,7 @@
                         <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>
                     </div>
                 </div>
-                <div class="col-3 mx-lg-5 mx-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
+                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
                     <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
                         <img class="col-3" src="../../../images/card.svg" alt="">
                         <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
@@ -49,6 +49,20 @@
                         - идеальный тип сайта для отображения товаров или услуг методом каталога
                     </div>
                     <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">
+                        <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>
+                    </div>
+                </div>
+                <div style="width: 100%;background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px; margin: 3rem 0; position: relative;">
+                    <div class="my-4" style="border-right: thick #EB5757 solid; display: flex; width: 90%; margin: auto;">
+                        <img src="../../../images/octopus.svg" alt="">
+                        <div style="width: 100%; text-align: end; font-size: x-large; display: flex; justify-content: flex-end; align-items: center; padding: 0 15px;">
+                            Индивидуальный проект
+                        </div>
+                    </div>
+                    <div style="font-size: 22px; line-height: normal; margin: 3rem auto; width: 90%;">
+                        если вам нужно что-нибудь отличное от Интернет магазина, сайта визитка или landing страницы.
+                    </div>
+                    <div style="position: absolute; bottom: 5%; right: 5%; font-weight: bold;">
                         <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>
                     </div>
                 </div>

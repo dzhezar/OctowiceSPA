@@ -654,6 +654,14 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.25"
 
+"@guillaumebriday/vue-scroll-progress-bar@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@guillaumebriday/vue-scroll-progress-bar/-/vue-scroll-progress-bar-0.3.0.tgz#b11c3b4da872e73d7331deb6fb3ba83be5208a33"
+  integrity sha512-QVXXt6i6e17R2VSVlWqEIGzYZ83gKKLO2yzMd/9ishM3EAyXfW+gtPffyi1TPcnbS8Xp8WREqVNPFsuJoXNyJw==
+  dependencies:
+    core-js "^3.1.2"
+    vue "^2.6.10"
+
 "@symfony/webpack-encore@^0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.28.0.tgz#75f24034602cfca35eea95400e88926821a1d7dc"
@@ -1740,6 +1748,11 @@ core-js@^3.0.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.3.2.tgz#cd42da1d7b0bb33ef11326be3a721934277ceb42"
   integrity sha512-S1FfZpeBchkhyoY76YAdFzKS4zz9aOK7EeFaNA2aJlyXyA+sgqz6xdxmLPGXEAf0nF44MVN1kSjrA9Kt3ATDQg==
+
+core-js@^3.1.2:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.3.3.tgz#b7048d3c6c1a52b5fe55a729c1d4ccdffe0891bb"
+  integrity sha512-0xmD4vUJRY8nfLyV9zcpC17FtSie5STXzw+HyYw2t8IIvmDnbq7RJUULECCo+NstpJtwK9kx8S+898iyqgeUow==
 
 core-util-is@~1.0.0:
   version "1.0.2"

@@ -1,8 +1,9 @@
 import VueRouter from 'vue-router';
 import Index from "./views/index";
-import Servises from './views/servises';
+import Services from './views/services';
 import Blog from './views/blog';
 import Single_Service from './views/single_service';
+import Single_Blog from './views/single_blog';
 import {i18n} from "../i18n";
 
 const router = new VueRouter({
@@ -14,19 +15,24 @@ const router = new VueRouter({
             component: Index
         },
         {
-            path: '/servises',
-            name: 'servises',
-            component: Servises
+            path: '/services',
+            name: 'services',
+            component: Services
         },
         {
-            path: '/servises/landing',
-            name: 'servises',
+            path: '/service/landing',
+            name: 'single_service',
             component: Single_Service
         },
         {
             path: '/blog',
             name: 'blog',
             component: Blog
+        },
+        {
+            path: '/blog/paragraph',
+            name: 'single_blog',
+            component: Single_Blog
         },
         {
             path: '/:lang',

@@ -1,6 +1,7 @@
 <template>
     <div>
         <nav id='main-nav' class="navbar navbar-expand-lg header">
+            <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
             <div class="row w-75 m-auto">
                 <div class="collapse navbar-collapse justify-content-around" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
@@ -13,7 +14,7 @@
                                 <router-link to="/">Главная</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/servises">Услуги</router-link>
+                                <router-link to="/services">Услуги</router-link>
                             </li>
                             <li class="nav-item pt-0">
                                 <img src="../../../images/octo.png" alt="">

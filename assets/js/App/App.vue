@@ -1,6 +1,6 @@
 <template>
     <transition name="router-anim" enter-active-class="animated fadeIn faster" leave-active-class="animated fadeOut faster">
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
     </transition>
 </template>
 
