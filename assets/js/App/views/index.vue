@@ -133,11 +133,13 @@
             </div>
         </section>
         <section id="contacts" class="section_light">
-        <div class="contacts_title">
-                Наши контакты
-            </div>
-            <div class="contacts_subtitle">
-                Свяжись с нами. Работаем с 10:00 - 19:00
+            <div class="contacts_title">
+                <div>
+                    Наши контакты
+                </div>
+                <div>
+                    Свяжись с нами. Работаем с 10:00 - 19:00
+                </div>
             </div>
             <div class="contacts-bar">
                 <ul>
