@@ -312,6 +312,12 @@ nav ul li a:hover{
     padding: .75rem 1.25rem;
     list-style: none
 }
+footer {
+    height: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
 #footer-nav {
     position: relative;
     display: -ms-flexbox;
@@ -666,30 +672,33 @@ nav ul li a:hover{
 .contacts_title {
     width: 100%;
     text-align: center;
-    padding-top: 120px;
+    padding-top: 100px;
+    height: 22%;
     font-weight: 900;
     font-size: 45px;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: black;
+    display: flex;
+    flex-direction: column;
+    place-content: flex-end;
 }
-.contacts_subtitle {
-    width: 100%;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 16px;
-    line-height: 100%;
-    font-family: 'M PLUS 1p', sans-serif;
-    color: black;
+.contacts_title > div:last-child {
+    font-size: initial;
+    font-weight: normal;
 }
 .contacts-bar {
     width: 75%;
-    margin: 40px auto 0;
+    margin: auto;
+    height: 13%;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: white;
     background: #333333;
     padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .contacts-bar ul {
     -ms-flex-pack: center!important;
@@ -718,11 +727,14 @@ nav ul li a:hover{
 }
 .form-wrapper {
     width: 75%;
-    margin: 40px auto 0;
+    margin: auto;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: black;
-    padding: 20px 0 0;
+    height: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .form-wrapper form {
     place-content: center;
@@ -730,14 +742,14 @@ nav ul li a:hover{
     flex-wrap: wrap;
 }
 .form-wrapper input{
-    height: 50px;
-    margin: 0 1px 20px;
+    height: 18%;
+    margin: 0 1px 2%;
     padding: 5px 20px;
     flex: 0 0 50%;
 }
 .form-wrapper textarea{
-    height: 100px;
-    margin: 0 1px 20px;
+    height: 38%;
+    margin: 0 1px 2%;
     padding: 5px 20px;
     flex: 0 0 50%;
 }
@@ -745,7 +757,10 @@ nav ul li a:hover{
     background: black;
     color: white;
     font-size: large;
-    font-weight: 800
+    font-weight: 800;
+    margin: unset;
+    border: unset;
+    height: 20%;
 }
 @keyframes gradientBG {
     0% {
