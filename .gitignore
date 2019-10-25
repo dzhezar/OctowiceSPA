@@ -25,4 +25,5 @@
 /public/images/
 npm-debug.log
 yarn-error.log
+yarn.lock
 ###< symfony/webpack-encore-bundle ###
