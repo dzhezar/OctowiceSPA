@@ -1,6 +1,9 @@
 get_categories:
   path: /api/get_categories
   controller: App\Controller\Api\CategoryApiController::get_categories
+get_category:
+  path: /api/get_category
+  controller: App\Controller\Api\CategoryApiController::get_category
 send_mail:
   path: /api/send_mail
   methods: post
@@ -8,9 +11,16 @@ send_mail:
 get_languages:
   path: /api/get_languages
   controller: App\Controller\Api\MainApiController::getLanguages
+get_project:
+  path: /api/get_project/{project}
+  controller: App\Controller\Api\ProjectApiController::get_project
 admin:
   path: /octo_admin
   controller: App\Controller\Admin\MainController::index
+change_order_category:
+  methods: post
+  path: /octo_admin/change_order/category
+  controller: App\Controller\Admin\MainController::change_order_category
 locale_main:
   path: /octo_admin/locale_main
   controller: App\Controller\Admin\LocaleController::index
@@ -29,3 +39,52 @@ create_category:
 remove_category:
   path: /octo_admin/remove_category/{category}
   controller: App\Controller\Admin\CategoryController::remove_category
+project_main:
+  path: /octo_admin/project_main
+  controller: App\Controller\Admin\ProjectController::index
+create_project:
+  path: /octo_admin/create_project
+  controller: App\Controller\Admin\ProjectController::create_project
+edit_project:
+  path: /octo_admin/edit_project/{id}
+  controller: App\Controller\Admin\ProjectController::edit_project
+edit_project_translation:
+  path: /octo_admin/edit_project_translation/{project}/{locale}
+  controller: App\Controller\Admin\ProjectController::edit_project_translation
+remove_project:
+  path: /octo_admin/remove_project/{project}
+  controller: App\Controller\Admin\ProjectController::remove_project
+service_main:
+  path: /octo_admin/service_main
+  controller: App\Controller\Admin\ServiceController::index
+create_service:
+  path: /octo_admin/create_service
+  controller: App\Controller\Admin\ServiceController::create_service
+edit_service:
+  path: /octo_admin/edit_service/{id}
+  controller: App\Controller\Admin\ServiceController::edit_service
+edit_service_traslation:
+  path: /octo_admin/edit_service_traslation/{service}/{locale}
+  controller: App\Controller\Admin\ServiceController::edit_service_translation
+remove_service:
+  path: /octo_admin/remove_service/{service}
+  controller: App\Controller\Admin\ServiceController::remove_service
+project_block_main:
+  path: /octo_admin/project_block_main/{project}
+  controller: App\Controller\Admin\ProjectBlockController::index
+project_block_create:
+  path: /octo_admin/project_block_create/{project}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_create
+project_block_edit:
+  path: /octo_admin/project_block_edit/{block}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_edit
+project_block_edit_translation:
+  path: /octo_admin/project_block_edit_translation/{block}/{locale}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_edit_translation
+project_block_remove:
+  path: /octo_admin/project_block_remove/{block}
+  controller: App\Controller\Admin\ProjectBlockController::project_block_remove
+change_order_block:
+  methods: post
+  path: /octo_admin/change_order/block
+  controller: App\Controller\Admin\ProjectBlockController::change_order_block

@@ -1,0 +1,68 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Montserrat'],
+                height: 300,
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                },
+                codemirror: {
+                    theme: 'paper'
+                }
+            });
+
+
+            $('#create_project_block_color').after('<div class="form-group"><label for="color_picker" class="required">Название (на русском)<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+
+            const pickr = Pickr.create({
+                el: '#color_picker',
+                theme: 'classic',
+                components: {
+                    preview: true,
+                    opacity: true,
+
+                    hue: true,
+                    interaction: {
+                        input: true,
+                    }
+                }
+            });
+
+            pickr.on('change', (color) => {
+                console.log($('#create_project_block_color'));
+                $('#create_project_block_color').val(color.toHEXA().toString());
+            });
+        })
+    </script>
+{% endblock %}

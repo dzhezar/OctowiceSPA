@@ -20,6 +20,10 @@ class EditCategoryTranslationForm extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Название',
             ])
+            ->add('shortDescription', TextType::class, [
+                'label' => 'Короткое описание',
+                'required' => false
+            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Описание',
             ])

@@ -28,7 +28,7 @@ class CategoryTranslation
     private $category;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -37,6 +37,11 @@ class CategoryTranslation
      * @ORM\JoinColumn(nullable=false)
      */
     private $locale;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $short_description;
 
     public function getId(): ?int
     {
@@ -87,6 +92,18 @@ class CategoryTranslation
     public function setLocale(?Locale $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->short_description;
+    }
+
+    public function setShortDescription(?string $short_description): self
+    {
+        $this->short_description = $short_description;
 
         return $this;
     }
