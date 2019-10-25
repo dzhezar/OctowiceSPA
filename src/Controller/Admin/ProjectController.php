@@ -125,6 +125,8 @@ class ProjectController extends AbstractController
             if($category)
                 $id->setCategory($category);
             if($data->getImage()){
+                if($id->getImage())
+                    $uploadedFile->remove($id->getImage());
                 $newFileName = $uploadedFile->upload($data->getImage());
                 $id->setImage($newFileName);
             }
