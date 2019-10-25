@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <div id="edit_services"></div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <link href="/admin/css/magicsuggest-min.css" rel="stylesheet">
+    <script src="/admin/js/magicsuggest-min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#create_category_form_description').parent().after('<div id="service_editor" class="form-group"><label for="edit_services">Что входит в тариф</label></div>');
+            $('#edit_services').appendTo('#service_editor');
+            let all_services = JSON.parse('{{ services|raw }}');
+
+            let recommend = $('#edit_services').magicSuggest({
+                allowFreeEntries: false,
+                useCommaKey: false,
+                data: all_services,
+                placeholder: 'Начните вводить текст'
+            });
+
+            $(recommend).on('blur', function () {
+                $('#create_category_form_services').val(JSON.stringify(this.getValue()));
+            });
+        });
+    </script>
+
+{% endblock %}

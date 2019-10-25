@@ -19,32 +19,39 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    // /**
-    //  * @return Service[] Returns an array of Service objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getServicesInRussian()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('service')
+            ->leftJoin('service.serviceTranslations', 'service_translations')
+            ->leftJoin('service_translations.locale', 'locale')
+            ->where('locale.short_name =:name')
+            ->select('service.id', 'service.price', 'service_translations.name')
+            ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Service
+    public function getServicesNameInRussian()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('service')
+            ->leftJoin('service.serviceTranslations', 'service_translations')
+            ->leftJoin('service_translations.locale', 'locale')
+            ->where('locale.short_name =:name')
+            ->select('service.id', 'service_translations.name')
+            ->setParameter('name', 'ru')
+            ->getQuery()->getResult();
     }
-    */
+
+    public function getServicesNameInRussianByCategoryId(int $id)
+    {
+        return $this->createQueryBuilder('service')
+            ->leftJoin('service.serviceTranslations', 'service_translations')
+            ->leftJoin('service_translations.locale', 'locale')
+            ->where('locale.short_name =:name')
+            ->andWhere('category.id =:id')
+            ->leftJoin('service.category', 'category')
+            ->select('service.id', 'service_translations.name')
+            ->setParameter('name', 'ru')
+            ->setParameter('id', $id)
+            ->getQuery()->getResult();
+    }
 }

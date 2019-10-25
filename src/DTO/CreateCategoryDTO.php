@@ -5,6 +5,7 @@ namespace App\DTO;
 
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CreateCategoryDTO
 {
@@ -12,10 +13,16 @@ class CreateCategoryDTO
     private $price;
     private $seo_title;
     private $seo_description;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $name;
     private $description;
+    private $services;
+    private $short_description;
 
+    
     /**
      * @return mixed
      */
@@ -111,6 +118,42 @@ class CreateCategoryDTO
     {
         $this->description = $description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param mixed $services
+     */
+    public function setServices($services): void
+    {
+        $this->services = $services;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return $this->short_description;
+    }
+
+    /**
+     * @param mixed $short_description
+     */
+    public function setShortDescription($short_description): void
+    {
+        $this->short_description = $short_description;
+    }
+
+
+
+
 
 
 }

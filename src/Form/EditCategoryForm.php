@@ -7,6 +7,7 @@ namespace App\Form;
 use App\DTO\EditCategoryDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,6 +35,7 @@ class EditCategoryForm extends AbstractType
                 'label' => 'Фото',
                 'required' => false,
             ])
+            ->add('services', HiddenType::class)
             ->add('save', SubmitType::class, ['label' => 'Сохранить'])
             ->getForm();
     }

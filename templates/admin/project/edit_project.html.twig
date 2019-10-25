@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    Редактирование портфолио
+{% endblock %}
+
+{% block title %}
+    Редактирование портфолио
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            {% if image is not empty %}
+                $('#edit_project_form_image').parent().after('<div>Старое фото: <a target="_blank" href="/images/{{ image }}"><img class="admin-show-image" src="/images/{{ image }}"></a> </div>');
+            {% else %}
+                $('#edit_project_form_image').after('<div>Старого фото нет</div>');
+            {% endif %}
+            $('#edit_project_form_photos').parent().css('margin-bottom', '20px');
+        });
+
+        function create_image_block(src, id) {
+            return '<div class="col-2 has-image"><a target="_blank" href="/images/'+src+'"><img class="img-product" style="width: 100px; height: 100px; object-fit: contain; " src="/images/'+src+'"></a><a data-id="'+id+'" class="delete-project-image" id="2" style="text-decoration: underline; color: #4954ff; cursor: pointer">Удалить фото</a></div>';
+        }
+
+        $(document).on('click', '.delete-project-image', function () {
+            let elem = $(this);
+            let id = $(this).attr('data-id');
+            if(confirm('Уверены, что хотите удалить фото?')){
+                $.ajax({
+                    method: "GET",
+                    url: '/octo_admin/remove_project_image/'+id,
+                })
+                    .done(function() {
+                        elem.parent().remove();
+                    });
+            }
+        })
+    </script>
+{% endblock %}
