@@ -54,7 +54,7 @@ class BlogController extends AbstractController
         return $this->render('admin/blog/index.html.twig', ['locales' => $locales, 'blogs' => $blogs]);
     }
 
-    public function create_service(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository)
+    public function create_blog(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository)
     {
         $form = $this->createForm(CreateBlogForm::class);
         $form->handleRequest($request);
@@ -92,7 +92,7 @@ class BlogController extends AbstractController
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
     }
 
-    public function edit_service(Blog $blog, Request $request, UploadFileService $uploadFileService)
+    public function edit_blog(Blog $blog, Request $request, UploadFileService $uploadFileService)
     {
         $dto = $this->blogMapper->EntityToEditBlogDTO($blog);
         $form = $this->createForm(EditBlogForm::class, $dto);
@@ -121,7 +121,7 @@ class BlogController extends AbstractController
 
     }
 
-    public function edit_service_translation(Blog $blog, Locale $locale, Request $request, BlogTranslationRepository $blogTranslationRepository)
+    public function edit_blog_translation(Blog $blog, Locale $locale, Request $request, BlogTranslationRepository $blogTranslationRepository)
     {
         $translation = $blogTranslationRepository->getBlogByIdAndLocale($blog->getId(), $locale->getId());
         if(!isset($translation[0]))
@@ -151,5 +151,16 @@ class BlogController extends AbstractController
         }
 
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
+    }
+
+    public function remove_blog(Blog $blog, UploadFileService $uploadFileService)
+    {
+        if($blog->getImage())
+            $uploadFileService->remove($blog->getImage());
+
+        $this->entityManager->remove($blog);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('blog_main');
     }
 }
