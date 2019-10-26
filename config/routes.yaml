@@ -8,6 +8,9 @@ send_mail:
   path: /api/send_mail
   methods: post
   controller: App\Controller\Api\MainApiController::sendMail
+show_mails:
+  path: /octo_admin/show_mails
+  controller: App\Controller\Admin\MainController::render_mails
 get_languages:
   path: /api/get_languages
   controller: App\Controller\Api\MainApiController::getLanguages
@@ -93,10 +96,13 @@ blog_main:
   controller: App\Controller\Admin\BlogController::index
 create_blog:
   path: /octo_admin/create_blog
-  controller: App\Controller\Admin\BlogController::create_service
+  controller: App\Controller\Admin\BlogController::create_blog
 edit_blog:
   path: /octo_admin/edit_blog/{blog}
-  controller: App\Controller\Admin\BlogController::edit_service
+  controller: App\Controller\Admin\BlogController::edit_blog
 edit_blog_traslation:
   path: /octo_admin/edit_blog_traslation/{blog}/{locale}
-  controller: App\Controller\Admin\BlogController::edit_service_translation
+  controller: App\Controller\Admin\BlogController::edit_blog_translation
+remove_blog:
+  path: /octo_admin/remove_blog/{blog}
+  controller: App\Controller\Admin\BlogController::remove_blog

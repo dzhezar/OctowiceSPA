@@ -30,7 +30,7 @@ class Blog
     private $SeoDescription;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BlogTranslation", mappedBy="blog")
+     * @ORM\OneToMany(targetEntity="App\Entity\BlogTranslation", mappedBy="blog", cascade={"remove"})
      */
     private $blogTranslations;
 
