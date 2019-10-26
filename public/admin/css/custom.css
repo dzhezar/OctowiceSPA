@@ -3,3 +3,5 @@
     height: 200px;
     object-fit: contain;
 }
+
+.ui-helper-hidden-accessible { position: absolute; left:-999em; }
