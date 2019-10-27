@@ -5,6 +5,7 @@ namespace App\Service\Language;
 
 
 use App\Entity\Locale;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class LanguageService
 {
@@ -37,6 +38,17 @@ class LanguageService
     {
         $array = json_encode($array, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
         file_put_contents($this->directory.$locale->getShortName().'.json', $array);
+    }
+
+    public function removeFile(Locale $locale)
+    {
+        try {
+            if(file_exists($this->directory.$locale->getShortName().'.json'))
+                unlink($this->directory.$locale->getShortName().'.json');
+            return true;
+        } catch (FileException $e) {
+            return null;
+        }
     }
 
 }

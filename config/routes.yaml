@@ -27,9 +27,18 @@ change_order_category:
 locale_main:
   path: /octo_admin/locale_main
   controller: App\Controller\Admin\LocaleController::index
+create_locale:
+  path: /octo_admin/create_locale/
+  controller: App\Controller\Admin\LocaleController::create_locale
 edit_locale_text:
   path: /octo_admin/edit_locale_text/{locale}
   controller: App\Controller\Admin\LocaleController::edit_locale_text
+edit_locale:
+  path: /octo_admin/edit_locale/{locale}
+  controller: App\Controller\Admin\LocaleController::edit_locale
+remove_locale:
+  path: /octo_admin/remove_locale/{locale}
+  controller: App\Controller\Admin\LocaleController::remove_locale
 edit_locale_text_action:
   path: /octo_admin/edit_locale_text_action/{locale}
   methods: post
