@@ -1,0 +1,92 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    Настройка {{ locale.shortName }} языка
+{% endblock %}
+{% block title %}
+    Настройка {{ locale.shortName }} языка
+{% endblock %}
+
+{% block body %}
+    <section id="locales">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">Настройка {{ locale.shortName }} языка</h3>
+                        </div>
+                        <div class="card-header d-flex align-items-center">
+                            <a class="btn btn-primary active text-save">Сохранить</a>
+                        </div>
+                        <div class="card-body" >
+                            <ul class="list-group" id="text-list"></ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let array = [];
+        $.ajax({
+            method: "POST",
+            url: '/octo_admin/get_locale_text/{{ locale.id }}',
+        })
+            .done(function(data) {
+                array = data;
+                console.log(data);
+                let parent = $('#text-list');
+                Object.keys(data).forEach(function (key) {
+                    callback_build_list(parent, data[key], key, 'array');
+                });
+            });
+
+        function callback_build_list(parent, elem, key_parent, elem_id) {
+            let is_array = elem.length === undefined;
+            let li = $('<li class="list-group-item"></li>');
+            parent.append(li);
+            elem_id = elem_id+'["'+key_parent+'"]';
+            if(is_array){
+                let ul = $('<ul class="list-group">'+key_parent+'</ul>');
+                li.append(ul);
+                Object.keys(elem).forEach(function (key) {
+                    callback_build_list(ul, elem[key], key, elem_id);
+                });
+            }
+            else{
+                let div = $('<div class="input-group input-group-sm mb-3">\n' +
+                    '  <div class="input-group-prepend">\n' +
+                    '    <span class="input-group-text" id="inputGroup-sizing-sm">'+key_parent+'</span>\n' +
+                    '  </div>\n' +
+                    '</div>');
+                li.append(div);
+                let input =$('<input data-id = \''+elem_id+'\' type="text"  class="form-control text-value" aria-label="Small" aria-describedby="inputGroup-sizing-sm">');
+                div.append(input);
+                input.val(elem);
+            }
+        }
+        $(document).on('focusout', '.text-value', function () {
+            let str = $(this).val();
+            str = str.replace(/"/g, '\\"');
+            eval($(this).attr('data-id') + ' = "' + str + '"');
+        });
+
+        $(document).on('click', '.text-save', function () {
+            $.ajax({
+                method: "POST",
+                url: '/octo_admin/edit_locale_text_action/{{ locale.id }}',
+                data:{
+                    array: array
+                }
+            })
+                .done(function() {
+                    location.reload();
+                });
+        })
+    </script>
+{% endblock %}

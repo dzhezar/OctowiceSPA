@@ -24,6 +24,7 @@
                                         <th>#</th>
                                         <th>Название</th>
                                         <th>Короткое название</th>
+                                        <th>Редактировать текста</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -32,6 +33,7 @@
                                             <th scope="row">{{ locale.id }}</th>
                                             <td>{{ locale.name }}</td>
                                             <td>{{ locale.shortName }}</td>
+                                            <td><a class="btn btn-primary active" role="button" aria-pressed="true" href="{{ path('edit_locale_text', {'locale': locale.id}) }}">Редактировать</a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

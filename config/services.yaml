@@ -6,6 +6,7 @@
 parameters:
     locale: ru
     app.uploads_dir: '%kernel.project_dir%/public/images/'
+    app.locales_dir: '%kernel.project_dir%/assets/js/locales/'
 
 services:
     _defaults:
@@ -19,7 +20,9 @@ services:
     App\Service\UploadFile\UploadFileService:
         arguments:
             - '%app.uploads_dir%'
-            -
+    App\Service\Language\LanguageService:
+        arguments:
+            - '%app.locales_dir%'
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
