@@ -7,6 +7,10 @@
     Языки
 {% endblock %}
 
+{% block stylesheets %}
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
     <section id="locales">
         <div class="container">
@@ -27,6 +31,7 @@
                                         <th>Короткое название</th>
                                         <td>Редактировать название</td>
                                         <th>Редактировать текста</th>
+                                        <th>Выключение/включение</th>
                                         <th>Удалить язык</th>
                                     </tr>
                                     </thead>
@@ -38,6 +43,7 @@
                                             <td>{{ locale.shortName }}</td>
                                             <td><a class="btn btn-primary active {% if locale.shortName == 'ru' %}disabled{% endif %}" role="button" aria-pressed="true" href="{% if locale.shortName != 'ru' %}{{ path('edit_locale', {'locale': locale.id}) }}{% endif %}">Редактировать</a></td>
                                             <td><a class="btn btn-outline-info active" role="button" aria-pressed="true" href="{{ path('edit_locale_text', {'locale': locale.id}) }}">Редактировать</a></td>
+                                            <td><input data-id="{{ locale.id }}" type="checkbox" {% if locale.shortName == 'ru' %}disabled{% endif %} {% if locale.isShown %}checked{% endif %} class="switcher-locale" data-toggle="toggle"></td>
                                             <td><button data-id="{{ locale.id }}" {% if locale.shortName == 'ru' %}disabled{% endif %} type="button" class="btn btn-danger remove-locale">Удалить</button></td>
                                         </tr>
                                     {% endfor %}
@@ -47,19 +53,30 @@
                         </div>
                     </div>
                 </div>
-
         </div>
         </div>
     </section>
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
         $(document).on('click', '.remove-locale', function () {
             let id = $(this).attr('data-id');
             if(confirm('Вы уверены, что хотите удалить язык?')){
                 location.href = '/octo_admin/remove_locale/'+id;
             }
-        })
+        });
+
+        $(document).on('change', '.switcher-locale', function () {
+            let bool = +$(this).prop('checked');
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: '/octo_admin/switch_locale/'+id+'/'+bool,
+            })
+                .done(function() {
+
+                });
+        });
     </script>
 {% endblock %}

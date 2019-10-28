@@ -23,6 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ServiceController extends AbstractController
 {
@@ -160,5 +161,14 @@ class ServiceController extends AbstractController
         $this->entityManager->flush();
 
         return $this->redirectToRoute('service_main');
+    }
+
+    public function switch_service(Service $id, bool $bool)
+    {
+        $id->setIsOnServicePage($bool);
+        $this->entityManager->persist($id);
+        $this->entityManager->flush();
+
+        return new Response(null);
     }
 }

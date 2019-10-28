@@ -34,6 +34,19 @@ class LocaleController extends AbstractController
         return $this->redirectToRoute('locale_main');
     }
 
+    public function switch_locale(Locale $locale, bool $bool, EntityManagerInterface $entityManager)
+    {
+        if($locale->getShortName() === 'ru')
+            return new Response(null, 405);
+
+        $locale->setIsShown($bool);
+        $entityManager->persist($locale);
+        $entityManager->flush();
+
+        return new Response(null);
+
+    }
+
     public function edit_locale_text(Locale $locale)
     {
         return $this->render('admin/locale/edit_locale_text.twig', ['locale' => $locale]);

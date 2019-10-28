@@ -25,7 +25,7 @@ class ServiceRepository extends ServiceEntityRepository
             ->leftJoin('service.serviceTranslations', 'service_translations')
             ->leftJoin('service_translations.locale', 'locale')
             ->where('locale.short_name =:name')
-            ->select('service.id', 'service.price', 'service_translations.name')
+            ->select('service.id', 'service.is_on_service_page', 'service.price', 'service_translations.name')
             ->setParameter('name', 'ru')
             ->getQuery()->getResult();
     }
