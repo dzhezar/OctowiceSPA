@@ -27,6 +27,28 @@ change_order_category:
 locale_main:
   path: /octo_admin/locale_main
   controller: App\Controller\Admin\LocaleController::index
+create_locale:
+  path: /octo_admin/create_locale/
+  controller: App\Controller\Admin\LocaleController::create_locale
+edit_locale_text:
+  path: /octo_admin/edit_locale_text/{locale}
+  controller: App\Controller\Admin\LocaleController::edit_locale_text
+edit_locale:
+  path: /octo_admin/edit_locale/{locale}
+  controller: App\Controller\Admin\LocaleController::edit_locale
+switch_locale:
+  path: /octo_admin/switch_locale/{locale}/{bool}
+  controller: App\Controller\Admin\LocaleController::switch_locale
+remove_locale:
+  path: /octo_admin/remove_locale/{locale}
+  controller: App\Controller\Admin\LocaleController::remove_locale
+edit_locale_text_action:
+  path: /octo_admin/edit_locale_text_action/{locale}
+  methods: post
+  controller: App\Controller\Admin\LocaleController::edit_locale_text_action
+get_locale_text:
+  path: /octo_admin/get_locale_text/{locale}
+  controller: App\Controller\Admin\LocaleController::get_locale_text
 category_main:
   path: /octo_admin/category_main
   controller: App\Controller\Admin\CategoryController::index
@@ -66,6 +88,9 @@ create_service:
 edit_service:
   path: /octo_admin/edit_service/{id}
   controller: App\Controller\Admin\ServiceController::edit_service
+switch_service:
+  path: /octo_admin/switch_service/{id}/{bool}
+  controller: App\Controller\Admin\ServiceController::switch_service
 edit_service_traslation:
   path: /octo_admin/edit_service_traslation/{service}/{locale}
   controller: App\Controller\Admin\ServiceController::edit_service_translation
