@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocaleRepository")
  */
@@ -29,29 +30,34 @@ class Locale
     private $short_name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CategoryTranslation", mappedBy="locale")
+     * @ORM\OneToMany(targetEntity="App\Entity\CategoryTranslation", mappedBy="locale", cascade={"remove"})
      */
     private $categoryTranslations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BlogTranslation", mappedBy="locale")
+     * @ORM\OneToMany(targetEntity="App\Entity\BlogTranslation", mappedBy="locale", cascade={"remove"})
      */
     private $blogTranslations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectTranslation", mappedBy="locale")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectTranslation", mappedBy="locale", cascade={"remove"})
      */
     private $projectTranslations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ServiceTranslation", mappedBy="locale")
+     * @ORM\OneToMany(targetEntity="App\Entity\ServiceTranslation", mappedBy="locale", cascade={"remove"})
      */
     private $serviceTranslations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlockTranslation", mappedBy="locale")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectBlockTranslation", mappedBy="locale", cascade={"remove"})
      */
     private $projectBlockTranslations;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_shown;
 
     public function __construct()
     {
@@ -242,6 +248,18 @@ class Locale
                 $projectBlockTranslation->setLocale(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsShown(): ?bool
+    {
+        return $this->is_shown;
+    }
+
+    public function setIsShown(bool $is_shown): self
+    {
+        $this->is_shown = $is_shown;
 
         return $this;
     }
