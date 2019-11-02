@@ -19,32 +19,17 @@ class BlogTranslationRepository extends ServiceEntityRepository
         parent::__construct($registry, BlogTranslation::class);
     }
 
-    // /**
-    //  * @return BlogTranslation[] Returns an array of BlogTranslation objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?BlogTranslation
+    public function getBlogByIdAndLocale(int $blog, int $locale)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('blog_translation')
+            ->leftJoin('blog_translation.blog', 'blog')
+            ->leftJoin('blog_translation.locale', 'locale')
+            ->select('blog_translation')
+            ->where('blog.id =:blog_id')
+            ->andWhere('locale.id =:locale_id')
+            ->setParameter('blog_id', $blog)
+            ->setParameter('locale_id', $locale)
+            ->getQuery()->getResult();
     }
-    */
 }

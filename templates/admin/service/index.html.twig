@@ -7,6 +7,10 @@
     Услуги
 {% endblock %}
 
+{% block stylesheets %}
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
     <section id="locales">
         <div class="container">
@@ -27,6 +31,7 @@
                                         <th>Цена</th>
                                         <th>Редактировать цену/SEO/Фото</th>
                                         <th>Редактировать перевод</th>
+                                        <th>Отобраажать в доп.услугах</th>
                                         <th>Удалить</th>
                                     </tr>
                                     </thead>
@@ -47,6 +52,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td><input data-id="{{ service.id }}" type="checkbox"  {% if service.is_on_service_page %}checked{% endif %} class="switcher-service" data-toggle="toggle"></td>
                                             <td><button data-id="{{ service.id }}" type="button" class="btn btn-danger remove-project">Удалить</button></td>
                                         </tr>
                                     {% endfor %}
@@ -63,12 +69,24 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script>
         $(document).on('click', '.remove-project', function () {
             let id = $(this).attr('data-id');
             if(confirm('Вы уверены?')){
                 location.href = '/octo_admin/remove_service/'+id;
             }
-        })
+        });
+
+        $(document).on('change', '.switcher-service', function () {
+            let bool = +$(this).prop('checked');
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: '/octo_admin/switch_service/'+id+'/'+bool,
+            })
+                .done(function() {
+
+                });
+        });
     </script>
 {% endblock %}

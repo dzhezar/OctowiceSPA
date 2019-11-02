@@ -28,6 +28,7 @@ class CategoryRepository extends ServiceEntityRepository
                 ->leftJoin('cp.projectTranslations', 'cpp')
                 ->leftJoin('c.categoryTranslations', 'ct')
                 ->leftJoin('ct.locale', 'cl')
+                ->orderBy('c.queue')
                 ->select('c', 'ct', 'cl', 'cp', 'cpp');
 
         return $query->getQuery()->getResult();

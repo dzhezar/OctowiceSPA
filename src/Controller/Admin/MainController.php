@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 
 use App\Repository\CategoryRepository;
+use App\Repository\MailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ class MainController extends AbstractController
 {
     public function index()
     {
-        return $this->render('admin/base.html.twig');
+        return $this->redirectToRoute('show_mails');
     }
 
     public function change_order_category(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
@@ -31,5 +32,10 @@ class MainController extends AbstractController
         }
 
         return new Response('', 200);
+    }
+
+    public function render_mails(MailRepository $repository)
+    {
+        return $this->render('admin/mail/index.html.twig', ['mails' => $repository->findBy([], ['created_at' => 'DESC'])]);
     }
 }
