@@ -117,6 +117,7 @@ class CategoryMapper
         return [
             'id' => $category->getId(),
             'icon' => $category->getIcon(),
+            'image' => $category->getImage(),
             'slug' => $category->getSlug(),
             'translations' => $translations,
             'projects' => $projects,
@@ -148,7 +149,7 @@ class CategoryMapper
 
         $result['translations'] = [];
         foreach ($category->getCategoryTranslations() as $categoryTranslation) {
-            $result['translations'][$categoryTranslation->getLocale()->getShortName()] = ['name' => $categoryTranslation->getName(), 'description' => $categoryTranslation->getDescription()];
+            $result['translations'][$categoryTranslation->getLocale()->getShortName()] = ['name' => $categoryTranslation->getName(), 'description' => $categoryTranslation->getDescription(), 'long_description' => $categoryTranslation->getLongDescription(), 'short_description' => $categoryTranslation->getShortDescription()];
         }
 
 
