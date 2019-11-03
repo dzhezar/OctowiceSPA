@@ -17,7 +17,7 @@ class UploadFileService
     public function upload(UploadedFile $file): ?string
     {
         try {
-            $newFileName = \md5(\uniqid($file->getClientOriginalName())).'.png';
+            $newFileName = \md5(\uniqid($file->getClientOriginalName())).'.'.$file->getClientOriginalExtension();
             $file->move($this->uploadDir, $newFileName);
             return $newFileName;
         } catch (FileException $e) {
