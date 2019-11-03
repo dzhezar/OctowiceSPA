@@ -17,7 +17,8 @@ class CategoryTranslationMapper
         return new EditCategoryTranslationDTO(
             $categoryTranslation->getName(),
             $categoryTranslation->getDescription(),
-            $categoryTranslation->getShortDescription()
+            $categoryTranslation->getShortDescription(),
+            $categoryTranslation->getLongDescription()
         );
     }
 

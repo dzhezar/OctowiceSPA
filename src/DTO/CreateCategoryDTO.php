@@ -11,8 +11,13 @@ class CreateCategoryDTO
 {
 
     private $price;
+    private $long_description;
     private $seo_title;
     private $seo_description;
+    /**
+     * @Assert\Image()
+     */
+    private $icon;
     /**
      * @Assert\Image()
      */
@@ -150,6 +155,41 @@ class CreateCategoryDTO
     {
         $this->short_description = $short_description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     */
+    public function setIcon($icon): void
+    {
+        $this->icon = $icon;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongDescription()
+    {
+        return $this->long_description;
+    }
+
+    /**
+     * @param mixed $long_description
+     */
+    public function setLongDescription($long_description): void
+    {
+        $this->long_description = $long_description;
+    }
+
+
+
 
 
 
