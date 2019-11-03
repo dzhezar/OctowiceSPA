@@ -1,29 +1,29 @@
 <template>
-    <div>
+    <header data-aos="fade-down">
         <nav id='main-nav' class="navbar navbar-expand-lg header">
+            <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
             <div class="row w-75 m-auto">
                 <div class="collapse navbar-collapse justify-content-around" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <p class="logo">
-                            +38(050)868-38-47<br>
-                            octowice@gmail.com
-                        </p>
+                        <div class="contacts header-cnct">
+                            <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a><br>
+                            <a href="mailto:octowice@gmail.com">octowice@gmail.com</a>
+                        </div>
                         <ul class="navbar-nav">
-
                             <li class="nav-item">
-                                <a href="#">Главная</a>
+                                <router-link to="/">{{ $t("header.main") }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Услуги</a>
+                                <router-link to="/services">{{ $t("header.services") }}</router-link>
                             </li>
                             <li class="nav-item pt-0">
                                 <img src="../../../images/octo.png" alt="">
                             </li>
                             <li class="nav-item">
-                                <a href="#">Портфолио</a>
+                                <a href="#">{{ $t("header.portfolio") }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Блог</a>
+                                <router-link to="/blog">{{ $t("header.blog") }}</router-link>
                             </li>
                             <li class="nav-item">
                                 <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
@@ -56,7 +56,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </header>
 </template>
 <script>
     import $ from 'jquery';
@@ -86,7 +86,20 @@
             }
         }
     }
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            let nav = document.getElementById("main-nav");
+            nav.style.background = "white";
+            nav.style.boxShadow = "0 4px 10px 0 lightgray";
+        } else {
+            let nav = document.getElementById("main-nav");
+            nav.style.background = "transparent";
+            nav.style.boxShadow = "unset";
+        }
+    }
 </script>
+
 <style>
 
 </style>
