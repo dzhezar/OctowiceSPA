@@ -90,6 +90,10 @@ a {
 .arrow-up a {
     color: white;
 }
+.arrow-up i {
+    padding: 1rem;
+    cursor: pointer;
+}
 /*-----------------------------------------------------------------------------------*/
 /*  Navbar Top
 /*-----------------------------------------------------------------------------------*/
@@ -308,6 +312,12 @@ nav ul li a:hover{
     padding: .75rem 1.25rem;
     list-style: none
 }
+footer {
+    height: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+}
 #footer-nav {
     position: relative;
     display: -ms-flexbox;
@@ -374,6 +384,9 @@ nav ul li a:hover{
     color: gray;
     z-index: 1;
     cursor: pointer;
+}
+.scroll-arrow i {
+    padding: 1rem;
 }
 .main-text {
     height: 90vh;
@@ -446,9 +459,9 @@ nav ul li a:hover{
 }
 .service-card_top {
     border-right: thick #EB5757 solid;
-    margin: 1.5rem 0;
     display: flex;
     flex-wrap: wrap;
+    height: 20%;
 }
 .service-card_top_icon {
     flex: 0 0 25%;
@@ -472,10 +485,14 @@ nav ul li a:hover{
     padding-left: 15px;
 }
 .service-card_text {
+    display: flex;
     font-size: 22px;
     line-height: normal;
-    margin: 20% 2rem;
+    margin: 0 2rem;
     text-align: end;
+    height: 80%;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .services-wrapper_button-wrapper {
     display: flex;
@@ -576,28 +593,35 @@ nav ul li a:hover{
 .reasons_title {
     width: 100%;
     text-align: center;
-    padding-top: 9%;
+    display: flex;
+    padding-top: 100px;
+    height: 20%;
     font-weight: 900;
     font-size: 45px;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
+    place-content: center;
+    flex-wrap: wrap;
 }
 .reasons_text {
     width: 85%;
     margin: auto;
     text-align: justify;
-    padding-top: 3%;
+    height: 25%;
     font-weight: 200;
     font-size: 25px;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .reasons_card-wrapper {
     width: 80%;
-    height: 45%;
+    height: 55%;
     margin: auto;
     display: flex;
-    padding-top: 4%;
+    padding: 3% 0;
     color: black;
     flex-wrap: nowrap;
     justify-content: space-around;
@@ -610,57 +634,71 @@ nav ul li a:hover{
     max-width: 30%;
 }
 .reasons_card_img {
-    padding-top: 20%;
     flex: 0 0 100%;
     max-width: 100%;
     text-align: center;
+    height: 45%;
+    display: flex;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .reasons_card_img img {
-    transform: scale(2);
+    height: 90%;
 }
 .reasons_card_title {
-    padding-top: 15%;
     font-size: x-large;
     font-weight: 800;
     flex: 0 0 100%;
     max-width: 100%;
     text-align: center;
+    height: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
 }
 .reasons_card_text {
-    padding-top: 7%;
-    font-size: large;
+    font-size: 20px;
     margin: auto;
     text-align: justify;
     flex: 0 0 85%;
     max-width: 85%;
+    height: 35%;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .contacts_title {
     width: 100%;
     text-align: center;
-    padding-top: 120px;
+    padding-top: 100px;
+    height: 22%;
     font-weight: 900;
     font-size: 45px;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: black;
+    display: flex;
+    flex-direction: column;
+    place-content: flex-end;
 }
-.contacts_subtitle {
-    width: 100%;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 16px;
-    line-height: 100%;
-    font-family: 'M PLUS 1p', sans-serif;
-    color: black;
+.contacts_title > div:last-child {
+    font-size: initial;
+    font-weight: normal;
 }
 .contacts-bar {
     width: 75%;
-    margin: 40px auto 0;
+    margin: auto;
+    height: 13%;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: white;
     background: #333333;
     padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .contacts-bar ul {
     -ms-flex-pack: center!important;
@@ -689,11 +727,14 @@ nav ul li a:hover{
 }
 .form-wrapper {
     width: 75%;
-    margin: 40px auto 0;
+    margin: auto;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: black;
-    padding: 20px 0 0;
+    height: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
 }
 .form-wrapper form {
     place-content: center;
@@ -701,14 +742,14 @@ nav ul li a:hover{
     flex-wrap: wrap;
 }
 .form-wrapper input{
-    height: 50px;
-    margin: 0 1px 20px;
+    height: 18%;
+    margin: 0 1px 2%;
     padding: 5px 20px;
     flex: 0 0 50%;
 }
 .form-wrapper textarea{
-    height: 100px;
-    margin: 0 1px 20px;
+    height: 38%;
+    margin: 0 1px 2%;
     padding: 5px 20px;
     flex: 0 0 50%;
 }
@@ -716,7 +757,10 @@ nav ul li a:hover{
     background: black;
     color: white;
     font-size: large;
-    font-weight: 800
+    font-weight: 800;
+    margin: unset;
+    border: unset;
+    height: 20%;
 }
 @keyframes gradientBG {
     0% {

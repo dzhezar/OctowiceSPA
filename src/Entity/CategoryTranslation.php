@@ -43,6 +43,11 @@ class CategoryTranslation
      */
     private $short_description;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $long_description;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class CategoryTranslation
     public function setShortDescription(?string $short_description): self
     {
         $this->short_description = $short_description;
+
+        return $this;
+    }
+
+    public function getLongDescription(): ?string
+    {
+        return $this->long_description;
+    }
+
+    public function setLongDescription(string $long_description): self
+    {
+        $this->long_description = $long_description;
 
         return $this;
     }

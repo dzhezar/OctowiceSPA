@@ -1,25 +1,28 @@
 {
   "common": {
     "buttons": {
-      "have_question": "asdfasgd?",
-      "services": "adsgag",
-      "order_call": "adgagaf"
+      "have_question": "Остались вопросы?",
+      "services": "Услуги",
+      "order_call": "Заказать звонок",
+      "dont_understand": "Ничего  не понятно, прошу позвонить мне",
+      "leave_request": "Оставить заявку"
     }
   },
   "header": {
-    "main": "asgagasfa",
-    "services": "asdgasdfasgvas",
-    "portfolio": "adgasfas",
-    "blog": "gdsgasfaewf"
+    "main": "Главная",
+    "services": "Услуги",
+    "portfolio": "Портфолио",
+    "blog": "Блог"
   },
   "main": {
     "octopus": {
-      "professional": "asdvsd",
-      "site_helps": "asdfsavasdc"
+      "professional": "закажи сайт у культурных профессионалов!",
+      "site_helps": "Сайты помогут – построить имидж, увеличить продажи, привлечь новых клиентов."
     },
     "categories": {
-      "services": "sadvasvasfawef",
-      "list": "sdavsafasdaef"
+      "what_we_do": "Что мы делаем?",
+      "services": "Услуги",
+      "list": "весь перечень услуг"
     },
     "bike": {
       "complex": "Мы делаем сайты комплексно",
@@ -40,7 +43,41 @@
         "name": "Продукт",
         "description": "Мы уверены в своих силах и предоставляемых услугах"
       }
+    },
+    "contacts": {
+      "name": "Наши контакты",
+      "time": "Свяжись с нами. Работаем с 10:00 - 19:00",
+      "form": {
+        "name": "Ваше имя",
+        "email": "Email",
+        "message": "Ваше сообщение",
+        "submit": "Отправить"
+      }
     }
+  },
+  "services": {
+    "name": "Что мы делаем?",
+    "additional": {
+      "name": "Страница на которой перечень услуг которые можно купить отдельно, или же продлеваются здесь ",
+      "more": "Подробнее"
+    }
+  },
+  "single_service": {
+    "include": "Что входит в тариф?",
+    "price_explain": "Цены рассчитываются с учётом всех необходимых комлектующих сайта для его жизни. Сайт попадает в мир полноценным.",
+    "what_price": "Какая же цена?",
+    "price_from": "От"
+  },
+  "blog": {
+    "name": "Блог"
+  },
+  "portfolio": {
+    "name": "Наше портфолио",
+    "description": "OctoWice - Знайте все кто перейдет по контексной рекламе",
+    "more": "Больше работ"
+  },
+  "additional_services": {
+    "name": "Дополнительные услуги",
+    "short_description": "- если нужна только частичка сайта"
   }
-
 }

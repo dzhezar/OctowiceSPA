@@ -6,13 +6,13 @@
                 <span>
                     <span>
                         <span>OctoWice</span>
-                        digital agency
+                        {{ $t("main.octopus.professional") }}
                     </span>
                 </span>
             </div>
             <div data-aos="fade-left" class="octopus">
                 <img src="../../../images/осьминог.svg" alt="">
-           </div>
+            </div>
             <div class="scroll-arrow">
                 <a v-scroll-to="'#services'">
                     <i class="fas fa-3x fa-chevron-down"></i>
@@ -22,65 +22,42 @@
         <section id="services" class="section_dark">
             <div class="services-wrapper">
                 <div class="services_main-text">
-                    Что мы делаем?
+                    {{ $t("main.categories.what_we_do") }}
                 </div>
                 <div class="services_cards-wrapper">
-                    <div data-aos="flip-right" data-aos-delay="100" class="service-card">
+                    <div data-aos="flip-right" data-aos-delay="100" class="service-card" v-for="category in categories">
                         <div class="service-card_top">
-                            <img class="service-card_top_icon" src="../../../images/landing.svg" alt="">
+                            <img class="service-card_top_icon" :src="'/images/'+category.icon" alt="">
                             <div class="service-card_top_text">
-                                Landing Page
+                                {{ category.translations[getLocale()].name }}
                             </div>
                         </div>
                         <div class="service-card_text">
-                            одностраничный сайт отличается повышенной конверсией, меньшей информативностью по сравнению с другими сайтами
-                        </div>
-                    </div>
-                    <div data-aos="flip-right" data-aos-delay="200" class="service-card">
-                        <div class="service-card_top">
-                            <img class="service-card_top_icon" src="../../../images/shop.svg" alt="">
-                            <div class="service-card_top_text">
-                                Интернет магазин
-                            </div>
-                        </div>
-                        <div class="service-card_text">
-                            любимые всеми магазины, похожи на сайты каталоги, однако есть функция покупки
-                        </div>
-                    </div>
-                    <div data-aos="flip-right" data-aos-delay="300" class="service-card">
-                        <div class="service-card_top">
-                            <img class="service-card_top_icon" src="../../../images/card.svg" alt="">
-                            <div class="service-card_top_text">
-                                Сайт-визитка
-                            </div>
-                        </div>
-                        <div class="service-card_text">
-                            идеальный тип сайта для отображения товаров или услуг методом каталога
+                            {{ category.translations[getLocale()].description  }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="services-wrapper_button-wrapper">
                 <div class="services-wrapper_button-wrapper_button">
-                    <a href="#">Услуги</a>
+                    <a href="#">{{ $t("main.categories.services") }}</a>
                 </div>
                 <div class="services-wrapper_button-wrapper_text">
-                    весь перечень услуг
+                    {{ $t("main.categories.list") }}
                 </div>
             </div>
         </section>
         <section class="section_light">
             <div class="bike-section_wrapper">
                 <div class="bike-section_title">
-                    Мы делаем сайты комплексно
+                    {{ $t("main.bike.complex") }}
                 </div>
                 <div class="bike-section_bike">
                     <img src="../../../images/bike.png" alt="">
                 </div>
                 <div class="bike-section_text" >
                     <p>
-                    Если вы покупаете велосипед, то хотите сразу на нём поехать. Мы не продаем колёса отдельно от рамы. <br><br>
-                    Вы делаете инвестицию в ваш бизнес, который будет полноценным. Дизайн, Сео, Верстка, поставить на наш хост. Всё это уже есть в стоимости пакета.
+                        {{ $t("main.bike.description") }}
                     </p>
                     <div>
                         <a>Заказать звонок</a>
@@ -90,11 +67,10 @@
         </section>
         <section id="reasons" class="section_dark">
             <div class="reasons_title">
-                Почему стоит обратится к OctoWice?
+                {{ $t("main.choose_us.name") }}
             </div>
             <div class="reasons_text">
-                Заказывая дешевый сайт у людей, которые только начинают развитие в сфере веб индустрии вы ставите под вопрос успешность вашего проекта. Из-за незнания мелочей и банальной неопытности вы рискуете потерять рейтинг в поисковике. Увеличение сложности продвижение, больше затрат на рекламу – вот что вас ждёт.<br><br>
-                Заказав сайт у профессионалов, вы сразу же отделяете себя от этих проблем. Во-время работы над проектом вы получаете еженедельный отчёт по выполненной работе, то есть вам остается только проверить.
+                {{ $t("main.choose_us.description") }}
             </div>
             <div class="reasons_card-wrapper">
                 <div class="reasons_card">
@@ -102,10 +78,10 @@
                         <img src="../../../images/coin.svg" alt="">
                     </div>
                     <div class="reasons_card_title">
-                        Цена
+                        {{ $t("main.choose_us.price.name") }}
                     </div>
                     <div class="reasons_card_text">
-                        наших услуг < пользе которую они приносят
+                        {{ $t("main.choose_us.price.description") }}
                     </div>
                 </div>
                 <div class="reasons_card">
@@ -113,10 +89,10 @@
                         <img src="../../../images/future.svg" alt="">
                     </div>
                     <div class="reasons_card_title">
-                        Будущее за ИТ
+                        {{ $t("main.choose_us.it.name") }}
                     </div>
                     <div class="reasons_card_text">
-                        Будущее бизнеса кроется в интернете и качестве услуг
+                        {{ $t("main.choose_us.it.description") }}
                     </div>
                 </div>
                 <div class="reasons_card">
@@ -124,20 +100,22 @@
                         <img src="../../../images/product.svg" alt="">
                     </div>
                     <div class="reasons_card_title">
-                        Продукт
+                        {{ $t("main.choose_us.product.name") }}
                     </div>
                     <div class="reasons_card_text">
-                        Мы уверены в своих силах и предоставляемых услугах
+                        {{ $t("main.choose_us.product.description") }}
                     </div>
                 </div>
             </div>
         </section>
         <section id="contacts" class="section_light">
-        <div class="contacts_title">
-                Наши контакты
-            </div>
-            <div class="contacts_subtitle">
-                Свяжись с нами. Работаем с 10:00 - 19:00
+            <div class="contacts_title">
+                <div>
+                    {{ $t("main.contacts.name") }}
+                </div>
+                <div>
+                    {{ $t("main.contacts.time") }}
+                </div>
             </div>
             <div class="contacts-bar">
                 <ul>
@@ -158,10 +136,10 @@
             </div>
             <div class="form-wrapper">
                 <form @submit="sendMessage">
-                    <input required v-model="name" placeholder="Ваше имя">
-                    <input required v-model="email" placeholder="Email">
-                    <textarea required rows="6" v-model="message" placeholder="Ваше сообщение"></textarea>
-                    <input type="submit" value="Отправить">
+                    <input required v-model="name" :placeholder=" $t('main.contacts.form.name')">
+                    <input required v-model="email" :placeholder=" $t('main.contacts.form.email')">
+                    <textarea required rows="6" v-model="message" :placeholder=" $t('main.contacts.form.message')"></textarea>
+                    <input type="submit" :value=" $t('main.contacts.form.submit')">
                 </form>
             </div>
             <footer-nav></footer-nav>
@@ -174,16 +152,17 @@
                 <i class="fas fa-2x fa-chevron-up"></i>
             </a>
         </div>
-<!--        <div>-->
-<!--            <p @click="setLocale('en')"><flag iso="us"></flag></p>-->
-<!--            <p @click="setLocale('ru')"><flag iso="ru"></flag></p>-->
-<!--        </div>-->
-<!--        <p>{{ $t('header.main') }}</p>-->
+        <!--        <div>-->
+        <!--            <p @click="setLocale('en')"><flag iso="us"></flag></p>-->
+        <!--            <p @click="setLocale('ru')"><flag iso="ru"></flag></p>-->
+        <!--        </div>-->
+        <!--        <p>{{ $t('header.main') }}</p>-->
     </div>
 </template>
 <script>
     import navigation from '../components/navigation';
     import footerNav from '../components/footerNav';
+    import axios from 'axios'
     export default {
         name: 'index',
         components: {
@@ -195,6 +174,7 @@
                 name: '',
                 email: '',
                 message: '',
+                categories: [],
             }
         },
         methods: {
@@ -202,6 +182,14 @@
                 e.preventDefault();
                 console.log(this.message);
             },
+            getLocale(){
+                return this.$i18n.locale;
+            }
+        },
+        mounted() {
+            axios
+                .get('/api/get_categories?limit=3&project_limit=1')
+                .then(response => (this.categories = response.data));
         }
 
 
