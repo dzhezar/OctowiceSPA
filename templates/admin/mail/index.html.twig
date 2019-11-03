@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    Заявки
+{% endblock %}
+{% block title %}
+    Заявки
+{% endblock %}
+
+{% block body %}
+    <section id="locales">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">Список языков</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Имя</th>
+                                        <th>Почта</th>
+                                        <th>Телефон</th>
+                                        <th>Сообщение</th>
+                                        <th>Время</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for mail in mails %}
+                                        <tr>
+                                            <th scope="row">{{ mail.id }}</th>
+                                            <td>{{ mail.name }}</td>
+                                            <td><a href="mailto:{{ mail.mail }}">{{ mail.mail }}</a></td>
+                                            <td><a href="tel:{{ mail.phone }}">{{ mail.phone }}</a></td>
+                                            <td>{{ mail.message }}</td>
+                                            <td>{{ mail.createdAt|date("m-d-Y  H:i:s") }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

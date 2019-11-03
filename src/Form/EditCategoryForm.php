@@ -31,6 +31,10 @@ class EditCategoryForm extends AbstractType
                 'label' => 'Сео описание',
                 'required' => false,
             ])
+            ->add('icon', FileType::class,[
+                'label' => 'Иконка',
+                'required' => false,
+            ])
             ->add('image', FileType::class,[
                 'label' => 'Фото',
                 'required' => false,

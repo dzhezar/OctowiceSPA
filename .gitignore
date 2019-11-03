@@ -4,9 +4,12 @@
 /.env.local.php
 /.env.*.local
 /public/bundles/
+/yarn.lock
 /var/
 /vendor/
 /.idea/
+/yarn.lock
+/public/images
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
