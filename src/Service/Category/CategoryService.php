@@ -37,9 +37,9 @@ class CategoryService implements CategoryServiceInterface
 
     }
 
-    public function getCategory(int $id)
+    public function getCategory($slug)
     {
-        $category = $this->categoryRepository->getCategory($id);
+        $category = $this->categoryRepository->getCategory($slug);
         if(!$category)
             return ['status' => 404];
 

@@ -8,50 +8,50 @@
         </div>
         <div style="background: linear-gradient(180deg, #131313 0%, #333333 100%); display: flex;">
             <div class="row m-auto" style="color: black;display: flex; justify-content: space-between; width: 85%;">
-                <div class="col-3 my-lg-5 m-md-3 caption" style="background: #BDBDBD;box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
+                <div class="col-3 my-lg-5 m-md-3 caption" style="background: #BDBDBD;box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px" v-for="category in categories">
                     <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
-                        <img class="col-3" src="../../../images/landing.svg" alt="">
+                        <img class="col-3" :src="'/images/'+category.icon" alt="">
                         <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
-                            Landing Page
+                            {{ category.translations[getLocale()].name }}
                         </div>
                     </div>
                     <div style="display: flex;">
                         <div style="font-size: 22px; line-height: normal; text-align: justify; margin: 15% 2rem;">
-                            - одностраничный сайт отличается повышенной конверсией, меньшей информативностью по сравнению с другими сайтами
+                            {{ category.translations[getLocale()].description }}
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">
-                        <router-link to="/service/landing" style="color: black; text-decoration: none;">Подробнее ></router-link>
+                        <router-link :to="'/service/'+category.slug" style="color: black; text-decoration: none;">Подробнее ></router-link>
                     </div>
                 </div>
-                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
-                    <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
-                        <img class="col-3" src="../../../images/shop.svg" alt="">
-                        <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
-                            Интернет магазин
-                        </div>
-                    </div>
-                    <div  style="font-size: 22px; line-height: normal; margin: 15% 2rem">
-                        - любимые всеми магазины, похожи на сайты каталоги, однако есть функция покупки
-                    </div>
-                    <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">
-                        <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>
-                    </div>
-                </div>
-                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">
-                    <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">
-                        <img class="col-3" src="../../../images/card.svg" alt="">
-                        <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">
-                            Сайт-визитка
-                        </div>
-                    </div>
-                    <div style="font-size: 22px; line-height: normal; margin: 15% 2rem">
-                        - идеальный тип сайта для отображения товаров или услуг методом каталога
-                    </div>
-                    <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">
-                        <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>
-                    </div>
-                </div>
+<!--                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">-->
+<!--                    <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">-->
+<!--                        <img class="col-3" src="../../../images/shop.svg" alt="">-->
+<!--                        <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">-->
+<!--                            Интернет магазин-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div  style="font-size: 22px; line-height: normal; margin: 15% 2rem">-->
+<!--                        - любимые всеми магазины, похожи на сайты каталоги, однако есть функция покупки-->
+<!--                    </div>-->
+<!--                    <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">-->
+<!--                        <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-3 my-lg-5 m-md-3" style="background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px">-->
+<!--                    <div class="row mx-0 my-4" style="border-right: thick #EB5757 solid">-->
+<!--                        <img class="col-3" src="../../../images/card.svg" alt="">-->
+<!--                        <div class="col-9" style="font-size: x-large; display: flex; justify-content: flex-end; align-items: center;">-->
+<!--                            Сайт-визитка-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div style="font-size: 22px; line-height: normal; margin: 15% 2rem">-->
+<!--                        - идеальный тип сайта для отображения товаров или услуг методом каталога-->
+<!--                    </div>-->
+<!--                    <div style="position: absolute; bottom: 3%; right: 10%; font-weight: bold;">-->
+<!--                        <a style="color: black; text-decoration: none;" href="#">Подробнее ></a>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div style="width: 100%;background: #BDBDBD; box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px; margin: 3rem 0; position: relative;">
                     <div class="my-4" style="border-right: thick #EB5757 solid; display: flex; width: 90%; margin: auto;">
                         <img src="../../../images/octopus.svg" alt="">
@@ -100,11 +100,27 @@
 <script>
     import navigation from '../components/navigation';
     import footerNav from '../components/footerNav';
+    import axios from 'axios';
     export default {
         name: 'servises',
         components: {
             navigation,
             footerNav,
         },
+        data() {
+            return {
+                categories: [],
             }
+        },
+        methods: {
+            getLocale(){
+                return this.$i18n.locale;
+            }
+        },
+        mounted() {
+            axios
+                .get('/api/get_categories?project_limit=1')
+                .then(response => (this.categories = response.data));
+        }
+    }
 </script>
