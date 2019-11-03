@@ -15,6 +15,10 @@ class EditCategoryDTO
     /**
      * @Assert\Image()
      */
+    private $icon;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $services;
 
@@ -79,6 +83,24 @@ class EditCategoryDTO
     {
         $this->seo_description = $seo_description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     */
+    public function setIcon($icon): void
+    {
+        $this->icon = $icon;
+    }
+
+
 
     /**
      * @return mixed

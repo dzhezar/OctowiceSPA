@@ -14,6 +14,10 @@ class EditCategoryTranslationDTO
     /**
      * @Assert\NotBlank
      */
+    private $long_description;
+    /**
+     * @Assert\NotBlank
+     */
     private $description;
     /**
      * @var null
@@ -26,12 +30,14 @@ class EditCategoryTranslationDTO
      * @param $name
      * @param $description
      * @param null $short_description
+     * @param null $long_description
      */
-    public function __construct($name = null, $description = null, $short_description = null)
+    public function __construct($name = null, $description = null, $short_description = null, $long_description = null)
     {
         $this->name = $name;
         $this->description = $description;
         $this->short_description = $short_description;
+        $this->long_description = $long_description;
     }
 
     /**
@@ -48,6 +54,22 @@ class EditCategoryTranslationDTO
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongDescription()
+    {
+        return $this->long_description;
+    }
+
+    /**
+     * @param mixed $long_description
+     */
+    public function setLongDescription($long_description): void
+    {
+        $this->long_description = $long_description;
     }
 
     /**
@@ -81,6 +103,7 @@ class EditCategoryTranslationDTO
     {
         $this->short_description = $short_description;
     }
+
 
 
 

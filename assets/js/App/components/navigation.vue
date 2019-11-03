@@ -11,26 +11,26 @@
                         </div>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <router-link to="/">Главная</router-link>
+                                <router-link to="/">{{ $t("header.main") }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/services">Услуги</router-link>
+                                <router-link to="/services">{{ $t("header.services") }}</router-link>
                             </li>
                             <li class="nav-item pt-0">
                                 <img src="../../../images/octo.png" alt="">
                             </li>
                             <li class="nav-item">
-                                <a href="#">Портфолио</a>
+                                <a href="#">{{ $t("header.portfolio") }}</a>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/blog">Блог</router-link>
+                                <router-link to="/blog">{{ $t("header.blog") }}</router-link>
                             </li>
-<!--                            <li class="nav-item">-->
-<!--                                <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>-->
-<!--                            </li>-->
-<!--                            <li class="nav-item">-->
-<!--                                <p @click="setLocale('ru')"><country-flag country='rus'/></p>-->
-<!--                            </li>-->
+                            <li class="nav-item">
+                                <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
+                            </li>
+                            <li class="nav-item">
+                                <p @click="setLocale('ru')"><country-flag country='rus'/></p>
+                            </li>
                         </ul>
                         <a class="header-btn" href="#">Остались вопросы?</a>
                     </div>

@@ -7,7 +7,7 @@ let VueScrollTo = require('vue-scrollto');
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
-import 'axios';
+
 Vue.use(VueRouter);
 Vue.use(VueScrollTo);
 Vue.use(VueScrollProgressBar);

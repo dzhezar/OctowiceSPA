@@ -16,8 +16,13 @@ class CreateCategoryDTO
     /**
      * @Assert\Image()
      */
+    private $icon;
+    /**
+     * @Assert\Image()
+     */
     private $image;
     private $name;
+    private $long_description;
     private $description;
     private $services;
     private $short_description;
@@ -58,6 +63,22 @@ class CreateCategoryDTO
     /**
      * @return mixed
      */
+    public function getLongDescription()
+    {
+        return $this->long_description;
+    }
+
+    /**
+     * @param mixed $long_description
+     */
+    public function setLongDescription($long_description): void
+    {
+        $this->long_description = $long_description;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getSeoDescription()
     {
         return $this->seo_description;
@@ -70,6 +91,24 @@ class CreateCategoryDTO
     {
         $this->seo_description = $seo_description;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param mixed $icon
+     */
+    public function setIcon($icon): void
+    {
+        $this->icon = $icon;
+    }
+
+
 
     /**
      * @return mixed
