@@ -63,6 +63,11 @@ class Category
      */
     private $queue;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->categoryTranslations = new ArrayCollection();
@@ -233,6 +238,18 @@ class Category
     public function setQueue(int $queue): self
     {
         $this->queue = $queue;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
