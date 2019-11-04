@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class EditProjectBlockDTO
 {
     private $color;
+    private $color_text;
     /**
      * @Assert\Image()
      */
@@ -16,11 +17,13 @@ class EditProjectBlockDTO
 
     /**
      * EditProjectBlockDTO constructor.
-     * @param $color
+     * @param string $color
+     * @param string $color_text
      */
-    public function __construct($color)
+    public function __construct($color = '#FFFFF', $color_text = '#000000')
     {
         $this->color = $color;
+        $this->color_text = $color_text;
     }
 
 
@@ -55,6 +58,24 @@ class EditProjectBlockDTO
     {
         $this->image = $image;
     }
+
+    /**
+     * @return string
+     */
+    public function getColorText(): string
+    {
+        return $this->color_text;
+    }
+
+    /**
+     * @param string $color_text
+     */
+    public function setColorText(string $color_text): void
+    {
+        $this->color_text = $color_text;
+    }
+
+    
 
 
 

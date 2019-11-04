@@ -32,6 +32,9 @@ class CreateProjectBlock extends AbstractType
             ->add('color', HiddenType::class, [
                 'label' => 'Цвет Фона',
             ])
+            ->add('colorText', HiddenType::class, [
+                'label' => 'Цвет текста',
+            ])
             ->add('image', FileType::class,[
                 'label' => 'Фото',
                 'required' => false

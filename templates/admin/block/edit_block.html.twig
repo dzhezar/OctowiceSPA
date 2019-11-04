@@ -34,9 +34,11 @@
                 $('#edit_project_block_form_image').after('<div>Старого фото нет</div>');
             {% endif %}
 
-            $('#edit_project_block_form_color').after('<div class="form-group"><label for="color_picker" class="required">Название (на русском)<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+            $('#edit_project_block_form_color').after('<div class="form-group"><label for="color_picker" class="required">Цвет фона<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+            $('#edit_project_block_form_colorText').after('<div class="form-group"><label for="color_picker_text" class="required">Цвет текста<span> *Обязательно</span></label><input type="text" id="color_picker_text" required="required" class="form-control"></div>');
 
-            console.log($('#edit_project_block_form_color').val());
+
+
 
             const pickr = Pickr.create({
                 default: $('#edit_project_block_form_color').val(),
@@ -57,6 +59,27 @@
                 let colorq = color.toHEXA().toString();
                 pickr.setColor(colorq);
                 $('#edit_project_block_form_color').val(colorq);
+            });
+
+            const pickr_text = Pickr.create({
+                default: $('#edit_project_block_form_colorText').val(),
+                el: '#color_picker_text',
+                theme: 'classic',
+                components: {
+                    preview: true,
+                    opacity: true,
+
+                    hue: true,
+                    interaction: {
+                        input: true,
+                    }
+                }
+            });
+
+            pickr_text.on('change', (color) => {
+                let colorq = color.toHEXA().toString();
+                pickr_text.setColor(colorq);
+                $('#edit_project_block_form_colorText').val(colorq);
             });
         })
     </script>
