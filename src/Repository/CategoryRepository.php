@@ -70,7 +70,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    public function getCategory(int $id)
+    public function getCategory(string $slug)
     {
         return $this->createQueryBuilder('category')
             ->leftJoin('category.categoryTranslations', 'category_translations')
@@ -79,8 +79,8 @@ class CategoryRepository extends ServiceEntityRepository
             ->leftJoin('service_translations.locale', 'service_locale')
             ->leftJoin('category_translations.locale', 'category_locale')
             ->select('category', 'category_translations', 'services', 'service_translations', 'service_locale', 'category_locale')
-            ->where('category.id =:id')
-            ->setParameter('id', $id)
+            ->where('category.slug =:slug')
+            ->setParameter('slug', $slug)
             ->getQuery()->getResult();
     }
 

@@ -8,6 +8,8 @@
 /var/
 /vendor/
 /.idea/
+/yarn.lock
+/public/images
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -26,4 +28,5 @@
 /public/images/
 npm-debug.log
 yarn-error.log
+yarn.lock
 ###< symfony/webpack-encore-bundle ###

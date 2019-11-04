@@ -80,8 +80,13 @@ class CategoryController extends AbstractController
                 ->setSlug($slugify->slugify($data->getName()))
                 ->setPrice($data->getPrice())
                 ->setQueue($queue);
+
             if($data->getImage()){
                 $file_name = $uploadFileService->upload($data->getImage());
+                $category->setImage($file_name);
+            }
+            if($data->getIcon()){
+                $file_name = $uploadFileService->upload($data->getIcon());
                 $category->setIcon($file_name);
             }
             $this->em->persist($category);
@@ -90,6 +95,9 @@ class CategoryController extends AbstractController
             $translation->setCategory($category)
                 ->setLocale($ru_locale)
                 ->setName($data->getName())
+                ->setEpigraph($data->getEpigraph())
+                ->setPriceDescription($data->getPriceDescription())
+                ->setLongDescription($data->getLongDescription())
                 ->setShortDescription($data->getShortDescription())
                 ->setDescription($data->getDescription());
             $this->em->persist($translation);
@@ -137,9 +145,15 @@ class CategoryController extends AbstractController
                 }
             }
             if($data->getImage()){
+                if($id->getImage())
+                    $uploadedFile->remove($id->getImage());
+                $newFileName = $uploadedFile->upload($data->getImage());
+                $id->setImage($newFileName);
+            }
+            if($data->getIcon()){
                 if($id->getIcon())
                     $uploadedFile->remove($id->getIcon());
-                $newFileName = $uploadedFile->upload($data->getImage());
+                $newFileName = $uploadedFile->upload($data->getIcon());
                 $id->setIcon($newFileName);
             }
             $id->setPrice($data->getPrice())
@@ -153,7 +167,8 @@ class CategoryController extends AbstractController
 
         return $this->render('admin/category/edit_category.html.twig', [
             'form' => $form->createView(),
-            'image' => $id->getIcon(),
+            'image' => $id->getImage(),
+            'icon' => $id->getIcon(),
             'services' => json_encode($serviceRepository->getServicesNameInRussian()),
             'current_services' => json_encode($serviceRepository->getServicesNameInRussianByCategoryId($id->getId()))]);
     }
@@ -178,11 +193,16 @@ class CategoryController extends AbstractController
                 $translation->setName($data->getName())
                     ->setDescription($data->getDescription())
                     ->setShortDescription($data->getShortDescription())
+                    ->setEpigraph($data->getEpigraph())
+                    ->setPriceDescription($data->getPriceDescription())
                     ->setCategory($category)
                     ->setLocale($locale);
             }
             else{
                 $translation->setName($data->getName())
+                    ->setEpigraph($data->getEpigraph())
+                    ->setPriceDescription($data->getPriceDescription())
+                    ->setLongDescription($data->getLongDescription())
                     ->setShortDescription($data->getShortDescription())
                     ->setDescription($data->getDescription());
             }

@@ -26,12 +26,25 @@ class CreateCategoryForm extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Название (на русском)',
             ])
+            ->add('longDescription', TextType::class, [
+                'label' => 'Длинное описание',
+            ])
             ->add('shortDescription', TextType::class, [
                 'label' => 'Короткое описание',
                 'required' => false,
             ])
+            ->add('epigraph', TextType::class, [
+                'label' => 'Описние под названием типа проекта',
+                'required' => false,
+            ])
+            ->add('priceDescription', TextType::class, [
+                'label' => 'Длительность выполнения проекта',
+            ])
             ->add('description', TextType::class, [
                 'label' => 'Описание (на русском)',
+            ])
+            ->add('icon', FileType::class,[
+                'label' => 'Иконка',
             ])
             ->add('image', FileType::class,[
                 'label' => 'Фото',

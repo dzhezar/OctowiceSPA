@@ -26,6 +26,12 @@
     <link href="/admin/css/magicsuggest-min.css" rel="stylesheet">
     <script src="/admin/js/magicsuggest-min.js"></script>
     <script>
+        {% if icon is not empty %}
+            $('#edit_category_form_icon').parent().after('<div>Старая иконка: <a target="_blank" href="/images/{{ icon }}"><img class="admin-show-image" src="/images/{{ icon }}"></a> </div>');
+        {% else %}
+            $('#edit_category_form_icon').after('<div>Старой иконки нет</div>');
+        {% endif %}
+
         {% if image is not empty %}
             $('#edit_category_form_image').parent().after('<div>Старое фото: <a target="_blank" href="/images/{{ image }}"><img class="admin-show-image" src="/images/{{ image }}"></a> </div>');
         {% else %}
