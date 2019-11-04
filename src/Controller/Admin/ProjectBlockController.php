@@ -86,7 +86,11 @@ class ProjectBlockController extends AbstractController
             }
             if(!$data->getColor())
                 $data->setColor('#FFFFFF');
+            if(!$data->getColorText())
+                $data->setColorText('#000000');
+
             $block->setColor($data->getColor())
+                    ->setColorText($data->getColorText())
                     ->setProject($project)
                     ->setQueue($queue);
 
@@ -123,6 +127,7 @@ class ProjectBlockController extends AbstractController
                 $block->setImage($fileName);
             }
             $block->setColor($data->getColor());
+            $block->setColorText($data->getColorText());
             $this->entityManager->persist($block);
             $this->entityManager->flush();
 

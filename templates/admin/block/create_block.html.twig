@@ -43,9 +43,12 @@
             });
 
 
-            $('#create_project_block_color').after('<div class="form-group"><label for="color_picker" class="required">Название (на русском)<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+            $('#create_project_block_color').after('<div class="form-group"><label for="color_picker" class="required">Цвет фона<span> *Обязательно</span></label><input type="text" id="color_picker" required="required" class="form-control"></div>');
+            $('#create_project_block_colorText').after('<div class="form-group"><label for="color_picker_text" class="required">Цвет текста<span> *Обязательно</span></label><input type="text" id="color_picker_text" required="required" class="form-control"></div>');
+
 
             const pickr = Pickr.create({
+                default: '#000000',
                 el: '#color_picker',
                 theme: 'classic',
                 components: {
@@ -63,6 +66,27 @@
                 let colorq = color.toHEXA().toString();
                 pickr.setColor(colorq);
                 $('#create_project_block_color').val(colorq);
+            });
+
+            const pickr_text = Pickr.create({
+                default: '#FFFFFF',
+                el: '#color_picker_text',
+                theme: 'classic',
+                components: {
+                    preview: true,
+                    opacity: true,
+
+                    hue: true,
+                    interaction: {
+                        input: true,
+                    }
+                }
+            });
+
+            pickr_text.on('change', (color) => {
+                let colorq = color.toHEXA().toString();
+                pickr_text.setColor(colorq);
+                $('#create_project_block_colorText').val(colorq);
             });
         })
     </script>

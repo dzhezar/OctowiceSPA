@@ -21,6 +21,9 @@ class EditProjectBlockForm extends AbstractType
             ->add('color', HiddenType::class, [
                 'required' => true,
             ])
+            ->add('colorText', HiddenType::class, [
+                'required' => true,
+            ])
             ->add('image', FileType::class,[
                 'label' => 'Фото',
                 'required' => false
