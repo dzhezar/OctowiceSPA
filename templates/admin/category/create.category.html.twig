@@ -20,6 +20,12 @@
 
 
 {% block javascripts %}
+    <style>
+        .image-description{
+            height: 150px;
+            object-fit: contain;
+        }
+    </style>
     <link href="/admin/css/magicsuggest-min.css" rel="stylesheet">
     <script src="/admin/js/magicsuggest-min.js"></script>
 
@@ -39,6 +45,16 @@
             $(recommend).on('blur', function () {
                 $('#create_category_form_services').val(JSON.stringify(this.getValue()));
             });
+
+            $('#create_category_form_description').parent().append('<img class="image-description" src="/admin_description/description.png" ">');
+            $('#create_category_form_epigraph').parent().append('<img class="image-description" src="/admin_description/epigraph.png">');
+            $('#create_category_form_shortDescription').parent().append('<img class="image-description" src="/admin_description/short_description.png">');
+            $('#create_category_form_priceDescription').parent().append('<img class="image-description" src="/admin_description/price_description.png">');
+            $('#create_category_form_longDescription').parent().append('<img class="image-description" src="/admin_description/long_description.png">');
+
+
+
+
         });
     </script>
 

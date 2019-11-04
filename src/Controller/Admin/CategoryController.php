@@ -215,7 +215,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_main');
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
+        return $this->render('admin/category/edit_category_translation.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
     }
 
 

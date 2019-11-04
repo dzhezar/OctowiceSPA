@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,22 +27,22 @@ class CreateCategoryForm extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Название (на русском)',
             ])
-            ->add('longDescription', TextType::class, [
+            ->add('longDescription', TextareaType::class, [
                 'label' => 'Длинное описание',
             ])
             ->add('shortDescription', TextType::class, [
                 'label' => 'Короткое описание',
                 'required' => false,
             ])
-            ->add('epigraph', TextType::class, [
-                'label' => 'Описние под названием типа проекта',
+            ->add('epigraph', TextareaType::class, [
+                'label' => 'Описание под названием типа проекта',
                 'required' => false,
             ])
             ->add('priceDescription', TextType::class, [
                 'label' => 'Длительность выполнения проекта',
             ])
-            ->add('description', TextType::class, [
-                'label' => 'Описание (на русском)',
+            ->add('description', TextareaType::class, [
+                'label' => 'Описание на главной (на русском)',
             ])
             ->add('icon', FileType::class,[
                 'label' => 'Иконка',
