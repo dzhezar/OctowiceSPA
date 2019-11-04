@@ -44,6 +44,11 @@ class ProjectBlock
      */
     private $queue;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color_text;
+
     public function __construct()
     {
         $this->projectBlockTranslations = new ArrayCollection();
@@ -129,6 +134,18 @@ class ProjectBlock
     public function setQueue(int $queue): self
     {
         $this->queue = $queue;
+
+        return $this;
+    }
+
+    public function getColorText(): ?string
+    {
+        return $this->color_text;
+    }
+
+    public function setColorText(string $color_text): self
+    {
+        $this->color_text = $color_text;
 
         return $this;
     }
