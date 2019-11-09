@@ -11,6 +11,7 @@ class CreateProjectBlockDTO
     private $name;
     private $description;
     private $color;
+    private $color_text;
     /**
      * @Assert\Image()
      */
@@ -79,6 +80,24 @@ class CreateProjectBlockDTO
     {
         $this->image = $image;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getColorText()
+    {
+        return $this->color_text;
+    }
+
+    /**
+     * @param mixed $color_text
+     */
+    public function setColorText($color_text): void
+    {
+        $this->color_text = $color_text;
+    }
+
+
 
 
 

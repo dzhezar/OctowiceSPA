@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <ul id="sortable" class="list-group">
                                 {% for block in blocks %}
-                                    <li style="background: {{ block.color }}" data-id="{{ block.id }}" class="ui-state-default list-group-item"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{ block.name }}</li>
+                                    <li style="background: {{ block.color }}; color: {{ block.color_text }};" data-id="{{ block.id }}" class="ui-state-default list-group-item"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{ block.name }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -50,7 +50,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Название (ru)</th>
-                                        <th>Цвет</th>
+                                        <th>Цвет фона</th>
+                                        <th>Цвет текста</th>
                                         <th>Редактировать Фото/Цвет</th>
                                         <th>Редактировать перевод</th>
                                         <th>Удалить</th>
@@ -62,6 +63,7 @@
                                             <th scope="row">{{ block.id }}</th>
                                             <td>{{ block.name }}</td>
                                             <td><div style="width: 50px; height: 50px; border: 3px solid black;  background: {{ block.color }}"></div> </td>
+                                            <td><div style="width: 50px; height: 50px; border: 3px solid black;  background: {{ block.color_text }}"></div> </td>
                                             <td><a href="{{ path('project_block_edit', {block: block.id}) }}" class="btn btn-primary active" role="button" aria-pressed="true">Редактировать</a></td>
                                             <td>
                                                 <div class="input-group-prepend">

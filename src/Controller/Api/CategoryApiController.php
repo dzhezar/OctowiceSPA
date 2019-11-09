@@ -32,9 +32,8 @@ class CategoryApiController extends AbstractController
 
     public function get_category(Request $request)
     {
-        $id = $request->query->get('slug');
-        $category = $this->categoryService->getCategory($id);
-        dd($category);
+        $slug = $request->query->get('slug');
+        $category = $this->categoryService->getCategory($slug);
         if(isset($category['status']) && $category['status'] === 404)
             return new JsonResponse(null, 404);
 

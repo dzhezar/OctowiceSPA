@@ -25,7 +25,7 @@ class ProjectBlockRepository extends ServiceEntityRepository
             ->leftJoin('project_block.project', 'project')
             ->leftJoin('project_block.projectBlockTranslations', 'project_block_translations')
             ->leftJoin('project_block_translations.locale', 'locale')
-            ->select('project_block.id', 'project_block.color', 'project_block_translations.name')
+            ->select('project_block.id', 'project_block.color_text', 'project_block.color', 'project_block_translations.name')
             ->where('locale.short_name =:loc')
             ->andWhere('project.id =:id')
             ->orderBy('project_block.queue')

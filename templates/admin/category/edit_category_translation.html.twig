@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block name %}
+    {% if text is defined %}{{ text }}{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_start(form) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <style>
+        .image-description{
+            height: 150px;
+            object-fit: contain;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('#edit_category_translation_form_description').parent().append('<img class="image-description" src="/admin_description/description.png" ">');
+            $('#edit_category_translation_form_epigraph').parent().append('<img class="image-description" src="/admin_description/epigraph.png">');
+            $('#edit_category_translation_form_shortDescription').parent().append('<img class="image-description" src="/admin_description/short_description.png">');
+            $('#edit_category_translation_form_priceDescription').parent().append('<img class="image-description" src="/admin_description/price_description.png">');
+            $('#edit_category_translation_form_longDescription').parent().append('<img class="image-description" src="/admin_description/long_description.png">');
+        });
+    </script>
+{% endblock %}
