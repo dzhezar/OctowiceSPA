@@ -1,9 +1,13 @@
 <template>
     <header data-aos="fade-down">
-        <nav id='main-nav' class="navbar navbar-expand-lg header">
+        <nav id='main-nav' class="navbar-expand-lg header">
+            <div class="mobile-nav">
+                <img src="../../../images/octo.png">
+                <div style="display: flex; flex-flow: row wrap; font-size: x-large; margin-left: 1rem; place-content: center">Octowice</div>
+            </div>
             <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
-            <div class="row w-75 m-auto">
-                <div class="collapse navbar-collapse justify-content-around" id="navbarNavAltMarkup">
+            <div class="header_wrapper">
+                <div class="collapse navbar-collapse" id="navbarHeader">
                     <div class="navbar-nav">
                         <div class="contacts header-cnct">
                             <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a><br>
@@ -25,14 +29,18 @@
                             <li class="nav-item">
                                 <router-link to="/blog">{{ $t("header.blog") }}</router-link>
                             </li>
-                            <li class="nav-item">
-                                <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
-                            </li>
-                            <li class="nav-item">
-                                <p @click="setLocale('ru')"><country-flag country='rus'/></p>
-                            </li>
                         </ul>
-                        <a class="header-btn" href="#">Остались вопросы?</a>
+                        <div class="header-btn">
+<!--                            <div @click="changeLocale">-->
+                                <li v-if="this.$i18n.locale === 'ru'" class="nav-item">
+                                    <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
+                                </li>
+                                <li v-else class="nav-item">
+                                    <p @click="setLocale('ru')"><country-flag country='rus'/></p>
+                                </li>
+<!--                            </div>-->
+                            <a href="#">Остались вопросы?</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,16 +51,20 @@
         <nav id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
-                    <a class="nav-link m-1 sidebar-link" href="#">Главная</a>
+                    <img src="../../../images/octo.png">
+                    <div style="display: flex; flex-flow: row wrap; font-size: x-large; margin-left: 1rem; place-content: center">Octowice</div>
                 </li>
                 <li class="sidebar-nav-item">
-                    <a class="nav-link m-1 sidebar-link" href="#">Услуги</a>
+                    <a class="nav-link sidebar-link" href="#">Главная</a>
                 </li>
                 <li class="sidebar-nav-item">
-                    <a class="nav-link m-1 sidebar-link" href="#">Портфолио</a>
+                    <a class="nav-link sidebar-link" href="#">Услуги</a>
                 </li>
                 <li class="sidebar-nav-item">
-                    <a class="nav-link m-1 sidebar-link" href="#">Блог</a>
+                    <a class="nav-link sidebar-link" href="#">Портфолио</a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a class="nav-link sidebar-link" href="#">Блог</a>
                 </li>
             </ul>
         </nav>
@@ -71,18 +83,29 @@
                     e.preventDefault();
                     $("#sidebar-wrapper").toggleClass("active");
                     $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
+                    $(".sidebar-nav-item").each(function (key,value) {
+                        if(key === 0) {
+                            $(this).toggleClass('fadeIn active animated');
+                        }
+                        else {
+                            $(this).toggleClass('slideInRight active animated');
+                        }
+                    });
                     $(this).toggleClass("active");
                 });
             });
         },
         methods: {
             setLocale(locale){
+                $('body').fadeOut('fast');
+
                 import(`../../locales/${locale}.json`).then((msgs) => {
                     this.$i18n.setLocaleMessage(locale,msgs);
                     this.$i18n.locale = locale
                 });
                 this.$i18n.locale = locale;
-                console.log(this.$i18n.locale);
+                $('body').fadeIn('1000');
+                console.log($('body'));
             }
         }
     }

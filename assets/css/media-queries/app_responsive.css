@@ -24,12 +24,47 @@
  */
 
 @media (min-width: 768px) and (max-width: 991px) {
+    #top {
+        position: relative;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+    .scroll-arrow {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .octopus img {
+        height: 80vh;
+    }
+    .scroll-arrow i {
+        color: #eb5757;
+    }
+    .services_cards-wrapper {
+        justify-content: unset;
+    }
+    .service-card {
+        max-width: 50%;
+    }
     /* Navbar */
     nav {
         padding: 20px 15px;
     }
+    #main-nav {
+        background-color: black!important;
+    }
     .main_img_text{
         font-size: 85px!important;
+    }
+    .main-text {
+        height: unset;
+        align-items: flex-start;
+        padding: 140px 10% 0 0;
+    }
+    .main-text span {
+        font-size: 8vh!important;
     }
     .nav-menu {
         margin-top: 40px;
@@ -77,11 +112,7 @@
         margin-bottom: 0;
     }
     /* portfolio */
-    #portfolio .portfolio-list .nav li {
-        float: none;
-        margin: 20px;
-        display: inline-block;
-    }
+
     /* journal */
     #journal .journal-block .journal-info {
         margin-bottom: 30px;
@@ -154,10 +185,9 @@
         margin-bottom: 0;
     }
     /* portfolio */
-    #portfolio .portfolio-list .nav li {
-        float: none;
-        margin: 20px;
-        display: inline-block;
+    .bike-section_bike img {
+        height: unset;
+        width: 100vw;
     }
     /* journal */
     #journal .journal-block .journal-info {

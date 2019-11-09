@@ -15,30 +15,28 @@
         </div>
         <nav id='footer-nav' class="navbar-expand-lg">
             <div>
-                <div class="navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                ©2018 OctoWice
-                            </li>
-                            <li class="nav-item">
-                                <a href="#">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#">Услуги</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#">Портфолио</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#">Блог</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a>
-                                <a href="mailto:octowice@gmail.com">octowice@gmail.com</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="navbar-collapse" id="navbarFooter">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            ©2018 OctoWice
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Услуги</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Портфолио</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Блог</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="tel:+38(050)868-38-47">+38(050)868-38-47</a>
+                            <a href="mailto:octowice@gmail.com">octowice@gmail.com</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
