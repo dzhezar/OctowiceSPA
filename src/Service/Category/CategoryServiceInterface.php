@@ -15,6 +15,5 @@ interface CategoryServiceInterface
 
     public function getCategoriesInRussian();
 
-    public function getCategory($id);
-
+    public function getCategory(string $slug);
 }

@@ -37,7 +37,7 @@ class CategoryService implements CategoryServiceInterface
 
     }
 
-    public function getCategory($slug)
+    public function getCategory(string $slug)
     {
         $category = $this->categoryRepository->getCategory($slug);
         if(!$category)

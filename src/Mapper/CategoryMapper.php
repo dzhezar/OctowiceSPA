@@ -149,7 +149,7 @@ class CategoryMapper
 
         $result['translations'] = [];
         foreach ($category->getCategoryTranslations() as $categoryTranslation) {
-            $result['translations'][$categoryTranslation->getLocale()->getShortName()] = ['name' => $categoryTranslation->getName(), 'description' => $categoryTranslation->getDescription(), 'long_description' => $categoryTranslation->getLongDescription(), 'short_description' => $categoryTranslation->getShortDescription()];
+            $result['translations'][$categoryTranslation->getLocale()->getShortName()] = ['name' => $categoryTranslation->getName(), 'description' => $categoryTranslation->getDescription(), 'epigraph' => $categoryTranslation->getEpigraph(), 'price_description' => $categoryTranslation->getPriceDescription(), 'short_description' => $categoryTranslation->getShortDescription(), 'long_description' => $categoryTranslation->getLongDescription()];
         }
 
 

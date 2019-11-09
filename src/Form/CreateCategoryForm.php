@@ -33,6 +33,13 @@ class CreateCategoryForm extends AbstractType
                 'label' => 'Короткое описание',
                 'required' => false,
             ])
+            ->add('epigraph', TextType::class, [
+                'label' => 'Описние под названием типа проекта',
+                'required' => false,
+            ])
+            ->add('priceDescription', TextType::class, [
+                'label' => 'Длительность выполнения проекта',
+            ])
             ->add('description', TextType::class, [
                 'label' => 'Описание (на русском)',
             ])

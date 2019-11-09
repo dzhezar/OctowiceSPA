@@ -18,7 +18,9 @@ class CategoryTranslationMapper
             $categoryTranslation->getName(),
             $categoryTranslation->getDescription(),
             $categoryTranslation->getShortDescription(),
-            $categoryTranslation->getLongDescription()
+            $categoryTranslation->getLongDescription(),
+            $categoryTranslation->getEpigraph(),
+            $categoryTranslation->getPriceDescription()
         );
     }
 
