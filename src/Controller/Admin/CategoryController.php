@@ -95,6 +95,8 @@ class CategoryController extends AbstractController
             $translation->setCategory($category)
                 ->setLocale($ru_locale)
                 ->setName($data->getName())
+                ->setEpigraph($data->getEpigraph())
+                ->setPriceDescription($data->getPriceDescription())
                 ->setLongDescription($data->getLongDescription())
                 ->setShortDescription($data->getShortDescription())
                 ->setDescription($data->getDescription());
@@ -191,11 +193,15 @@ class CategoryController extends AbstractController
                 $translation->setName($data->getName())
                     ->setDescription($data->getDescription())
                     ->setShortDescription($data->getShortDescription())
+                    ->setEpigraph($data->getEpigraph())
+                    ->setPriceDescription($data->getPriceDescription())
                     ->setCategory($category)
                     ->setLocale($locale);
             }
             else{
                 $translation->setName($data->getName())
+                    ->setEpigraph($data->getEpigraph())
+                    ->setPriceDescription($data->getPriceDescription())
                     ->setLongDescription($data->getLongDescription())
                     ->setShortDescription($data->getShortDescription())
                     ->setDescription($data->getDescription());
@@ -209,7 +215,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_main');
         }
 
-        return $this->render('admin/form.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
+        return $this->render('admin/category/edit_category_translation.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
     }
 
 

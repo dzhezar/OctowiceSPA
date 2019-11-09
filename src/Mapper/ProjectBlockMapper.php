@@ -14,7 +14,8 @@ class ProjectBlockMapper
     public function entityToEditProjectBlockDTO(ProjectBlock $block): EditProjectBlockDTO
     {
         return new EditProjectBlockDTO(
-            $block->getColor()
+            $block->getColor(),
+            $block->getColorText()
         );
     }
 
