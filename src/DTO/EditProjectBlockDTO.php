@@ -3,10 +3,11 @@
 
 namespace App\DTO;
 
+use App\Service\ItemEditor\EditItemInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class EditProjectBlockDTO
+class EditProjectBlockDTO implements EditItemInterface
 {
     private $color;
     private $color_text;

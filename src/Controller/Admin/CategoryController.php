@@ -4,11 +4,7 @@
 namespace App\Controller\Admin;
 
 
-use App\DTO\CreateCategoryDTO;
-use App\DTO\EditCategoryDTO;
-use App\DTO\EditCategoryTranslationDTO;
 use App\Entity\Category;
-use App\Entity\CategoryTranslation;
 use App\Entity\Locale;
 use App\Form\CreateCategoryForm;
 use App\Form\EditCategoryForm;
@@ -19,11 +15,9 @@ use App\Repository\CategoryRepository;
 use App\Repository\CategoryTranslationRepository;
 use App\Repository\LocaleRepository;
 use App\Repository\ServiceRepository;
-use App\Service\UploadFile\UploadFileService;
-use Cocur\Slugify\Slugify;
+use App\Service\Category\CategoryService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends AbstractController
@@ -31,83 +25,21 @@ class CategoryController extends AbstractController
     private $categoryMapper;
     private $em;
     private $categoryRepository;
+    private $categoryService;
 
     /**
      * CategoryController constructor.
      * @param CategoryMapper $categoryMapper
      * @param EntityManagerInterface $em
      * @param CategoryTranslationRepository $categoryRepository
+     * @param CategoryService $categoryService
      */
-    public function __construct(CategoryMapper $categoryMapper, EntityManagerInterface $em, CategoryTranslationRepository $categoryRepository)
+    public function __construct(CategoryMapper $categoryMapper, EntityManagerInterface $em, CategoryTranslationRepository $categoryRepository, CategoryService $categoryService)
     {
         $this->categoryMapper = $categoryMapper;
         $this->em = $em;
         $this->categoryRepository = $categoryRepository;
-    }
-
-    public function create_category(Request $request, UploadFileService $uploadFileService, LocaleRepository $localeRepository, ServiceRepository $serviceRepository, CategoryRepository $categoryRepository)
-    {
-        $form = $this->createForm(CreateCategoryForm::class);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $ru_locale = $localeRepository->findOneBy(['short_name' => 'ru']);
-            if(!$ru_locale)
-                throw new Exception('Гг, русский язык удалён');
-
-            $slugify = new Slugify();
-            /** @var CreateCategoryDTO $data */
-            $data = $form->getData();
-            $category = new Category();
-
-            $data->setServices(json_decode($data->getServices()));
-            if($data->getServices()) {
-                foreach ($data->getServices() as $item) {
-                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                    if ($service_search)
-                        $category->addService($service_search);
-                }
-            }
-
-            $queue = $categoryRepository->getLastQueue();
-            if($queue)
-                $queue = $queue[0]['queue']+1;
-            elseif(!$queue)
-                $queue = 1;
-
-            $category->setSeoTitle($data->getSeoTitle())
-                ->setSeoDescription($data->getSeoDescription())
-                ->setSlug($slugify->slugify($data->getName()))
-                ->setPrice($data->getPrice())
-                ->setQueue($queue);
-
-            if($data->getImage()){
-                $file_name = $uploadFileService->upload($data->getImage());
-                $category->setImage($file_name);
-            }
-            if($data->getIcon()){
-                $file_name = $uploadFileService->upload($data->getIcon());
-                $category->setIcon($file_name);
-            }
-            $this->em->persist($category);
-            $this->em->flush();
-            $translation = new CategoryTranslation();
-            $translation->setCategory($category)
-                ->setLocale($ru_locale)
-                ->setName($data->getName())
-                ->setEpigraph($data->getEpigraph())
-                ->setPriceDescription($data->getPriceDescription())
-                ->setLongDescription($data->getLongDescription())
-                ->setShortDescription($data->getShortDescription())
-                ->setDescription($data->getDescription());
-            $this->em->persist($translation);
-            $this->em->flush();
-
-            return $this->redirectToRoute('category_main');
-
-        }
-
-        return $this->render('admin/category/create.category.html.twig', ['form' => $form->createView(), 'services' => json_encode($serviceRepository->getServicesNameInRussian())]);
+        $this->categoryService = $categoryService;
     }
 
     public function index(CategoryRepository $categoryRepository, LocaleRepository $localeRepository)
@@ -115,52 +47,26 @@ class CategoryController extends AbstractController
         return $this->render('admin/category/index.html.twig', ['categories' => $categoryRepository->getCategoriesInRussian(), 'locales' => $localeRepository->getAllLanguages()]);
     }
 
-
-
-    public function remove_category(Category $category, UploadFileService $uploadFileService)
+    public function create_category(Request $request, ServiceRepository $serviceRepository)
     {
-        $uploadFileService->remove($category->getIcon());
-        $this->em->remove($category);
-        $this->em->flush();
-        return $this->redirectToRoute('category_main');
+        $form = $this->createForm(CreateCategoryForm::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->categoryService->create($form->getData());
+            return $this->redirectToRoute('category_main');
+        }
+
+        return $this->render('admin/category/create.category.html.twig', ['form' => $form->createView(), 'services' => json_encode($serviceRepository->getServicesNameInRussian())]);
     }
 
-    public function edit_category(Category $id, Request $request, UploadFileService $uploadedFile, ServiceRepository $serviceRepository)
+    public function edit_category(Category $id, Request $request, ServiceRepository $serviceRepository)
     {
         $form = $this->createForm(EditCategoryForm::class, $this->categoryMapper->EntityToEditCategoryDTO($id));
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            /** @var EditCategoryDTO $data */
-            $data = $form->getData();
-            $data->setServices(json_decode($data->getServices()));
-            foreach ($id->getServices() as $service) {
-                $id->removeService($service);
-            }
-            if($data->getServices()) {
-                foreach ($data->getServices() as $item) {
-                    $service_search = $serviceRepository->findOneBy(['id' => $item]);
-                    if ($service_search)
-                        $id->addService($service_search);
-                }
-            }
-            if($data->getImage()){
-                if($id->getImage())
-                    $uploadedFile->remove($id->getImage());
-                $newFileName = $uploadedFile->upload($data->getImage());
-                $id->setImage($newFileName);
-            }
-            if($data->getIcon()){
-                if($id->getIcon())
-                    $uploadedFile->remove($id->getIcon());
-                $newFileName = $uploadedFile->upload($data->getIcon());
-                $id->setIcon($newFileName);
-            }
-            $id->setPrice($data->getPrice())
-                ->setSeoDescription($data->getSeoDescription())
-                ->setSeoTitle($data->getSeoTitle());
-            $this->em->persist($id);
-            $this->em->flush();
+            $this->categoryService->edit($form->getData(), $id);
             return $this->redirectToRoute('category_main');
         }
 
@@ -186,37 +92,17 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            /** @var EditCategoryTranslationDTO $data */
-            $data = $form->getData();
-            if(!$translation){
-                $translation = new CategoryTranslation();
-                $translation->setName($data->getName())
-                    ->setDescription($data->getDescription())
-                    ->setShortDescription($data->getShortDescription())
-                    ->setEpigraph($data->getEpigraph())
-                    ->setPriceDescription($data->getPriceDescription())
-                    ->setCategory($category)
-                    ->setLocale($locale);
-            }
-            else{
-                $translation->setName($data->getName())
-                    ->setEpigraph($data->getEpigraph())
-                    ->setPriceDescription($data->getPriceDescription())
-                    ->setLongDescription($data->getLongDescription())
-                    ->setShortDescription($data->getShortDescription())
-                    ->setDescription($data->getDescription());
-            }
-            if($locale->getShortName() === 'ru'){
-                $slugify = new Slugify();
-                $translation->getCategory()->setSlug($slugify->slugify($translation->getName()));
-            }
-            $this->em->persist($translation);
-            $this->em->flush();
+            $this->categoryService->edit_translation($form->getData(), $translation, $category, $locale);
             return $this->redirectToRoute('category_main');
         }
 
         return $this->render('admin/category/edit_category_translation.html.twig', ['form' => $form->createView(), 'text' => $locale->getName().' Перевод']);
     }
 
+    public function remove_category(Category $category)
+    {
+        $this->categoryService->remove($category);
+        return $this->redirectToRoute('category_main');
+    }
 
 }

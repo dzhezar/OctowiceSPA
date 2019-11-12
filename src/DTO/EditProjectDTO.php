@@ -5,9 +5,10 @@ namespace App\DTO;
 
 
 use App\Entity\Category;
+use App\Service\ItemEditor\EditItemInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditProjectDTO
+class EditProjectDTO implements EditItemInterface
 {
     private $seo_title;
     private $seo_description;

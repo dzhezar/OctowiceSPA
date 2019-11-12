@@ -4,7 +4,10 @@
 namespace App\DTO;
 
 
-class EditBlogTranslationDTO
+
+use App\Service\ItemEditor\EditItemTranslationInterface;
+
+class EditBlogTranslationDTO implements EditItemTranslationInterface
 {
     private $name;
     private $description;
