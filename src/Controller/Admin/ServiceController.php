@@ -18,6 +18,7 @@ use App\Mapper\ServiceTranslationMapper;
 use App\Repository\LocaleRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\ServiceTranslationRepository;
+use App\Service\Service\ServiceService;
 use App\Service\UploadFile\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,17 +36,23 @@ class ServiceController extends AbstractController
      * @var ServiceTranslationRepository
      */
     private $serviceTranslationRepository;
+    /**
+     * @var ServiceService
+     */
+    private $serviceService;
 
 
     /**
      * ServiceController constructor.
      * @param EntityManagerInterface $entityManager
      * @param ServiceTranslationRepository $serviceTranslationRepository
+     * @param ServiceService $serviceService
      */
-    public function __construct(EntityManagerInterface $entityManager, ServiceTranslationRepository $serviceTranslationRepository)
+    public function __construct(EntityManagerInterface $entityManager, ServiceTranslationRepository $serviceTranslationRepository, ServiceService $serviceService)
     {
         $this->entityManager = $entityManager;
         $this->serviceTranslationRepository = $serviceTranslationRepository;
+        $this->serviceService = $serviceService;
     }
 
     public function index(ServiceRepository $serviceRepository, LocaleRepository $localeRepository)
@@ -54,65 +61,26 @@ class ServiceController extends AbstractController
         
     }
 
-    public function create_service(Request $request, LocaleRepository $localeRepository, UploadFileService $uploadFileService)
+    public function create_service(Request $request)
     {
         $form = $this->createForm(CreateServiceForm::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            /** @var CreateServiceDTO $data */
-            $data = $form->getData();
-            $locale_ru = $localeRepository->findOneBy(['short_name' => 'ru']);
-            if(!$locale_ru)
-                throw new Exception('No russian language');
-            $service = new Service();
-            $service->setPrice($data->getPrice())
-                ->setIsOnServicePage($data->getIsOnServicePage());
-
-            if($data->getImage()) {
-                $fileName = $uploadFileService->upload($data->getImage());
-                $service->setImage($fileName);
-            }
-
-            $this->entityManager->persist($service);
-            $this->entityManager->flush();
-
-            $translation = new ServiceTranslation();
-            $translation->setLocale($locale_ru)
-                ->setName($data->getName())
-                ->setDescription($data->getDescription())
-                ->setService($service);
-
-            $this->entityManager->persist($translation);
-            $this->entityManager->flush();
-
+            $this->serviceService->create($form->getData());
             return $this->redirectToRoute('service_main');
-
-
         }
 
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
     }
 
-    public function edit_service(Service $id, Request $request, UploadFileService $uploadFileService, ServiceMapper $serviceMapper)
+    public function edit_service(Service $id, Request $request, ServiceMapper $serviceMapper)
     {
         $form = $this->createForm(EditServiceForm::class, $serviceMapper->entityToEditServiceDTO($id));
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            /** @var EditServiceDTO $data */
-            $data = $form->getData();
-            $id->setPrice($data->getPrice())
-                ->setIsOnServicePage($data->getIsOnServicePage());
-            if($data->getImage()){
-                if($id->getImage())
-                    $uploadFileService->remove($id->getImage());
-                $image = $uploadFileService->upload($data->getImage());
-                $id->setImage($image);
-            }
-            $this->entityManager->persist($id);
-            $this->entityManager->flush();
-
+            $this->serviceService->edit($form->getData(), $id);
             return $this->redirectToRoute('service_main');
         }
 
@@ -131,35 +99,16 @@ class ServiceController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            /** @var EditServiceTranslationDTO $data */
-            $data = $form->getData();
-            if(!$translation){
-                $translation = new ServiceTranslation();
-                $translation
-                    ->setLocale($locale)
-                    ->setService($service);
-            }
-            $translation->setName($data->getName())
-                ->setDescription($data->getDescription());
-
-            $this->entityManager->persist($translation);
-            $this->entityManager->flush();
-
+            $this->serviceService->edit_translation($form->getData(), $translation, $service, $locale);
             return $this->redirectToRoute('service_main');
         }
 
         return $this->render('admin/form.html.twig', ['form' => $form->createView()]);
     }
 
-    public function remove_service(Service $service, UploadFileService $uploadFileService)
+    public function remove_service(Service $service)
     {
-
-        if($service->getImage())
-            $uploadFileService->remove($service->getImage());
-
-        $this->entityManager->remove($service);
-        $this->entityManager->flush();
-
+        $this->serviceService->remove($service);
         return $this->redirectToRoute('service_main');
     }
 

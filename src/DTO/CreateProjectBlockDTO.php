@@ -3,10 +3,11 @@
 
 namespace App\DTO;
 
+use App\Service\ItemEditor\CreateItemInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class CreateProjectBlockDTO
+class CreateProjectBlockDTO implements CreateItemInterface
 {
     private $name;
     private $description;

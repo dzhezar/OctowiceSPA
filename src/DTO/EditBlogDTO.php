@@ -4,7 +4,9 @@
 namespace App\DTO;
 
 
-class EditBlogDTO
+use App\Service\ItemEditor\EditItemInterface;
+
+class EditBlogDTO implements EditItemInterface
 {
     private $seo_title;
     private $seo_description;

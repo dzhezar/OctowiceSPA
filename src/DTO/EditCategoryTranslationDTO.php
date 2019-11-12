@@ -3,9 +3,10 @@
 
 namespace App\DTO;
 
+use App\Service\ItemEditor\EditItemTranslationInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class EditCategoryTranslationDTO
+class EditCategoryTranslationDTO implements EditItemTranslationInterface
 {
     /**
      * @Assert\NotBlank

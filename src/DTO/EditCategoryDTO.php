@@ -3,11 +3,12 @@
 
 namespace App\DTO;
 
+use App\Service\ItemEditor\EditItemInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class EditCategoryDTO
+class EditCategoryDTO implements EditItemInterface
 {
     private $price;
     private $seo_title;
