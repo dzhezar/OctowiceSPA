@@ -4,7 +4,9 @@
 namespace App\DTO;
 
 
-class EditProjectTranslationDTO
+use App\Service\ItemEditor\EditItemTranslationInterface;
+
+class EditProjectTranslationDTO implements EditItemTranslationInterface
 {
     private $name;
     private $description;

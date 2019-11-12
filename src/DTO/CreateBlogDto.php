@@ -4,7 +4,9 @@
 namespace App\DTO;
 
 
-class CreateBlogDto
+use App\Service\ItemEditor\CreateItemInterface;
+
+class CreateBlogDto implements CreateItemInterface
 {
     private $name;
     private $description;
