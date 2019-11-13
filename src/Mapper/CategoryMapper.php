@@ -117,6 +117,7 @@ class CategoryMapper
         return [
             'id' => $category->getId(),
             'icon' => $category->getIcon(),
+            'image' => $category->getImage(),
             'slug' => $category->getSlug(),
             'translations' => $translations,
             'projects' => $projects,
