@@ -1,11 +1,11 @@
 <template>
     <header data-aos="fade-down">
+        <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
         <nav id='main-nav' class="navbar-expand-lg header">
             <div class="mobile-nav">
                 <img src="../../../images/octo.png">
-                <div style="display: flex; flex-flow: row wrap; font-size: x-large; margin-left: 1rem; place-content: center">Octowice</div>
+                <div>Octowice</div>
             </div>
-            <vue-scroll-progress-bar height=".25rem" background-color="#EB5757"></vue-scroll-progress-bar>
             <div class="header_wrapper">
                 <div class="collapse navbar-collapse" id="navbarHeader">
                     <div class="navbar-nav">
@@ -31,14 +31,12 @@
                             </li>
                         </ul>
                         <div class="header-btn">
-<!--                            <div @click="changeLocale">-->
                                 <li v-if="this.$i18n.locale === 'ru'" class="nav-item">
                                     <p @click="setLocale('en')"><country-flag country="us"></country-flag></p>
                                 </li>
                                 <li v-else class="nav-item">
                                     <p @click="setLocale('ru')"><country-flag country='rus'/></p>
                                 </li>
-<!--                            </div>-->
                             <a href="#">Остались вопросы?</a>
                         </div>
                     </div>
@@ -83,6 +81,7 @@
                     e.preventDefault();
                     $("#sidebar-wrapper").toggleClass("active");
                     $(".menu-toggle > .fa-bars, .menu-toggle > .fa-times").toggleClass("fa-bars fa-times");
+                    $('.fixed-buttons').toggle();
                     $(".sidebar-nav-item").each(function (key,value) {
                         if(key === 0) {
                             $(this).toggleClass('fadeIn active animated');
@@ -105,7 +104,6 @@
                 });
                 this.$i18n.locale = locale;
                 $('body').fadeIn('1000');
-                console.log($('body'));
             }
         }
     }
@@ -113,12 +111,24 @@
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             let nav = document.getElementById("main-nav");
-            nav.style.background = "white";
-            nav.style.boxShadow = "0 4px 10px 0 lightgray";
+            if (window.screen.width > 992) {
+                nav.style.background = "white";
+                nav.style.boxShadow = "0 4px 10px 0 lightgray";
+            }
+            else {
+                $(nav).fadeOut();
+            }
+
         } else {
             let nav = document.getElementById("main-nav");
-            nav.style.background = "transparent";
-            nav.style.boxShadow = "unset";
+            if (window.screen.width > 992) {
+                nav.style.background = "transparent";
+                nav.style.boxShadow = "unset";
+            }
+            else {
+                $(nav).fadeIn();
+            }
+
         }
     }
 </script>

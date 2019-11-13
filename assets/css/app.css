@@ -12,7 +12,7 @@ body {
     background: #ffffff;
     color: white;
     font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
+    font-size: 1.6vh;
     font-weight: 300;
     line-height: 20px;
     letter-spacing: 0.02em;
@@ -36,7 +36,7 @@ h2 {
 
 h4 {
     color: #292929;
-    font-size: 14px;
+    font-size: 1.4vh;
     font-weight: 600;
 }
 #progress-el {
@@ -76,7 +76,8 @@ a {
     border-radius: 50%;
     display: flex;
     flex-wrap: wrap;
-    place-content: center;
+    align-items: center;
+    justify-content: center;
     -webkit-animation: flip-horizontal-top 0.4s 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
     animation: flip-horizontal-top 0.4s 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
@@ -147,7 +148,7 @@ nav {
 }
 #navbarHeader ul li {
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+    font-size: 1.4vh;
     margin-left: 40px;
     padding: 0;
     color: black;
@@ -165,7 +166,7 @@ nav {
 #navbarHeader ul li a {
     position: relative;
     display: block;
-    font-size: 16px;
+    font-size: 1.7vh;
     color: black;
     font-weight: 500;
     line-height: 16px;
@@ -193,7 +194,7 @@ nav {
     letter-spacing: 0.1rem;
     text-decoration: none;
     text-transform: none;
-    font-size: 14px;
+    font-size: 1.4vh;
     line-height: 7px;
 }
 .header-btn {
@@ -218,7 +219,7 @@ nav {
 }
 .responsive {
     display: none;
-    font-size: 23px;
+    font-size: 2.4vh;
 }
 .mobile-nav {
     flex-direction: row;
@@ -270,6 +271,14 @@ nav {
     display: flex;
     height: 90px;
 }
+.sidebar-nav li:first-child div {
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 2.5vh;
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+}
 .sidebar-nav li:nth-child(odd) {
     animation-delay: .05s;
 }
@@ -284,7 +293,7 @@ nav {
     text-decoration: none;
     color: #fff;
     padding: 15px;
-    font-size: 60px;
+    font-size: 6vh;
     margin: 2rem 0;
 }
 
@@ -316,13 +325,24 @@ nav {
     height: 50px;
     text-align: center;
     color: #fff;
-    background: transparent;
+    background: #0000006e;
     line-height: 50px;
     z-index: 4;
 }
 
 .menu-toggle:focus, .menu-toggle:hover {
     color: #fff;
+}
+#menu-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-decoration: none;
+    vertical-align: middle;
+}
+#menu-button i {
+    font-size: 2em;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -386,6 +406,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    flex-direction: row;
 }
 #navbarFooter ul li {
     display: flex;
@@ -425,13 +446,14 @@ footer {
     position:absolute;
     bottom: 0;
     right: 0;
+    display: flow-root;
 }
 .octopus img {
     height: 95vh;
     z-index: -1;
 }
 .scroll-arrow {
-    height: 10vh;
+    height: 10%;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-end;
@@ -455,7 +477,7 @@ footer {
     width: 80%;
     margin: 0 10%;
     color: black;
-    font-size: 50px;
+    font-size: 5vh;
     padding: 90px 20% 0 0;
     line-height: normal;
 }
@@ -464,7 +486,9 @@ footer {
     animation: fade-in-left 1s .3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     font-family: 'MADE Evolve Sans EVO', sans-serif;
     z-index: 1;
-    font-size: 15vh;
+    font-size: 10vh;
+    display: flex;
+    flex-direction: column;
 }
 .main-text span span span {
     font-size: 20vh;
@@ -490,22 +514,27 @@ footer {
     height: 30%;
     text-align: center;
     font-weight: 800;
-    font-size: 45px;
+    font-size: 4.5vh;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     flex-wrap: wrap;
-    place-content: center;
+    align-items: center;
+    justify-content: center;
 }
 .services_cards-wrapper {
     height: 70%;
     color: black;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto hidden;
-    justify-content: center;
+    /*display: flex;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: center;*/
     margin: 0 1rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
 }
 .service-card {
+    height: 100%;
     flex: 0 0 auto;
     max-width: 25%;
     display: inline-block;
@@ -513,6 +542,7 @@ footer {
     margin: 0 3rem;
     background: #BDBDBD;
     box-shadow: rgba(0, 0, 0, 0.55) 4px 4px 10px 10px;
+    white-space: normal;
 }
 .service-card_top {
     border-right: thick #EB5757 solid;
@@ -531,7 +561,7 @@ footer {
 .service-card_top_text {
     flex: 0 0 75%;
     max-width: 75%;
-    font-size: x-large;
+    font-size: 2.5vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -543,7 +573,7 @@ footer {
 }
 .service-card_text {
     display: flex;
-    font-size: 22px;
+    font-size: 2vh;
     line-height: normal;
     margin: 0 2rem;
     text-align: end;
@@ -562,7 +592,7 @@ footer {
     width: fit-content;
     text-align: center;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 2.5vh;
     margin: 2% auto 0;
     background: #EB5757;
     padding: 1rem 0;
@@ -588,7 +618,7 @@ footer {
     text-align: center;
     padding-top: 6%;
     font-weight: 900;
-    font-size: 50px;
+    font-size: 5vh;
     line-height: 100%;
     font-family: "M PLUS 1p", sans-serif;
     color: black;
@@ -606,11 +636,13 @@ footer {
     max-width: 100%;
     position: relative;
     width: 100%;
-    padding-right: 15px;
+    display: flex;
+    place-content: center;
     height: 80%;
 }
 .bike-section_bike img {
     height: 100%;
+    width: 50vw;
 }
 .bike-section_text {
     flex-basis: 0;
@@ -622,7 +654,7 @@ footer {
     padding-right: 15px;
     padding-left: 15px;
     color: black;
-    font-size: 25px;
+    font-size: 2.5vh;
     display: flex;
     flex-wrap: wrap;
     place-content: center;
@@ -637,7 +669,7 @@ footer {
     text-align: center;
     font-weight: 700;
     color: white;
-    font-size: 25px;
+    font-size: 2.5vh;
     margin: 3% auto 0;
     background: #EB5757;
     padding: 1rem 2rem;
@@ -654,7 +686,7 @@ footer {
     padding-top: 100px;
     height: 20%;
     font-weight: 900;
-    font-size: 45px;
+    font-size: 4.5vh;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     place-content: center;
@@ -666,7 +698,7 @@ footer {
     text-align: justify;
     height: 25%;
     font-weight: 200;
-    font-size: 25px;
+    font-size: 2.5vh;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     display: flex;
@@ -704,7 +736,7 @@ footer {
     height: 90%;
 }
 .reasons_card_title {
-    font-size: x-large;
+    font-size: 2.5vh;
     font-weight: 800;
     flex: 0 0 100%;
     max-width: 100%;
@@ -716,7 +748,7 @@ footer {
     justify-content: center;
 }
 .reasons_card_text {
-    font-size: 20px;
+    font-size: 2.2vh;
     margin: auto;
     text-align: justify;
     flex: 0 0 85%;
@@ -732,7 +764,7 @@ footer {
     padding-top: 100px;
     height: 22%;
     font-weight: 900;
-    font-size: 45px;
+    font-size: 4.5vh;
     line-height: 100%;
     font-family: 'M PLUS 1p', sans-serif;
     color: black;
@@ -758,8 +790,8 @@ footer {
     place-content: center;
 }
 .contacts-bar ul {
-    -ms-flex-pack: center!important;
-    justify-content: center!important;
+    -ms-flex-pack: center;
+    justify-content: center;
     -ms-flex-direction: row;
     flex-direction: row;
     display: -ms-flexbox;
@@ -780,7 +812,8 @@ footer {
     border-radius: 50%;
     display: flex;
     flex-wrap: wrap;
-    place-content: center;
+    align-items: center;
+    justify-content: center;
 }
 .form-wrapper {
     width: 75%;
@@ -813,7 +846,7 @@ footer {
 .form-wrapper input[type='submit'] {
     background: black;
     color: white;
-    font-size: large;
+    font-size: 2vh;
     font-weight: 800;
     margin: unset;
     border: unset;
