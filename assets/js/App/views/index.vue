@@ -152,11 +152,6 @@
                 <i class="fas fa-2x fa-chevron-up"></i>
             </a>
         </div>
-        <!--        <div>-->
-        <!--            <p @click="setLocale('en')"><flag iso="us"></flag></p>-->
-        <!--            <p @click="setLocale('ru')"><flag iso="ru"></flag></p>-->
-        <!--        </div>-->
-        <!--        <p>{{ $t('header.main') }}</p>-->
     </div>
 </template>
 <script>
@@ -191,7 +186,5 @@
                 .get('/api/get_categories?limit=3&project_limit=1')
                 .then(response => (this.categories = response.data));
         }
-
-
     }
 </script>

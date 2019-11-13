@@ -45,28 +45,6 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="col mx-5" style="background: #BDBDBD; padding: 2% 0">-->
-<!--                    <div class="col-12 text-center" style="padding-top: 20%">-->
-<!--                        <img src="../../../images/future.svg" alt="" style="transform: scale(2)">-->
-<!--                    </div>-->
-<!--                    <div class="col-12 text-center" style="padding-top: 15%; font-size: x-large; font-weight: 800">-->
-<!--                        Будущее за ИТ-->
-<!--                    </div>-->
-<!--                    <div class="col-10 text-justify m-auto" style="padding-top: 7%; font-size: large;">-->
-<!--                        Будущее бизнеса кроется в интернете и качестве услуг-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col mx-5" style="background: #BDBDBD; padding: 2% 0">-->
-<!--                    <div class="col-12 text-center" style="padding-top: 20%">-->
-<!--                        <img src="../../../images/product.svg" alt="" style="transform: scale(2)">-->
-<!--                    </div>-->
-<!--                    <div class="col-12 text-center" style="padding-top: 15%; font-size: x-large; font-weight: 800">-->
-<!--                        Продукт-->
-<!--                    </div>-->
-<!--                    <div class="col-10 text-justify m-auto" style="padding-top: 7%; font-size: large;">-->
-<!--                        Мы уверены в своих силах и предоставляемых услугах-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
         <div style="background: linear-gradient(180deg, #131313 0%, #333333 100%); display: flex; font-size: 22px; padding: 2% 6%; place-content: center">
