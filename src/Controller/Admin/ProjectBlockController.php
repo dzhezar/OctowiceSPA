@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 
+use App\DTO\EditProjectBlockTranslationDTO;
 use App\DTO\EditProjectTranslationDTO;
 use App\Entity\Locale;
 use App\Entity\Project;
@@ -95,10 +96,16 @@ class ProjectBlockController extends AbstractController
     {
         $translation_found = $projectBlockTranslationRepository->getTranslationByProjectAndLocaleID($block->getId(), $locale->getId());
 
-        if(!$translation_found)
-            $translation = new EditProjectTranslationDTO();
-        else
+        if(!$translation_found){
+            $translation = new EditProjectBlockTranslationDTO(null, null);
+            $translation_found = null;
+        }
+        else{
             $translation = $projectBlockMapper->entityToEditProjectBlockTranslationDTO($translation_found[0]);
+            $translation_found = $translation_found[0];
+        }
+
+
 
         $form = $this->createForm(EditProjectBlockTranslationForm::class, $translation);
         $form->handleRequest($request);
