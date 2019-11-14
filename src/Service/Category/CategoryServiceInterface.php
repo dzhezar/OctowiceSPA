@@ -6,10 +6,11 @@ namespace App\Service\Category;
 
 use App\Mapper\CategoryMapper;
 use App\Repository\CategoryRepository;
+use App\Repository\LocaleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 interface CategoryServiceInterface
 {
-    public function __construct(CategoryRepository $categoryRepository, CategoryMapper $categoryMapper);
 
     public function getCategories(int $limit, int $project_limit);
 

@@ -4,10 +4,11 @@
 namespace App\DTO;
 
 
+use App\Service\ItemEditor\CreateItemInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateCategoryDTO
+class CreateCategoryDTO implements CreateItemInterface
 {
 
     private $price;
