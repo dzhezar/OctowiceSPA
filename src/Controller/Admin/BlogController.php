@@ -20,17 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
     private $entityManager;
-    /**
-     * @var BlogMapper
-     */
     private $blogMapper;
-    /**
-     * @var BlogService
-     */
     private $blogService;
 
 
@@ -62,6 +53,7 @@ class BlogController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $this->blogService->create($form->getData());
+
             return $this->redirectToRoute('blog_main');
         }
 

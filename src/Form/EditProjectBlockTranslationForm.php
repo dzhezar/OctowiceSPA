@@ -4,7 +4,7 @@
 namespace App\Form;
 
 
-use App\DTO\EditProjectTranslationDTO;
+use App\DTO\EditProjectBlockTranslationDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -34,7 +34,7 @@ class EditProjectBlockTranslationForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => EditProjectTranslationDTO::class,
+            'data_class' => EditProjectBlockTranslationDTO::class,
         ));
     }
 
