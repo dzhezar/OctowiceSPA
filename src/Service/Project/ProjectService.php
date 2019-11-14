@@ -10,6 +10,7 @@ use App\DTO\EditProjectTranslationDTO;
 use App\Entity\Locale;
 use App\Entity\Project;
 use App\Entity\ProjectTranslation;
+use App\Mapper\ProjectMapper;
 use App\Repository\CategoryRepository;
 use App\Repository\LocaleRepository;
 use App\Service\ItemEditor\CreateItemInterface;
@@ -39,6 +40,10 @@ class ProjectService implements ProjectServiceInterface, EntityEditorInterface
      * @var EntityManagerInterface
      */
     private $entityManager;
+    /**
+     * @var ProjectMapper
+     */
+    private $projectMapper;
 
 
     /**
@@ -47,87 +52,42 @@ class ProjectService implements ProjectServiceInterface, EntityEditorInterface
      * @param UploadFileService $uploadFileService
      * @param LocaleRepository $localeRepository
      * @param EntityManagerInterface $entityManager
+     * @param ProjectMapper $projectMapper
      */
-    public function __construct(CategoryRepository $categoryRepository, UploadFileService $uploadFileService, LocaleRepository $localeRepository, EntityManagerInterface $entityManager)
+    public function __construct(CategoryRepository $categoryRepository, UploadFileService $uploadFileService, LocaleRepository $localeRepository, EntityManagerInterface $entityManager, ProjectMapper $projectMapper)
     {
         $this->categoryRepository = $categoryRepository;
         $this->uploadFileService = $uploadFileService;
         $this->localeRepository = $localeRepository;
         $this->entityManager = $entityManager;
+        $this->projectMapper = $projectMapper;
     }
 
     public function create(CreateItemInterface $createItem, $block = null)
     {
-        /** @var CreateProjectDTO $data */
-        $data = $createItem;
-        $id = new Project();
-        $category = $this->categoryRepository->findOneBy(['id' => $data->getCategory()->getId()]);
-        if($category)
-            $id->setCategory($category);
-        if($data->getImage()){
-            $newFileName = $this->uploadFileService->upload($data->getImage());
-            $id->setImage($newFileName);
-        }
-        $id->setSeoDescription($data->getSeoDescription())
-            ->setLink($data->getLink())
-            ->setSeoTitle($data->getSeoTitle());
-        $slugify = new Slugify();
-        $id->setSlug($slugify->slugify($data->getName()));
-        $this->entityManager->persist($id);
-        $this->entityManager->flush();
         $locale = $this->localeRepository->findOneBy(['short_name' => 'ru']);
         if(!$locale)
             throw new Exception('Russian not found');
-        $translation = new ProjectTranslation();
-        $translation->setName($data->getName())
-            ->setProject($id)
-            ->setDescription($data->getDescription())
-            ->setLocale($locale);
+
+        $project = $this->projectMapper->createProjectDTOtoEntity($createItem);
+        $this->entityManager->persist($project);
+        $this->entityManager->flush();
+
+        $translation = $this->projectMapper->createProjectTranslationDTOtoEntity($createItem, $project, $locale);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }
 
     public function edit(EditItemInterface $editItem, $entity)
     {
-        /** @var Project $entity */
-        /** @var EditProjectDTO $data */
-        $data = $editItem;
-        $category = $this->categoryRepository->findOneBy(['id' => $data->getCategory()->getId()]);
-        if($category)
-            $entity->setCategory($category);
-        if($data->getImage()){
-            if($entity->getImage())
-                $this->uploadFileService->remove($entity->getImage());
-            $newFileName = $this->uploadFileService->upload($data->getImage());
-            $entity->setImage($newFileName);
-        }
-        $entity->setSeoDescription($data->getSeoDescription())
-            ->setLink($data->getLink())
-            ->setSeoTitle($data->getSeoTitle());
+        $entity = $this->projectMapper->editProjectDTOtoEntity($editItem, $entity);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
     public function edit_translation(EditItemTranslationInterface $editItemTranslation, $translation, $entity, Locale $locale)
     {
-        /** @var ProjectTranslation $translation */
-        /** @var EditProjectTranslationDTO $data */
-        $data = $editItemTranslation;
-        if(!$translation){
-            $translation = new ProjectTranslation();
-            $translation->setName($data->getName())
-                ->setDescription($data->getDescription())
-                ->setProject($entity)
-                ->setLocale($locale);
-        }
-        else{
-            $translation->setName($data->getName())
-                ->setDescription($data->getDescription());
-        }
-        if($locale->getShortName() === 'ru'){
-            $slugify = new Slugify();
-            $translation->getProject()->setSlug($slugify->slugify($translation->getName()));
-        }
+        $translation = $this->projectMapper->editProjectTranslationDTOtoEntity($editItemTranslation, $translation, $entity, $locale);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }

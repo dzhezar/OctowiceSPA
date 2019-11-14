@@ -20,7 +20,7 @@ const router = new VueRouter({
             component: Services
         },
         {
-            path: '/service/landing',
+            path: '/service/:slug',
             name: 'single_service',
             component: Single_Service
         },

@@ -4,12 +4,12 @@
 namespace App\Service\ProjectBlock;
 
 
-use App\DTO\CreateProjectBlockDTO;
 use App\DTO\EditProjectBlockDTO;
 use App\DTO\EditProjectBlockTranslationDTO;
 use App\Entity\Locale;
 use App\Entity\ProjectBlock;
 use App\Entity\ProjectBlockTranslation;
+use App\Mapper\ProjectBlockMapper;
 use App\Repository\LocaleRepository;
 use App\Repository\ProjectBlockRepository;
 use App\Service\ItemEditor\CreateItemInterface;
@@ -38,6 +38,10 @@ class ProjectBlockService implements ProjectBlockServiceInterface, EntityEditorI
      * @var ProjectBlockRepository
      */
     private $projectBlockRepository;
+    /**
+     * @var ProjectBlockMapper
+     */
+    private $projectBlockMapper;
 
 
     /**
@@ -46,88 +50,42 @@ class ProjectBlockService implements ProjectBlockServiceInterface, EntityEditorI
      * @param EntityManagerInterface $entityManager
      * @param LocaleRepository $localeRepository
      * @param UploadFileService $uploadFileService
+     * @param ProjectBlockMapper $projectBlockMapper
      */
-    public function __construct(ProjectBlockRepository $projectBlockRepository, EntityManagerInterface $entityManager, LocaleRepository $localeRepository, UploadFileService $uploadFileService)
+    public function __construct(ProjectBlockRepository $projectBlockRepository, EntityManagerInterface $entityManager, LocaleRepository $localeRepository, UploadFileService $uploadFileService, ProjectBlockMapper $projectBlockMapper)
     {
         $this->entityManager = $entityManager;
         $this->localeRepository = $localeRepository;
         $this->uploadFileService = $uploadFileService;
         $this->projectBlockRepository = $projectBlockRepository;
+        $this->projectBlockMapper = $projectBlockMapper;
     }
 
     public function create(CreateItemInterface $createItem, $project = null)
     {
-        $queue = $this->projectBlockRepository->getLastQueue();
-        if($queue)
-            $queue = $queue[0]['queue']+1;
-        if(!$queue)
-            $queue = 1;
         $locale_ru = $this->localeRepository->findOneBy(['short_name' => 'ru']);
         if(!$locale_ru)
-            throw new Exception('Russian locale not found');
-        /** @var CreateProjectBlockDTO $data */
-        $data = $createItem;
-        $block = new ProjectBlock();
-        if($data->getImage()){
-            $fileName = $this->uploadFileService->upload($data->getImage());
-            $block->setImage($fileName);
-        }
-        if(!$data->getColor())
-            $data->setColor('#FFFFFF');
-        if(!$data->getColorText())
-            $data->setColorText('#000000');
+            throw new Exception('Russian not found');
 
-        $block->setColor($data->getColor())
-            ->setColorText($data->getColorText())
-            ->setProject($project)
-            ->setQueue($queue);
-
+        $block = $this->projectBlockMapper->createProjectBlockDTOtoEntity($createItem, $project);
         $this->entityManager->persist($block);
         $this->entityManager->flush();
 
-        $blockTranslation = new ProjectBlockTranslation();
-        $blockTranslation->setDescription($data->getDescription())
-            ->setName($data->getName())
-            ->setLocale($locale_ru)
-            ->setProjectBlock($block);
-
+        $blockTranslation = $this->projectBlockMapper->createProjectBlockTranslationDTOtoEntity($createItem, $block, $locale_ru);
         $this->entityManager->persist($blockTranslation);
         $this->entityManager->flush();
     }
 
     public function edit(EditItemInterface $editItem, $entity)
     {
-        /** @var EditProjectBlockDTO $data */
-        $data = $editItem;
-        /** @var ProjectBlock $entity */
-        if($data->getImage()){
-            if($entity->getImage())
-                $this->uploadFileService->remove($entity->getImage());
-            $fileName = $this->uploadFileService->upload($data->getImage());
-            $entity->setImage($fileName);
-        }
-        $entity->setColor($data->getColor());
-        $entity->setColorText($data->getColorText());
+        $entity = $this->projectBlockMapper->editProjectBlockDTOtoEntity($editItem, $entity);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
     public function edit_translation(EditItemTranslationInterface $editItemTranslation, $translation, $entity, Locale $locale)
     {
-        /** @var EditProjectBlockTranslationDTO $data */
-        $data = $editItemTranslation;
-
-        if(!$translation) {
-            $translation = new ProjectBlockTranslation();
-            $translation->setProjectBlock($entity)
-                ->setLocale($locale);
-        }
-        else
-            $translation = $translation[0];
-
-        $translation->setName($data->getName())
-            ->setDescription($data->getDescription());
-
+        $translation = $this->projectBlockMapper->editProjectBlockTranslationDTOtoEntity($editItemTranslation, $translation, $entity, $locale);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }

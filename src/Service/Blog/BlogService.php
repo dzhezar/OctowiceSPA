@@ -4,35 +4,25 @@
 namespace App\Service\Blog;
 
 
-use App\DTO\CreateBlogDto;
-use App\DTO\EditBlogDTO;
-use App\DTO\EditBlogTranslationDTO;
 use App\Entity\Blog;
-use App\Entity\BlogTranslation;
 use App\Entity\Locale;
+use App\Mapper\BlogMapper;
 use App\Repository\LocaleRepository;
 use App\Service\ItemEditor\CreateItemInterface;
 use App\Service\ItemEditor\EditItemInterface;
 use App\Service\ItemEditor\EditItemTranslationInterface;
 use App\Service\ItemEditor\EntityEditorInterface;
 use App\Service\UploadFile\UploadFileService;
-use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class BlogService implements BlogServiceInterface, EntityEditorInterface
 {
-    /**
-     * @var UploadFileService
-     */
+
     private $uploadFileService;
-    /**
-     * @var EntityManagerInterface
-     */
     private $entityManager;
-    /**
-     * @var LocaleRepository
-     */
     private $localeRepository;
+    private $blogMapper;
 
 
     /**
@@ -40,79 +30,43 @@ class BlogService implements BlogServiceInterface, EntityEditorInterface
      * @param UploadFileService $uploadFileService
      * @param EntityManagerInterface $entityManager
      * @param LocaleRepository $localeRepository
+     * @param BlogMapper $blogMapper
      */
-    public function __construct(UploadFileService $uploadFileService, EntityManagerInterface $entityManager, LocaleRepository $localeRepository)
+    public function __construct(UploadFileService $uploadFileService, EntityManagerInterface $entityManager, LocaleRepository $localeRepository, BlogMapper $blogMapper)
     {
         $this->uploadFileService = $uploadFileService;
         $this->entityManager = $entityManager;
         $this->localeRepository = $localeRepository;
+        $this->blogMapper = $blogMapper;
     }
 
     public function create(CreateItemInterface $createItem, $block = null)
     {
-        /** @var CreateBlogDto $data */
-        $data = $createItem;
-        $blog = new Blog();
+        $locale_ru = $this->localeRepository->findOneBy(['short_name' => 'ru']);
+        if(!$locale_ru)
+            throw new Exception('Russian not found');
 
-        if($data->getImage()){
-            $filename = $this->uploadFileService->upload($data->getImage());
-            $blog->setImage($filename);
-        }
-        $slugify = new Slugify();
-        $blog->setSlug($slugify->slugify($data->getName()))
-            ->setSeoTitle($data->getSeoTitle())
-            ->setSeoDescription($data->getSeoDescription());
-
+        $blog = $this->blogMapper->createBlogDTOtoEntity($createItem);
         $this->entityManager->persist($blog);
         $this->entityManager->flush();
 
-        $locale_ru = $this->localeRepository->findOneBy(['short_name' => 'ru']);
-        $translation = new BlogTranslation();
-        $translation->setName($data->getName())
-            ->setDescription($data->getDescription())
-            ->setLocale($locale_ru)
-            ->setBlog($blog);
-
+        $translation = $this->blogMapper->createBlogDTOtoTranslationEntity($createItem, $locale_ru, $blog);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }
 
     public function edit(EditItemInterface $editItem, $entity)
     {
-        /** @var EditBlogDTO $data */
-        $data = $editItem;
-        /** @var Blog $entity */
-
-        if($data->getImage()){
-            if($entity->getImage())
-                $this->uploadFileService->remove($entity->getImage());
-            $fileName = $this->uploadFileService->upload($data->getImage());
-            $entity->setImage($fileName);
-        }
-
-        $entity->setSeoTitle($data->getSeoTitle())
-            ->setSeoDescription($data->getSeoDescription());
-
+        $entity = $this->blogMapper->editBlogDTOtoEntity($editItem, $entity);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
     public function edit_translation(EditItemTranslationInterface $editItemTranslation, $translation, $entity, Locale $locale)
     {
-        /** @var EditBlogTranslationDTO $data */
-        $data = $editItemTranslation;
-        if(!$translation){
-            $translation = new BlogTranslation();
-            $translation->setBlog($entity);
-            $translation->setLocale($locale);
-        }
-
-        $translation->setName($data->getName())
-            ->setDescription($data->getDescription());
-
+        $translation = $this->blogMapper->editBlogTranslationDTOtoEntity($editItemTranslation, $translation, $entity, $locale);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
-
     }
 
     public function remove($entity)
