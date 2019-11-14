@@ -10,6 +10,7 @@ use App\DTO\EditServiceTranslationDTO;
 use App\Entity\Locale;
 use App\Entity\Service;
 use App\Entity\ServiceTranslation;
+use App\Mapper\ServiceMapper;
 use App\Repository\LocaleRepository;
 use App\Service\ItemEditor\CreateItemInterface;
 use App\Service\ItemEditor\EditItemInterface;
@@ -33,6 +34,10 @@ class ServiceService implements ServiceInterface, EntityEditorInterface
      * @var EntityManagerInterface
      */
     private $entityManager;
+    /**
+     * @var ServiceMapper
+     */
+    private $serviceMapper;
 
 
     /**
@@ -40,73 +45,41 @@ class ServiceService implements ServiceInterface, EntityEditorInterface
      * @param LocaleRepository $localeRepository
      * @param UploadFileService $uploadFileService
      * @param EntityManagerInterface $entityManager
+     * @param ServiceMapper $serviceMapper
      */
-    public function __construct(LocaleRepository $localeRepository, UploadFileService $uploadFileService, EntityManagerInterface $entityManager)
+    public function __construct(LocaleRepository $localeRepository, UploadFileService $uploadFileService, EntityManagerInterface $entityManager, ServiceMapper $serviceMapper)
     {
         $this->localeRepository = $localeRepository;
         $this->uploadFileService = $uploadFileService;
         $this->entityManager = $entityManager;
+        $this->serviceMapper = $serviceMapper;
     }
 
     public function create(CreateItemInterface $createItem, $block = null)
     {
-        /** @var CreateServiceDTO $data */
-        $data = $createItem;
         $locale_ru = $this->localeRepository->findOneBy(['short_name' => 'ru']);
         if(!$locale_ru)
             throw new Exception('No russian language');
-        $service = new Service();
-        $service->setPrice($data->getPrice())
-            ->setIsOnServicePage($data->getIsOnServicePage());
-
-        if($data->getImage()) {
-            $fileName = $this->uploadFileService->upload($data->getImage());
-            $service->setImage($fileName);
-        }
+        $service = $this->serviceMapper->createServiceDTOtoEntity($createItem);
 
         $this->entityManager->persist($service);
         $this->entityManager->flush();
 
-        $translation = new ServiceTranslation();
-        $translation->setLocale($locale_ru)
-            ->setName($data->getName())
-            ->setDescription($data->getDescription())
-            ->setService($service);
-
+        $translation = $this->serviceMapper->createServiceDTOtoTranslationEntity($createItem, $service, $locale_ru);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }
 
     public function edit(EditItemInterface $editItem, $entity)
     {
-        /** @var EditServiceDTO $data */
-        $data = $editItem;
-        /** @var Service $entity */
-        $entity->setPrice($data->getPrice())
-            ->setIsOnServicePage($data->getIsOnServicePage());
-        if($data->getImage()){
-            if($entity->getImage())
-                $this->uploadFileService->remove($entity->getImage());
-            $image = $this->uploadFileService->upload($data->getImage());
-            $entity->setImage($image);
-        }
+        $entity = $this->serviceMapper->editServiceDTOtoEntity($editItem, $entity);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
     public function edit_translation(EditItemTranslationInterface $editItemTranslation, $translation, $entity, Locale $locale)
     {
-        /** @var EditServiceTranslationDTO $data */
-        $data = $editItemTranslation;
-        if(!$translation){
-            $translation = new ServiceTranslation();
-            $translation
-                ->setLocale($locale)
-                ->setService($entity);
-        }
-        $translation->setName($data->getName())
-            ->setDescription($data->getDescription());
-
+        $translation = $this->serviceMapper->editServiceTranslationDTOtoEntity($editItemTranslation, $translation, $entity, $locale);
         $this->entityManager->persist($translation);
         $this->entityManager->flush();
     }
